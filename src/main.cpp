@@ -38,10 +38,11 @@ int main()
 
         ClearBackground(RAYWHITE);
 
+        drawArrayGrid(gamestate);
 
         GuiGameOfLife(gamestate, &guiState);
 
-        drawArrayGrid(gamestate);
+        
 
         
 
