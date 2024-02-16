@@ -16,6 +16,8 @@ int main()
 
     GuiGameOfLifeState guiState = InitGuiGameOfLife();
 
+    gamestate.gridArray.reInitialize(15, 15);
+    gamestate.gridArray.setItem(5, 5, 1);
 
     InitWindow(gamestate.screenWidth, gamestate.screenHeight, "Eric's Game of Life v0.0000000000000001");
 
@@ -36,9 +38,11 @@ int main()
 
         ClearBackground(RAYWHITE);
 
-        drawArrayGrid(gamestate);
 
         GuiGameOfLife(gamestate, &guiState);
+
+        drawArrayGrid(gamestate);
+
         
 
         EndDrawing();

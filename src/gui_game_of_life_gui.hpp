@@ -93,7 +93,7 @@ typedef struct {
     static void Button025(int x, int y, std::string& str, flexible_array& arrayRef);
     static void Button027(int x, int y, flexible_array& arrayRef);
     static void Button028(int x, int y, flexible_array& arrayRef);
-    static void Button037(int x, int y);
+    static void Button037(int x, int y, gamestate_class& gamestate);
     static void Button039(int x, int& squaresizeRef);
 
 #ifdef __cplusplus
