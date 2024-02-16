@@ -248,8 +248,8 @@ void GuiGameOfLife(gamestate_class & gamestate, GuiGameOfLifeState* state)
 
     GuiGroupBox(state->layoutRecs[1], "Array");
     GuiLabel(state->layoutRecs[2], "Array Size");
-    if (GuiSpinner(state->layoutRecs[3], NULL, &state->Spinner005Value, 0, 100, state->Spinner005EditMode)) state->Spinner005EditMode = !state->Spinner005EditMode;
-    if (GuiSpinner(state->layoutRecs[4], NULL, &state->Spinner006Value, 0, 100, state->Spinner006EditMode)) state->Spinner006EditMode = !state->Spinner006EditMode;
+    if (GuiSpinner(state->layoutRecs[3], NULL, &state->Spinner005Value, 0, 16384, state->Spinner005EditMode)) state->Spinner005EditMode = !state->Spinner005EditMode;
+    if (GuiSpinner(state->layoutRecs[4], NULL, &state->Spinner006Value, 0, 16384, state->Spinner006EditMode)) state->Spinner006EditMode = !state->Spinner006EditMode;
     GuiLabel(state->layoutRecs[5], "SIZE X");
     GuiLabel(state->layoutRecs[6], "SIZE Y");
     GuiLine(state->layoutRecs[7], NULL);
@@ -259,16 +259,16 @@ void GuiGameOfLife(gamestate_class & gamestate, GuiGameOfLifeState* state)
     GuiLabel(state->layoutRecs[11], "Game Status: ");
     if (GuiButton(state->layoutRecs[12], "Start")) Button015();
     if (GuiButton(state->layoutRecs[13], "Stop")) Button016();
-    if (GuiValueBox(state->layoutRecs[14], "Size X: ", &state->ValueBOx017Value, 0, 100, state->ValueBOx017EditMode)) state->ValueBOx017EditMode = !state->ValueBOx017EditMode;
-    if (GuiValueBox(state->layoutRecs[15], "Size Y: ", &state->ValueBOx016Value, 0, 100, state->ValueBOx016EditMode)) state->ValueBOx016EditMode = !state->ValueBOx016EditMode;
+    if (GuiValueBox(state->layoutRecs[14], "Size X: ", &state->ValueBOx017Value, 0, 16384, state->ValueBOx017EditMode)) state->ValueBOx017EditMode = !state->ValueBOx017EditMode;
+    if (GuiValueBox(state->layoutRecs[15], "Size Y: ", &state->ValueBOx016Value, 0, 16384, state->ValueBOx016EditMode)) state->ValueBOx016EditMode = !state->ValueBOx016EditMode;
     GuiLabel(state->layoutRecs[16], "Resize Array");
-    if (GuiValueBox(state->layoutRecs[17], "Square Size ", &state->ValueBOx018Value, 0, 100, state->ValueBOx018EditMode)) state->ValueBOx018EditMode = !state->ValueBOx018EditMode;
-    if (GuiSpinner(state->layoutRecs[18], NULL, &state->Spinner018Value, 0, 100, state->Spinner018EditMode)) state->Spinner018EditMode = !state->Spinner018EditMode;
+    if (GuiValueBox(state->layoutRecs[17], "Square Size ", &state->ValueBOx018Value, 0, 16384, state->ValueBOx018EditMode)) state->ValueBOx018EditMode = !state->ValueBOx018EditMode;
+    if (GuiSpinner(state->layoutRecs[18], NULL, &state->Spinner018Value, 0, 16384, state->Spinner018EditMode)) state->Spinner018EditMode = !state->Spinner018EditMode;
     GuiLabel(state->layoutRecs[19], "Fields");
-    if (GuiSpinner(state->layoutRecs[20], "X: ", &state->Spinner022Value, 0, 100, state->Spinner022EditMode)) state->Spinner022EditMode = !state->Spinner022EditMode;
+    if (GuiSpinner(state->layoutRecs[20], "X: ", &state->Spinner022Value, 0, 16384, state->Spinner022EditMode)) state->Spinner022EditMode = !state->Spinner022EditMode;
     GuiLabel(state->layoutRecs[21], "Value: ");
     if (GuiButton(state->layoutRecs[22], "Read")) Button025(state->Spinner022Value, state->Spinner026Value, field_readout, gamestate.gridArray);
-    if (GuiSpinner(state->layoutRecs[23], "Y: ", &state->Spinner026Value, 0, 100, state->Spinner026EditMode)) state->Spinner026EditMode = !state->Spinner026EditMode;
+    if (GuiSpinner(state->layoutRecs[23], "Y: ", &state->Spinner026Value, 0, 16384, state->Spinner026EditMode)) state->Spinner026EditMode = !state->Spinner026EditMode;
     GuiLabel(state->layoutRecs[24], field_readout.c_str());
     if (GuiButton(state->layoutRecs[25], "FALSE")) Button027(state->Spinner022Value, state->Spinner026Value, gamestate.gridArray);
     if (GuiButton(state->layoutRecs[26], "TRUE")) Button028(state->Spinner022Value, state->Spinner026Value, gamestate.gridArray);
@@ -278,8 +278,8 @@ void GuiGameOfLife(gamestate_class & gamestate, GuiGameOfLifeState* state)
     GuiLine(state->layoutRecs[30], NULL);
     GuiLabel(state->layoutRecs[31], "Grid");
     GuiLabel(state->layoutRecs[32], "Origin:");
-    if (GuiSpinner(state->layoutRecs[33], "X: ", &state->Spinner035Value, 0, 100, state->Spinner035EditMode)) state->Spinner035EditMode = !state->Spinner035EditMode;
-    if (GuiSpinner(state->layoutRecs[34], "Y: ", &state->Spinner036Value, 0, 100, state->Spinner036EditMode)) state->Spinner036EditMode = !state->Spinner036EditMode;
+    if (GuiSpinner(state->layoutRecs[33], "X: ", &state->Spinner035Value, 0, 16384, state->Spinner035EditMode)) state->Spinner035EditMode = !state->Spinner035EditMode;
+    if (GuiSpinner(state->layoutRecs[34], "Y: ", &state->Spinner036Value, 0, 16384, state->Spinner036EditMode)) state->Spinner036EditMode = !state->Spinner036EditMode;
     if (GuiButton(state->layoutRecs[35], "Set")) Button037(state->Spinner035Value, state->Spinner036Value, gamestate);
     GuiLabel(state->layoutRecs[36], "Set Square Size");
     if (GuiButton(state->layoutRecs[37], "Set")) Button039(state->Spinner018Value, gamestate.squareSize);

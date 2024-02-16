@@ -13,23 +13,23 @@ void drawArrayGrid(gamestate_class & gamestate) {
 			if (gamestate.gridArray.getItem(j - 1, i - 1) == 0) {
 				DrawRectangle((gamestate.squareSize * j) + gamestate.gridOrigin_x,
 							  (gamestate.squareSize * i) + gamestate.gridOrigin_y,
-							  gamestate.squareSize,
-							  gamestate.squareSize,
+							   gamestate.squareSize,
+							   gamestate.squareSize,
 								WHITE);
 			}
 			
 			else if (gamestate.gridArray.getItem(j - 1, i - 1) == 1) {
 				DrawRectangle((gamestate.squareSize * j) + gamestate.gridOrigin_x,
-							 (gamestate.squareSize * i) + gamestate.gridOrigin_y,
-							  gamestate.squareSize,
-							  gamestate.squareSize,
+							  (gamestate.squareSize * i) + gamestate.gridOrigin_y,
+							   gamestate.squareSize,
+							   gamestate.squareSize,
 								GREEN);
 			}
 
 			DrawRectangleLines((gamestate.squareSize * j) + gamestate.gridOrigin_x,
-							  (gamestate.squareSize * i) + gamestate.gridOrigin_y, 
-							   gamestate.squareSize,
-							   gamestate.squareSize,
+							   (gamestate.squareSize * i) + gamestate.gridOrigin_y, 
+							    gamestate.squareSize,
+							    gamestate.squareSize,
 								BLACK);
 		}
 	}
