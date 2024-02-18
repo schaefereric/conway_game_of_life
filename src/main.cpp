@@ -19,6 +19,7 @@ int main()
     gamestate.gridArray.reInitialize(15, 15);
     gamestate.gridArray.setItem(5, 5, 1);
 
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(gamestate.screenWidth, gamestate.screenHeight, "Eric's Game of Life v0.0000000000000001");
 
     SetTargetFPS(60);               
