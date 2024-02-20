@@ -1,0 +1,52 @@
+#
+# rgl layout text file (v4.0) - raygui layout file generated using rGuiLayout
+#
+# Number of controls:     39
+#
+# Ref. window:    r <x> <y> <width> <height>
+# Anchor info:    a <id> <name> <posx> <posy> <enabled>
+# Control info:   c <id> <type> <name> <rectangle> <anchor_id> <text>
+#
+r 0 40 -1 -1
+a 001 anchor01 712 64 1
+a 002 anchor02 728 112 1
+a 003 anchor03 728 616 1
+c 000 0 WindowBox000 0 8 336 672 1 Game of Life
+c 001 1 GroupBox001 0 0 304 472 2 Array
+c 002 4 Label003 16 8 120 24 2 Array Size
+c 003 15 Spinner005 16 136 120 24 2 
+c 004 15 Spinner006 168 136 120 24 2 
+c 005 4 Label007 56 112 120 24 2 SIZE X
+c 006 4 Label008 208 112 120 24 2 SIZE Y
+c 007 2 Line009 16 80 272 16 2 
+c 008 5 Button010 16 168 272 24 2 Resize!
+c 009 2 Line011 16 192 272 16 2 
+c 010 1 GroupBox013 0 16 304 96 3 Game Algorithm
+c 011 4 Label014 16 24 120 24 3 Game Status: 
+c 012 5 Button015 16 56 120 24 3 Start
+c 013 5 Button016 152 56 120 24 3 Stop
+c 014 14 ValueBOx017 56 32 40 24 2 Size X: 
+c 015 14 ValueBOx016 56 56 40 24 2 Size Y: 
+c 016 4 Label016 16 88 120 24 2 Resize Array
+c 017 14 ValueBOx018 240 312 40 24 2 Square Size 
+c 018 15 Spinner018 176 384 88 24 2 
+c 019 4 Label021 16 200 120 24 2 Fields
+c 020 15 Spinner022 24 248 96 24 2 X: 
+c 021 4 Label023 128 248 32 16 2 Value: 
+c 022 5 Button025 128 272 64 24 2 Read
+c 023 15 Spinner026 24 272 96 24 2 Y: 
+c 024 4 Label026 168 248 32 16 2 NaN
+c 025 5 Button027 200 272 88 24 2 FALSE
+c 026 5 Button028 928 360 88 24 0 TRUE
+c 027 4 Label029 16 224 80 24 2 Coordinates:
+c 028 4 Label030 128 224 40 24 2 Read:
+c 029 4 Label031 200 224 48 24 2 Set:
+c 030 2 Line032 16 296 272 16 2 
+c 031 4 Label033 16 304 120 24 2 Grid
+c 032 4 Label034 16 336 120 24 2 Origin:
+c 033 15 Spinner035 32 360 88 24 2 X: 
+c 034 15 Spinner036 32 384 88 24 2 Y: 
+c 035 5 Button037 32 408 88 24 2 Set
+c 036 4 Label038 176 360 88 24 2 Set Square Size
+c 037 5 Button039 176 408 88 24 2 Set
+c 038 2 Line038 16 432 272 16 2 
