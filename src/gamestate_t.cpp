@@ -1,6 +1,6 @@
-#include "gamestate_class.hpp"
+#include "gamestate_t.hpp"
 
-gamestate_class::gamestate_class() {
+gamestate_t::gamestate_t() {
 
     squareSize = 30;
     gridOrigin_x = 30;

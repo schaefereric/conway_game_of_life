@@ -4,7 +4,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "flexible_array.hpp"
-#include "gamestate_class.hpp"
+#include "gamestate_t.hpp"
 #include "grid.hpp"
 #include "raylib.h"
 #include "raygui.h"
@@ -12,7 +12,7 @@
 
 int main()
 {
-    gamestate_class gamestate;
+    gamestate_t gamestate;
 
     GuiGameOfLifeState guiState = InitGuiGameOfLife();
 

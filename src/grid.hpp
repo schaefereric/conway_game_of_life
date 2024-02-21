@@ -2,9 +2,9 @@
 
 #include "flexible_array.hpp"
 #include "raylib.h"
-#include "gamestate_class.hpp"
+#include "gamestate_t.hpp"
 
-void drawArrayGrid(gamestate_class & gamestate) {
+void drawArrayGrid(gamestate_t & gamestate) {
 
 	
 	for (unsigned int i = 1; i <= gamestate.gridArray.getSizeY(); i++) { // Column

@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <SourcePath>src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -134,15 +137,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\flexible_array.cpp" />
-    <ClCompile Include="src\gamestate_class.cpp" />
+    <ClCompile Include="src\gamestate_t.cpp" />
+    <ClCompile Include="src\guimaster_t.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="guimaster_t.hpp" />
     <ClInclude Include="src\flexible_array.hpp" />
-    <ClInclude Include="src\gamestate_class.hpp" />
+    <ClInclude Include="src\gamestate_t.hpp" />
     <ClInclude Include="src\grid.hpp" />
+    <ClInclude Include="src\guimaster_t.hpp" />
     <ClInclude Include="src\gui_button_implementation.hpp" />
     <ClInclude Include="src\gui_game_of_life_gui.hpp" />
+    <ClInclude Include="src\gui_structs.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

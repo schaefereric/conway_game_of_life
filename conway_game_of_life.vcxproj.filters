@@ -18,10 +18,13 @@
     <ClCompile Include="src\flexible_array.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\gamestate_class.cpp">
+    <ClCompile Include="src\gamestate_t.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\guimaster_t.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +32,7 @@
     <ClInclude Include="src\flexible_array.hpp">
       <Filter>Quelldateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\gamestate_class.hpp">
+    <ClInclude Include="src\gamestate_t.hpp">
       <Filter>Quelldateien</Filter>
     </ClInclude>
     <ClInclude Include="src\grid.hpp">
@@ -41,5 +44,17 @@
     <ClInclude Include="src\gui_game_of_life_gui.hpp">
       <Filter>Quelldateien</Filter>
     </ClInclude>
+    <ClInclude Include="guimaster_t.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui_structs.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\guimaster_t.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
   </ItemGroup>
 </Project>

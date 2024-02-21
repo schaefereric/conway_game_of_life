@@ -38,7 +38,7 @@ void set_square_size(int x, int& squaresizeRef) {
     squaresizeRef = x;
 }
 
-void set_grid_origin(int x, int y, gamestate_class& gamestate) {
+void set_grid_origin(int x, int y, gamestate_t& gamestate) {
     gamestate.gridOrigin_x = x;
     gamestate.gridOrigin_y = y;
 }

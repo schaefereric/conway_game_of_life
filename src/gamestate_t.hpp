@@ -3,7 +3,7 @@
 #include "flexible_array.hpp"
 
 
-struct gamestate_class {
+struct gamestate_t {
     flexible_array gridArray;
 
     int squareSize;
@@ -14,6 +14,6 @@ struct gamestate_class {
     int screenHeight;
 
 
-    gamestate_class();
+    gamestate_t();
 
 };

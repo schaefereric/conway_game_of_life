@@ -21,7 +21,7 @@
 #pragma once
 
 #include <string>
-#include "gamestate_class.hpp"
+#include "gamestate_t.hpp"
 #include "gui_button_implementation.hpp"
 #include "raylib.h"
 
@@ -86,14 +86,14 @@ typedef struct {
     // Module Functions Declaration
     //----------------------------------------------------------------------------------
     GuiGameOfLifeState InitGuiGameOfLife(void);
-    void GuiGameOfLife(gamestate_class & gamestate, GuiGameOfLifeState* state);
+    void GuiGameOfLife(gamestate_t & gamestate, GuiGameOfLifeState* state);
     static void Button010(int x, int y, flexible_array& arrayRef);
     static void Button015();
     static void Button016();
     static void Button025(int x, int y, std::string& str, flexible_array& arrayRef);
     static void Button027(int x, int y, flexible_array& arrayRef);
     static void Button028(int x, int y, flexible_array& arrayRef);
-    static void Button037(int x, int y, gamestate_class& gamestate);
+    static void Button037(int x, int y, gamestate_t& gamestate);
     static void Button039(int x, int& squaresizeRef);
 
 #ifdef __cplusplus
@@ -222,7 +222,7 @@ static void Button028(int x, int y, flexible_array & arrayRef)
 {
     set_field_true(x, y, arrayRef);
 }
-static void Button037(int x, int y, gamestate_class & gamestate)
+static void Button037(int x, int y, gamestate_t & gamestate)
 {
     set_grid_origin(x, y, gamestate);
 }
@@ -232,7 +232,7 @@ static void Button039(int x, int & squaresizeRef)
 }
 
 
-void GuiGameOfLife(gamestate_class & gamestate, GuiGameOfLifeState* state)
+void GuiGameOfLife(gamestate_t & gamestate, GuiGameOfLifeState* state)
 {
 
     if (state->WindowBox000Active)
