@@ -84,9 +84,11 @@ GuiGameOfLifeState InitGuiGameOfLife(void)
 {
     GuiGameOfLifeState state = { 0 };
 
-    state.anchor01 = { 712, 64 };
-    state.anchor02 = { 728, 112 };
-    state.anchor03 = { 728, 616 };
+    int anchor_distance_x = 300;
+
+    state.anchor01 = { float(712 + anchor_distance_x), 64 };
+    state.anchor02 = { float(728 + anchor_distance_x), 112 };
+    state.anchor03 = { float(728 + anchor_distance_x), 616 };
 
     state.WindowBox000Active = true;
     state.Spinner005EditMode = false;
@@ -136,7 +138,7 @@ GuiGameOfLifeState InitGuiGameOfLife(void)
     state.layoutRecs[23] = { state.anchor02.x + 24, state.anchor02.y + 272, 96, 24 };
     state.layoutRecs[24] = { state.anchor02.x + 168, state.anchor02.y + 248, 32, 16 };
     state.layoutRecs[25] = { state.anchor02.x + 200, state.anchor02.y + 272, 88, 24 };
-    state.layoutRecs[26] = { 928, 360, 88, 24 };
+    state.layoutRecs[26] = { float(928 + anchor_distance_x), 360, 88, 24 };
     state.layoutRecs[27] = { state.anchor02.x + 16, state.anchor02.y + 224, 80, 24 };
     state.layoutRecs[28] = { state.anchor02.x + 128, state.anchor02.y + 224, 40, 24 };
     state.layoutRecs[29] = { state.anchor02.x + 200, state.anchor02.y + 224, 48, 24 };

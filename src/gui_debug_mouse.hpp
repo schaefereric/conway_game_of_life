@@ -67,7 +67,9 @@ GuiDebugMouseState InitGuiDebugMouse(void)
 {
     GuiDebugMouseState state = { 0 };
 
-    state.anchor01 = { 450, 408 };
+    int anchor_distance_x = 300;
+
+    state.anchor01 = { float(450 + anchor_distance_x), 408 };
 
     state.WindowBox000Active = true;
     state.Brush_select_ListViewScrollIndex = 0;

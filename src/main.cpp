@@ -16,7 +16,6 @@
 int main()
 {
     gamestate_t gamestate;
-
     guimaster_t guimaster;
 
     gamestate.gridArray.reInitialize(15, 15);

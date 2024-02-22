@@ -6,7 +6,7 @@ gamestate_t::gamestate_t() {
     gridOrigin_x = 30;
     gridOrigin_y = 30;
 
-    screenWidth = 1200;
+    screenWidth = 1500;
     screenHeight = 800;
 
     mousePosition.x = 0; 
