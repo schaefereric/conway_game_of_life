@@ -3,6 +3,7 @@
 #include "flexible_array.hpp"
 #include "raylib.h"
 #include "gamestate_t.hpp"
+#include <cmath>
 
 void drawArrayGrid(gamestate_t& gamestate) {
 
@@ -23,17 +24,74 @@ void drawArrayGrid(gamestate_t& gamestate) {
 
             // draw (colored) squares
             DrawRectangle((gamestate.squareSize * x_index) + gamestate.gridOrigin_x,
-                          (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
-                           gamestate.squareSize,
-                           gamestate.squareSize,
-                           square_color);
+                (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
+                gamestate.squareSize,
+                gamestate.squareSize,
+                square_color);
 
             // draw grid lines
             DrawRectangleLines((gamestate.squareSize * x_index) + gamestate.gridOrigin_x,
-                               (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
-                                gamestate.squareSize,
-                                gamestate.squareSize,
-                                BLACK);
+                (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
+                gamestate.squareSize,
+                gamestate.squareSize,
+                BLACK);
         }
+    }
+
+}
+
+
+int getArrayXFromMousePosition(gamestate_t& gamestateRef) {
+    float temp;
+
+    temp = (gamestateRef.mousePosition.x - gamestateRef.gridOrigin_x) / gamestateRef.squareSize;
+
+    return (int)std::floor(temp);
+}
+
+int getArrayYFromMousePosition(gamestate_t& gamestateRef) {
+    float temp;
+
+    temp = (gamestateRef.mousePosition.y - gamestateRef.gridOrigin_y) / gamestateRef.squareSize;
+
+    return (int)std::floor(temp);
+}
+
+// The actual "paintbrush"
+// gamestateRef.paintbrush_mode determines whether to paint or erase
+void use_paintbrush(gamestate_t& gamestateRef) {
+    int x = getArrayXFromMousePosition(gamestateRef);
+    int y = getArrayYFromMousePosition(gamestateRef);
+
+    
+    if (x >= gamestateRef.gridArray.getSizeX() || y >= gamestateRef.gridArray.getSizeY()) {
+        return;
+    }
+
+    if (gamestateRef.paintbrush_mode == PAINT) {
+        gamestateRef.gridArray.setItem(x, y, 1);
+    }
+
+    if (gamestateRef.paintbrush_mode == ERASE) {
+        gamestateRef.gridArray.setItem(x, y, 0);
+    }
+}
+
+// Paintbrush_mode is overwritten via parameter
+void use_paintbrush(gamestate_t& gamestateRef, enum paintbrush_mode_t mode_overwrite) {
+    int x = getArrayXFromMousePosition(gamestateRef);
+    int y = getArrayYFromMousePosition(gamestateRef);
+
+
+    if (x >= gamestateRef.gridArray.getSizeX() || y >= gamestateRef.gridArray.getSizeY()) {
+        return;
+    }
+
+    if (mode_overwrite == PAINT) {
+        gamestateRef.gridArray.setItem(x, y, 1);
+    }
+
+    if (mode_overwrite == ERASE) {
+        gamestateRef.gridArray.setItem(x, y, 0);
     }
 }

@@ -3,6 +3,7 @@
 #define RAYGUI_IMPLEMENTATION
 #define _CRT_SECURE_NO_WARNINGS
 
+#include "GlobalDefinitions.hpp"
 #include "flexible_array.hpp"
 #include "gamestate_t.hpp"
 #include "grid.hpp"
@@ -34,6 +35,12 @@ int main()
 
         gamestate.updateMouse();
 
+        if (gamestate.mouse_L) {
+            use_paintbrush(gamestate);
+        }
+        if (gamestate.mouse_R) {
+            use_paintbrush(gamestate, ERASE);
+        }
 
         // Draw
         //----------------------------------------------------------------------------------

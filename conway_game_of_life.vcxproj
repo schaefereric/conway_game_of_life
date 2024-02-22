@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="src\flexible_array.hpp" />
     <ClInclude Include="src\gamestate_t.hpp" />
+    <ClInclude Include="src\GlobalDefinitions.hpp" />
     <ClInclude Include="src\grid.hpp" />
     <ClInclude Include="src\guimaster_t.hpp" />
     <ClInclude Include="src\gui_button_implementation.hpp" />

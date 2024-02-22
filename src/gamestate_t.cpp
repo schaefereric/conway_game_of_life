@@ -13,6 +13,8 @@ gamestate_t::gamestate_t() {
     mousePosition.y = 0;
     mouse_L = false;
     mouse_R = false;
+
+    paintbrush_mode = PAINT;
 }
 
 void gamestate_t::updateMouse() {

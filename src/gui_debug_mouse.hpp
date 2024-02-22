@@ -31,6 +31,7 @@
 #include "gui_structs.hpp"
 #include "gui_button_implementation.hpp"
 #include "gamestate_t.hpp"
+#include <iostream>
 
 
 //----------------------------------------------------------------------------------
@@ -127,7 +128,6 @@ void GuiDebugMouse(gamestate_t & gamestate, GuiDebugMouseState* state)
             strcpy(mouse_rval_str, "false");
         }
 
-
         state->WindowBox000Active = !GuiWindowBox(state->layoutRecs[0], "Mouse Debug");
         GuiLabel(state->layoutRecs[1], "Mouse Position:");
         GuiLabel(state->layoutRecs[2], "X: ");
@@ -148,5 +148,17 @@ void GuiDebugMouse(gamestate_t & gamestate, GuiDebugMouseState* state)
         GuiLabel(state->layoutRecs[17], "lks_x");
         GuiLabel(state->layoutRecs[18], "Y: ");
         GuiLabel(state->layoutRecs[19], "lks_y");
+
+        if (state->Brush_select_ListViewActive == 0) {
+            // "Paint" selection
+            gamestate.paintbrush_mode = PAINT;
+        }
+        if (state->Brush_select_ListViewActive == 1) {
+            // "Paint" selection
+            gamestate.paintbrush_mode = ERASE;
+        }
+
+
+        //std::cout << "scrollindex: " << state->Brush_select_ListViewScrollIndex << "    active: " << state->Brush_select_ListViewActive << std::endl;
     }
 }
