@@ -2,6 +2,11 @@
 #include "flexible_array.hpp"
 #include <string>
 
+// -------------------------------------------------------
+// 
+// Debug Main
+//  
+// -------------------------------------------------------
 void resize_array(int x, int y, flexible_array & arrayRef) {
 	arrayRef.reInitialize(x, y);
 }
@@ -42,3 +47,10 @@ void set_grid_origin(int x, int y, gamestate_t& gamestate) {
     gamestate.gridOrigin_x = x;
     gamestate.gridOrigin_y = y;
 }
+
+// -------------------------------------------------------
+// 
+// Debug Mouse
+//  
+// -------------------------------------------------------
+

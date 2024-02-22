@@ -44,13 +44,13 @@
     <ClInclude Include="src\gui_game_of_life_gui.hpp">
       <Filter>Quelldateien</Filter>
     </ClInclude>
-    <ClInclude Include="guimaster_t.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="src\gui_structs.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\guimaster_t.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui_debug_mouse.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

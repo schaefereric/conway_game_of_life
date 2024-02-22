@@ -8,13 +8,16 @@
 #include "grid.hpp"
 #include "raylib.h"
 #include "raygui.h"
+#include "guimaster_t.hpp"
 #include "gui_game_of_life_gui.hpp"
+#include "gui_debug_mouse.hpp"
+
 
 int main()
 {
     gamestate_t gamestate;
 
-    GuiGameOfLifeState guiState = InitGuiGameOfLife();
+    guimaster_t guimaster;
 
     gamestate.gridArray.reInitialize(15, 15);
     gamestate.gridArray.setItem(5, 5, 1);
@@ -41,7 +44,7 @@ int main()
 
         drawArrayGrid(gamestate);
 
-        GuiGameOfLife(gamestate, &guiState);
+        guimaster.draw(gamestate);
 
         
 

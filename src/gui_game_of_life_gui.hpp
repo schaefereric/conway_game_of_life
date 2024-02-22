@@ -30,47 +30,8 @@
 #include "raygui.h"
 
 #include <string.h>     // Required for: strcpy()
+#include "gui_structs.hpp"
 
-#ifndef GUI_GAME_OF_LIFE_H
-#define GUI_GAME_OF_LIFE_H
-
-typedef struct {
-    Vector2 anchor01;
-    Vector2 anchor02;
-    Vector2 anchor03;
-
-    bool WindowBox000Active;
-    bool Spinner005EditMode;
-    int Spinner005Value;
-    bool Spinner006EditMode;
-    int Spinner006Value;
-    bool ValueBOx017EditMode;
-    int ValueBOx017Value;
-    bool ValueBOx016EditMode;
-    int ValueBOx016Value;
-    bool ValueBOx018EditMode;
-    int ValueBOx018Value;
-    bool Spinner018EditMode;
-    int Spinner018Value;
-    bool Spinner022EditMode;
-    int Spinner022Value;
-    bool Spinner026EditMode;
-    int Spinner026Value;
-    bool Spinner035EditMode;
-    int Spinner035Value;
-    bool Spinner036EditMode;
-    int Spinner036Value;
-
-    Rectangle layoutRecs[39];
-
-    // Custom state variables (depend on development software)
-    // NOTE: This variables should be added manually if required
-
-} GuiGameOfLifeState;
-
-#ifdef __cplusplus
-//extern "C" {            // Prevents name mangling of functions
-#endif
 
     //----------------------------------------------------------------------------------
     // Defines and Macros
@@ -96,11 +57,6 @@ typedef struct {
     static void Button037(int x, int y, gamestate_t& gamestate);
     static void Button039(int x, int& squaresizeRef);
 
-#ifdef __cplusplus
-//}
-#endif
-
-#endif // GUI_GAME_OF_LIFE_H
 
 /***********************************************************************************
 *

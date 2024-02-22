@@ -1,0 +1,31 @@
+#
+# rgl layout text file (v4.0) - raygui layout file generated using rGuiLayout
+#
+# Number of controls:     20
+#
+# Ref. window:    r <x> <y> <width> <height>
+# Anchor info:    a <id> <name> <posx> <posy> <enabled>
+# Control info:   c <id> <type> <name> <rectangle> <anchor_id> <text>
+#
+r 0 40 -1 -1
+a 001 anchor01 504 256 1
+c 000 0 WindowBox000 0 0 256 336 1 Mouse Debug
+c 001 4 Label001 16 32 120 24 1 Mouse Position:
+c 002 4 Label002 16 56 12 16 1 X: 
+c 003 4 mou_x 32 56 40 16 1 mou_x
+c 004 4 Label004 104 56 12 12 1 Y: 
+c 005 4 mou_y 120 56 32 12 1 mou_y
+c 006 2 Line006 16 136 224 16 1 
+c 007 4 Label007 16 88 104 24 1 Mouse_L pressed?: 
+c 008 4 mouse_Lval 120 88 112 24 1 Mouse_Lval
+c 009 21 Brush_select_ListView 128 168 120 72 1 PAINT; ERASE
+c 010 4 Label010 16 168 72 24 1 Mouse Brush
+c 011 4 Label011 16 184 72 10 1 Settings
+c 012 4 Label012 16 104 104 24 1 Mouse_R pressed?: 
+c 013 4 mouse_Rval 120 104 112 24 1 Mouse_Rval
+c 014 2 Line014 16 248 224 16 1 
+c 015 4 Label015 16 264 120 24 1 Last Killed Square:
+c 016 4 Label016 16 288 16 24 1 X: 
+c 017 4 lks_x 32 288 40 24 1 lks_x
+c 018 4 Label018 80 288 16 24 1 Y: 
+c 019 4 lks-Y 96 288 40 24 1 lks_y

@@ -8,4 +8,16 @@ gamestate_t::gamestate_t() {
 
     screenWidth = 1200;
     screenHeight = 800;
+
+    mousePosition.x = 0; 
+    mousePosition.y = 0;
+    mouse_L = false;
+    mouse_R = false;
+}
+
+void gamestate_t::updateMouse() {
+    mousePosition = GetMousePosition();
+
+    mouse_L = IsMouseButtonDown(0x01);
+    mouse_R = IsMouseButtonDown(0x02);
 }
