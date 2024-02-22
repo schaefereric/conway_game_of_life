@@ -33,9 +33,9 @@
 #include "gamestate_t.hpp"
 
 
-//    //----------------------------------------------------------------------------------
-//    // Module Functions Declaration
-//    //----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+// Module Functions Declaration
+//----------------------------------------------------------------------------------
    GuiDebugMouseState InitGuiDebugMouse(void);
    void GuiDebugMouse(gamestate_t & gamestate, GuiDebugMouseState* state);
 
@@ -106,10 +106,10 @@ void GuiDebugMouse(gamestate_t & gamestate, GuiDebugMouseState* state)
 {
     if (state->WindowBox000Active)
     {
-        static char mou_x_buffer[2];
-        _itoa(gamestate.mousePosition.x, mou_x_buffer, 10); // Cast MousePosition.x integer to c_string
-        static char mou_y_buffer[2];
-        _itoa(gamestate.mousePosition.y, mou_y_buffer, 10); // Cast MousePosition.y integer to c_string
+        static char mou_x_buffer[10];
+        _itoa_s(gamestate.mousePosition.x, mou_x_buffer, 10, 10); // Cast MousePosition.x integer to c_string
+        static char mou_y_buffer[10];
+        _itoa_s(gamestate.mousePosition.y, mou_y_buffer, 10, 10); // Cast MousePosition.y integer to c_string
 
         static char mouse_lval_str[6];
         if (gamestate.mouse_L) {
