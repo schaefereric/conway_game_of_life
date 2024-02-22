@@ -106,20 +106,42 @@ void GuiDebugMouse(gamestate_t & gamestate, GuiDebugMouseState* state)
 {
     if (state->WindowBox000Active)
     {
+        static char mou_x_buffer[2];
+        _itoa(gamestate.mousePosition.x, mou_x_buffer, 10); // Cast MousePosition.x integer to c_string
+        static char mou_y_buffer[2];
+        _itoa(gamestate.mousePosition.y, mou_y_buffer, 10); // Cast MousePosition.y integer to c_string
+
+        static char mouse_lval_str[6];
+        if (gamestate.mouse_L) {
+            strcpy(mouse_lval_str, "true");
+        }
+        else if (!(gamestate.mouse_L)) {
+            strcpy(mouse_lval_str, "false");
+        }
+
+        static char mouse_rval_str[6];
+        if (gamestate.mouse_R) {
+            strcpy(mouse_rval_str, "true");
+        }
+        else if (!(gamestate.mouse_R)) {
+            strcpy(mouse_rval_str, "false");
+        }
+
+
         state->WindowBox000Active = !GuiWindowBox(state->layoutRecs[0], "Mouse Debug");
         GuiLabel(state->layoutRecs[1], "Mouse Position:");
         GuiLabel(state->layoutRecs[2], "X: ");
-        GuiLabel(state->layoutRecs[3], "mou_x");
+        GuiLabel(state->layoutRecs[3], mou_x_buffer);
         GuiLabel(state->layoutRecs[4], "Y: ");
-        GuiLabel(state->layoutRecs[5], "mou_y");
+        GuiLabel(state->layoutRecs[5], mou_y_buffer);
         GuiLine(state->layoutRecs[6], NULL);
         GuiLabel(state->layoutRecs[7], "Mouse_L pressed?: ");
-        GuiLabel(state->layoutRecs[8], "Mouse_Lval");
+        GuiLabel(state->layoutRecs[8], mouse_lval_str);
         GuiListView(state->layoutRecs[9], "PAINT; ERASE", &state->Brush_select_ListViewScrollIndex, &state->Brush_select_ListViewActive);
         GuiLabel(state->layoutRecs[10], "Mouse Brush");
         GuiLabel(state->layoutRecs[11], "Settings");
         GuiLabel(state->layoutRecs[12], "Mouse_R pressed?: ");
-        GuiLabel(state->layoutRecs[13], "Mouse_Rval");
+        GuiLabel(state->layoutRecs[13], mouse_rval_str);
         GuiLine(state->layoutRecs[14], NULL);
         GuiLabel(state->layoutRecs[15], "Last Killed Square:");
         GuiLabel(state->layoutRecs[16], "X: ");

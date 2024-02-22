@@ -18,6 +18,6 @@ gamestate_t::gamestate_t() {
 void gamestate_t::updateMouse() {
     mousePosition = GetMousePosition();
 
-    mouse_L = IsMouseButtonDown(0x01);
-    mouse_R = IsMouseButtonDown(0x02);
+    mouse_L = IsMouseButtonDown(0);
+    mouse_R = IsMouseButtonDown(1);
 }

@@ -15,8 +15,8 @@ struct gamestate_t {
     int screenHeight;
 
     Vector2 mousePosition;
-    bool mouse_L;
-    bool mouse_R;
+    bool mouse_L;           // is left mouse button pressed ? (update via updateMouse();)
+    bool mouse_R;           // is right mouse button pressed ? (update via updateMouse();)
 
     gamestate_t();
 

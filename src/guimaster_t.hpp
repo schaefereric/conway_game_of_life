@@ -16,8 +16,11 @@ struct GuiDebugMouseState;
 
 struct guimaster_t
 {
-    GuiGameOfLifeState guistate_debug_main;
-    GuiDebugMouseState guistate_debug_mouse;
+    GuiGameOfLifeState guistate_debug_main;             // Debug Main Window
+    GuiDebugMouseState guistate_debug_mouse;            // Debug Mouse Window
+
+    bool draw_debug_main;
+    bool draw_debug_mouse;
 
     guimaster_t();
 

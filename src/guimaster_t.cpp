@@ -8,6 +8,8 @@ void GuiDebugMouse(gamestate_t& gamestate, GuiDebugMouseState* state);
 
 
 guimaster_t::guimaster_t() {
+    draw_debug_main = true;
+    draw_debug_mouse = true;
     this->init();
 }
 
@@ -17,6 +19,13 @@ void guimaster_t::init() {
 }
 
 void guimaster_t::draw(gamestate_t & gamestateRef) {
-    GuiGameOfLife(gamestateRef, &guistate_debug_main);
-    GuiDebugMouse(gamestateRef, &guistate_debug_mouse);
+    if (draw_debug_main) {
+        GuiGameOfLife(gamestateRef, &guistate_debug_main);
+    }
+
+    if (draw_debug_mouse) {
+        GuiDebugMouse(gamestateRef, &guistate_debug_mouse);
+    }
+    
+    
 }
