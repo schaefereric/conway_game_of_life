@@ -36,15 +36,23 @@ struct flexible_array {
     // Initialize array with zeros
     void clearArray();
 
+    
+    // Scary Pointer Functions!
+    int* returnPointerToNewArray();
+
+    int* returnPointerToNewArray(unsigned int ix, unsigned int iy);
+
+    void exchangePointers(int* newArray);
+
     // -----------------------------------------------------------
     // 
     // DEPRECATED DEBUG FUNCTIONS !!! ONLY WORKS WITH INTEGERS !!!
     //
     // 
     // Prints a countinuous list of all items in the array
-    void traverse();
+    void traverse() const;
 
     // Assuming the array is storing bools, a square matrix is printed, displaying zeros/false as O and ones/true as X
-    void printMatrix();
+    void printMatrix() const;
 
 };

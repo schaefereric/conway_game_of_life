@@ -139,6 +139,7 @@
     <ClCompile Include="src\flexible_array.cpp" />
     <ClCompile Include="src\gamestate_t.cpp" />
     <ClCompile Include="src\guimaster_t.cpp" />
+    <ClCompile Include="src\logic.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="src\gui_debug_mouse.hpp" />
     <ClInclude Include="src\gui_game_of_life_gui.hpp" />
     <ClInclude Include="src\gui_structs.hpp" />
+    <ClInclude Include="src\logic.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

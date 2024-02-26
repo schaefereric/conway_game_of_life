@@ -3,8 +3,9 @@
 #include "flexible_array.hpp"
 #include "raylib.h"
 #include "gamestate_t.hpp"
-#include <cmath>
+#include <cmath> 
 
+// Reads array and draws the entire array on screen
 void drawArrayGrid(gamestate_t& gamestate) {
 
     Color square_color;
@@ -13,6 +14,7 @@ void drawArrayGrid(gamestate_t& gamestate) {
         for (unsigned int x_index = 0; x_index < gamestate.gridArray.getSizeX(); x_index++) { // Item per Column
 
             // determine color of square
+            // true -> green, false -> white
             if (gamestate.gridArray.getItem(x_index, y_index) == 1) {
                 square_color = GREEN;
             }
@@ -40,7 +42,7 @@ void drawArrayGrid(gamestate_t& gamestate) {
 
 }
 
-
+// Reverting the drawArrayGrid function to get coordinates of square at mouse cursor position
 int getArrayXFromMousePosition(gamestate_t& gamestateRef) {
     float temp;
 
@@ -63,7 +65,7 @@ void use_paintbrush(gamestate_t& gamestateRef) {
     int x = getArrayXFromMousePosition(gamestateRef);
     int y = getArrayYFromMousePosition(gamestateRef);
 
-    
+    // Return if mouse position is outside of grid
     if (x >= gamestateRef.gridArray.getSizeX() || y >= gamestateRef.gridArray.getSizeY()) {
         return;
     }

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "color.hpp"
+//#include "raylib.h"
 
 // Takes two index numbers (x and y) and returns single array index number
 int flexible_array::getSingleIndex(unsigned int ix, unsigned int iy) const  
@@ -83,13 +84,26 @@ void flexible_array::clearArray() {
     }
 }
 
+int* flexible_array::returnPointerToNewArray() {
+    return new int[size_x * size_y];
+}
+
+int* flexible_array::returnPointerToNewArray(unsigned int ix, unsigned int iy) {
+    return new int[ix * iy];
+}
+
+void flexible_array::exchangePointers(int* newArray) {
+    delete[] pAry;
+    pAry = newArray;
+}
+
 // -----------------------------------------------------------
 // 
 // DEPRECATED DEBUG FUNCTIONS !!! ONLY WORKS WITH INTEGERS !!!
 //
 // 
 // Prints a countinuous list of all items in the array
-void flexible_array::traverse() { 
+void flexible_array::traverse() const { 
     for (unsigned int i = 0; i < size_x; i++) {
         for (unsigned int j = 0; j < size_y; j++) {
             std::cout << "X: " << i
@@ -102,7 +116,7 @@ void flexible_array::traverse() {
 }
 
 // Assuming the array is storing bools, a square matrix is printed, displaying zeros/false as O and ones/true as X
-void flexible_array::printMatrix() { 
+void flexible_array::printMatrix() const { 
     for (unsigned int i = 0; i < size_x; i++) {
         for (unsigned int j = 0; j < size_y; j++) {
             if (getItem(i, j) == 0) {

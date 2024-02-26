@@ -6,6 +6,8 @@
 // already been included in main.cpp !
 // -------------------------------------------
 
+// This class stores the "guistates" for all GUIs, initializes, manages and draws them.
+// All guistates are initialized in constuctor and GUIs can be drawn via draw();.
 
 #include "gui_structs.hpp"
 #include "gamestate_t.hpp"

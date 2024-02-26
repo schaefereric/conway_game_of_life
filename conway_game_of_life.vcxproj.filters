@@ -27,6 +27,9 @@
     <ClCompile Include="src\guimaster_t.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\logic.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\flexible_array.hpp">
@@ -54,6 +57,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\GlobalDefinitions.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\logic.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,16 +3,16 @@
 #define RAYGUI_IMPLEMENTATION
 #define _CRT_SECURE_NO_WARNINGS
 
+#include "raylib.h"
+#include "raygui.h"
 #include "GlobalDefinitions.hpp"
 #include "flexible_array.hpp"
 #include "gamestate_t.hpp"
 #include "grid.hpp"
-#include "raylib.h"
-#include "raygui.h"
-#include "guimaster_t.hpp"
 #include "gui_game_of_life_gui.hpp"
 #include "gui_debug_mouse.hpp"
-
+#include "guimaster_t.hpp"
+#include "logic.hpp"
 
 int main()
 {
