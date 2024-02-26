@@ -1,6 +1,5 @@
 #include "logic.hpp"
 
-
 // {NW, N, NE, E, SE, S, SW, W};
 
 Vector2 getMooreNeighborhoodCoordinate(int ix, int iy, moore_direction direction) {
@@ -44,7 +43,7 @@ Vector2 getMooreNeighborhoodCoordinate(int ix, int iy, moore_direction direction
     return temp;
 }
 
-int getNumberOfNeighbors(unsigned int ix, unsigned int iy, gamestate_t & gamestateRef)
+int getNumberOfNeighbors(unsigned int ix, unsigned int iy, flexible_array* arrayRef)
 {
     int numberOfNeighbors = 0;
 
@@ -83,9 +82,9 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, gamestate_t & gamesta
         // if newPos is outside of the grid, do not count a neighbor and continue for loop
         if (newPos.x < 0 || newPos.y < 0) {
             continue;
-        }
+        } 
 
-        if (gamestateRef.gridArray.getItem(newPos.x, newPos.y) == 1) {
+        if (arrayRef->getItem(newPos.x, newPos.y) == 1) {
             numberOfNeighbors++;
         }
     }
@@ -94,18 +93,18 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, gamestate_t & gamesta
 }
 
 // Returns TRUE if this square lives in the next generation, or returns FALSE if this square dies in the next generation
-bool decideNewStateOfSquare(unsigned int ix, unsigned int iy, gamestate_t & gamestateRef) {
+bool decideNewStateOfSquare(unsigned int ix, unsigned int iy, flexible_array* arrayRef) {
     
-    int numberOfNeighbors = getNumberOfNeighbors(ix, iy, gamestateRef); 
+    int numberOfNeighbors = getNumberOfNeighbors(ix, iy, arrayRef); 
 
     // The game rules:
-    if (gamestateRef.gridArray.getItem(ix, iy) == 0) {
+    if (arrayRef->getItem(ix, iy) == 0) {
         if (numberOfNeighbors == 3) {
             return true;
         }
         else return false;
     }
-    if (gamestateRef.gridArray.getItem(ix, iy) == 1) {
+    if (arrayRef->getItem(ix, iy) == 1) {
         if (numberOfNeighbors < 2) {
             return false;
         }
@@ -120,12 +119,13 @@ bool decideNewStateOfSquare(unsigned int ix, unsigned int iy, gamestate_t & game
     
 }
 
-void applyGameRulesOnArray(gamestate_t & gamestateRef) {
+// Applies the game rules on the gridArray ONCE! 
+void applyGameRulesOnArray(flexible_array* arrayRef) {
     /*
     *  VERY STUPID IDEA !!!!
-    1. initialize new flexible-array
-    2. iterate over gridArray and save results directly to new array
-    3. deallocate old array pointer and save new array pointer to old array
+    * 1. initialize new flexible-array
+    * 2. iterate over gridArray and save results directly to new array
+    * 3. deallocate old array pointer and move new array pointer to old array
     *
     * 
     * Better (?) idea:
@@ -134,12 +134,12 @@ void applyGameRulesOnArray(gamestate_t & gamestateRef) {
     * 
     */
 
-    flexible_array newArray(gamestateRef.gridArray.getSizeX(), gamestateRef.gridArray.getSizeY());
+    flexible_array newArray(arrayRef->getSizeX(), arrayRef->getSizeY());
 
-    for (int index_y = 0; index_y < gamestateRef.gridArray.getSizeY(); index_y++) {
-        for (int index_x = 0; index_x < gamestateRef.gridArray.getSizeX(); index_x++) {
+    for (int index_y = 0; index_y < arrayRef->getSizeY(); index_y++) {
+        for (int index_x = 0; index_x < arrayRef->getSizeX(); index_x++) {
 
-            bool square = decideNewStateOfSquare(index_x, index_y, gamestateRef);
+            bool square = decideNewStateOfSquare(index_x, index_y, arrayRef);
 
             if (square) {
                 newArray.setItem(index_x, index_y, 1);
@@ -155,5 +155,5 @@ void applyGameRulesOnArray(gamestate_t & gamestateRef) {
     }
 
     // Change old array pointer with new array pointer
-    gamestateRef.gridArray.exchangePointers(newArray.pAry);
+    arrayRef->exchangePointers(newArray.pAry);
 }

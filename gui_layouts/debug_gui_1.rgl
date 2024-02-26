@@ -1,7 +1,7 @@
 #
 # rgl layout text file (v4.0) - raygui layout file generated using rGuiLayout
 #
-# Number of controls:     39
+# Number of controls:     41
 #
 # Ref. window:    r <x> <y> <width> <height>
 # Anchor info:    a <id> <name> <posx> <posy> <enabled>
@@ -11,7 +11,7 @@ r 0 40 -1 -1
 a 001 anchor01 712 64 1
 a 002 anchor02 728 112 1
 a 003 anchor03 728 616 1
-c 000 0 WindowBox000 0 8 336 672 1 Game of Life
+c 000 0 WindowBox000 0 8 336 712 1 Game of Life
 c 001 1 GroupBox001 0 0 304 472 2 Array
 c 002 4 Label003 16 8 120 24 2 Array Size
 c 003 15 Spinner005 16 136 120 24 2 
@@ -21,8 +21,8 @@ c 006 4 Label008 208 112 120 24 2 SIZE Y
 c 007 2 Line009 16 80 272 16 2 
 c 008 5 Button010 16 168 272 24 2 Resize!
 c 009 2 Line011 16 192 272 16 2 
-c 010 1 GroupBox013 0 16 304 96 3 Game Algorithm
-c 011 4 Label014 16 24 120 24 3 Game Status: 
+c 010 1 GroupBox013 0 16 304 128 3 Game Algorithm
+c 011 4 Label014 16 24 72 24 3 Game Status: 
 c 012 5 Button015 16 56 120 24 3 Start
 c 013 5 Button016 152 56 120 24 3 Stop
 c 014 14 ValueBOx017 56 32 40 24 2 Size X: 
@@ -50,3 +50,5 @@ c 035 5 Button037 32 408 88 24 2 Set
 c 036 4 Label038 176 360 88 24 2 Set Square Size
 c 037 5 Button039 176 408 88 24 2 Set
 c 038 2 Line038 16 432 272 16 2 
+c 039 4 Label039 88 24 72 24 3 runalgo
+c 040 5 Button040 16 88 120 24 3 Single Step

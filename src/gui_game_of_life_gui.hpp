@@ -49,13 +49,14 @@
     GuiGameOfLifeState InitGuiGameOfLife(void);
     void GuiGameOfLife(gamestate_t & gamestate, GuiGameOfLifeState* state);
     static void Button010(int x, int y, flexible_array& arrayRef);
-    static void Button015();
-    static void Button016();
+    static void Button015(gamestate_t& gamestate);
+    static void Button016(gamestate_t& gamestate);
     static void Button025(int x, int y, std::string& str, flexible_array& arrayRef);
     static void Button027(int x, int y, flexible_array& arrayRef);
     static void Button028(int x, int y, flexible_array& arrayRef);
     static void Button037(int x, int y, gamestate_t& gamestate);
     static void Button039(int x, int& squaresizeRef);
+    static void Button040(gamestate_t& gamestate);
 
 
 /***********************************************************************************
@@ -112,7 +113,7 @@ GuiGameOfLifeState InitGuiGameOfLife(void)
     state.Spinner036EditMode = false;
     state.Spinner036Value = 0;
 
-    state.layoutRecs[0] = { state.anchor01.x + 0, state.anchor01.y + 8, 336, 672 };
+    state.layoutRecs[0] = { state.anchor01.x + 0, state.anchor01.y + 8, 336, 712 };
     state.layoutRecs[1] = { state.anchor02.x + 0, state.anchor02.y + 0, 304, 472 };
     state.layoutRecs[2] = { state.anchor02.x + 16, state.anchor02.y + 8, 120, 24 };
     state.layoutRecs[3] = { state.anchor02.x + 16, state.anchor02.y + 136, 120, 24 };
@@ -122,7 +123,7 @@ GuiGameOfLifeState InitGuiGameOfLife(void)
     state.layoutRecs[7] = { state.anchor02.x + 16, state.anchor02.y + 80, 272, 16 };
     state.layoutRecs[8] = { state.anchor02.x + 16, state.anchor02.y + 168, 272, 24 };
     state.layoutRecs[9] = { state.anchor02.x + 16, state.anchor02.y + 192, 272, 16 };
-    state.layoutRecs[10] = { state.anchor03.x + 0, state.anchor03.y + 16, 304, 96 };
+    state.layoutRecs[10] = { state.anchor03.x + 0, state.anchor03.y + 16, 304, 128 };
     state.layoutRecs[11] = { state.anchor03.x + 16, state.anchor03.y + 24, 120, 24 };
     state.layoutRecs[12] = { state.anchor03.x + 16, state.anchor03.y + 56, 120, 24 };
     state.layoutRecs[13] = { state.anchor03.x + 152, state.anchor03.y + 56, 120, 24 };
@@ -151,6 +152,8 @@ GuiGameOfLifeState InitGuiGameOfLife(void)
     state.layoutRecs[36] = { state.anchor02.x + 176, state.anchor02.y + 360, 88, 24 };
     state.layoutRecs[37] = { state.anchor02.x + 176, state.anchor02.y + 408, 88, 24 };
     state.layoutRecs[38] = { state.anchor02.x + 16, state.anchor02.y + 432, 272, 16 };
+    state.layoutRecs[39] = { state.anchor03.x + 88, state.anchor03.y + 24, 72, 24 };
+    state.layoutRecs[40] = { state.anchor03.x + 16, state.anchor03.y + 88, 120, 24 };
 
     // Custom variables initialization
 
@@ -160,13 +163,15 @@ static void Button010(int x, int y, flexible_array & arrayRef)
 {
     resize_array(x, y, arrayRef);
 }
-static void Button015()
+static void Button015(gamestate_t& gamestate)
 {
-    // TODO: Implement control logic
+    // start algo
+    gamestate.setRunAlgorithm(true);
 }
-static void Button016()
+static void Button016(gamestate_t& gamestate)
 {
-    // TODO: Implement control logic
+    // stop algo
+    gamestate.setRunAlgorithm(false);
 }
 static void Button025(int x, int y, std::string & str, flexible_array & arrayRef)
 {
@@ -188,6 +193,11 @@ static void Button039(int x, int & squaresizeRef)
 {
     set_square_size(x, squaresizeRef);
 }
+static void Button040(gamestate_t& gamestate)
+{
+    gamestate.singleStep();
+}
+
 
 
 void GuiGameOfLife(gamestate_t & gamestate, GuiGameOfLifeState* state)
@@ -203,6 +213,13 @@ void GuiGameOfLife(gamestate_t & gamestate, GuiGameOfLifeState* state)
     state->ValueBOx016Value = gamestate.gridArray.getSizeY();
     state->ValueBOx018Value = gamestate.squareSize;
     
+    static char isAlgoRunning[10];
+    if (gamestate.runAlgorithm == true) {
+        strcpy(isAlgoRunning, "Running");
+    }
+    if (gamestate.runAlgorithm == false) {
+        strcpy(isAlgoRunning, "Paused");
+    }
 
     GuiGroupBox(state->layoutRecs[1], "Array");
     GuiLabel(state->layoutRecs[2], "Array Size");
@@ -215,8 +232,8 @@ void GuiGameOfLife(gamestate_t & gamestate, GuiGameOfLifeState* state)
     GuiLine(state->layoutRecs[9], NULL);
     GuiGroupBox(state->layoutRecs[10], "Game Algorithm");
     GuiLabel(state->layoutRecs[11], "Game Status: ");
-    if (GuiButton(state->layoutRecs[12], "Start")) Button015();
-    if (GuiButton(state->layoutRecs[13], "Stop")) Button016();
+    if (GuiButton(state->layoutRecs[12], "Start")) Button015(gamestate);
+    if (GuiButton(state->layoutRecs[13], "Stop")) Button016(gamestate);
     if (GuiValueBox(state->layoutRecs[14], "Size X: ", &state->ValueBOx017Value, 0, 16384, state->ValueBOx017EditMode)) state->ValueBOx017EditMode = !state->ValueBOx017EditMode;
     if (GuiValueBox(state->layoutRecs[15], "Size Y: ", &state->ValueBOx016Value, 0, 16384, state->ValueBOx016EditMode)) state->ValueBOx016EditMode = !state->ValueBOx016EditMode;
     GuiLabel(state->layoutRecs[16], "Resize Array");
@@ -242,5 +259,7 @@ void GuiGameOfLife(gamestate_t & gamestate, GuiGameOfLifeState* state)
     GuiLabel(state->layoutRecs[36], "Set Square Size");
     if (GuiButton(state->layoutRecs[37], "Set")) Button039(state->Spinner018Value, gamestate.squareSize);
     GuiLine(state->layoutRecs[38], NULL);
+    GuiLabel(state->layoutRecs[39], isAlgoRunning);
+    if (GuiButton(state->layoutRecs[40], "Single Step")) Button040(gamestate);
 }
 

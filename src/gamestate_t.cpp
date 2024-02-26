@@ -15,6 +15,8 @@ gamestate_t::gamestate_t() {
     mouse_R = false;
 
     paintbrush_mode = PAINT;
+
+    runAlgorithm = false;
 }
 
 void gamestate_t::updateMouse() {
@@ -22,4 +24,18 @@ void gamestate_t::updateMouse() {
 
     mouse_L = IsMouseButtonDown(0);
     mouse_R = IsMouseButtonDown(1);
+}
+
+void gamestate_t::setRunAlgorithm(bool input) {
+    runAlgorithm = input;
+}
+
+void gamestate_t::singleStep() {
+    applyGameRulesOnArray(&gridArray);
+}
+
+void gamestate_t::runAlgorithmIfActive() {
+    if (runAlgorithm) {
+        applyGameRulesOnArray(&gridArray);
+    }
 }

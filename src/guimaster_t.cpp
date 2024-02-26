@@ -3,8 +3,8 @@
 // Forward Declarations
 GuiGameOfLifeState InitGuiGameOfLife();
 GuiDebugMouseState InitGuiDebugMouse();
-void GuiGameOfLife(gamestate_t& gamestate, GuiGameOfLifeState* state);
-void GuiDebugMouse(gamestate_t& gamestate, GuiDebugMouseState* state);
+void               GuiGameOfLife(gamestate_t& gamestate, GuiGameOfLifeState* state);
+void               GuiDebugMouse(gamestate_t& gamestate, GuiDebugMouseState* state);
 
 
 guimaster_t::guimaster_t() {

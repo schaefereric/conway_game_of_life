@@ -21,13 +21,16 @@ struct guimaster_t
     GuiGameOfLifeState guistate_debug_main;             // Debug Main Window
     GuiDebugMouseState guistate_debug_mouse;            // Debug Mouse Window
 
+    // decides whether this window should be visible or not
     bool draw_debug_main;
     bool draw_debug_mouse;
 
     guimaster_t();
 
+    // initialize the gui structs with default values
     void init();
 
+    // executes the drawcalls for all visible windows
     void draw(gamestate_t& gamestateRef);
 
 };

@@ -45,8 +45,8 @@ int main()
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
-
         ClearBackground(RAYWHITE);
+
 
         drawArrayGrid(gamestate);
 

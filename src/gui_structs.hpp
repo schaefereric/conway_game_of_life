@@ -29,7 +29,7 @@ struct GuiGameOfLifeState {
     bool Spinner036EditMode;
     int Spinner036Value;
 
-    Rectangle layoutRecs[39];
+    Rectangle layoutRecs[41];
 };
 
 // Debug Mouse
