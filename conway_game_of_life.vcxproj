@@ -150,6 +150,7 @@
     <ClInclude Include="src\grid.hpp" />
     <ClInclude Include="src\guimaster_t.hpp" />
     <ClInclude Include="src\gui_button_implementation.hpp" />
+    <ClInclude Include="src\gui_debug_logic.hpp" />
     <ClInclude Include="src\gui_debug_mouse.hpp" />
     <ClInclude Include="src\gui_game_of_life_gui.hpp" />
     <ClInclude Include="src\gui_structs.hpp" />

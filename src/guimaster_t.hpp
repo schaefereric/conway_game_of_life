@@ -15,15 +15,18 @@
 // Forward Declarations
 struct GuiGameOfLifeState;
 struct GuiDebugMouseState;
+struct GuiDebugLogicState;
 
 struct guimaster_t
 {
     GuiGameOfLifeState guistate_debug_main;             // Debug Main Window
     GuiDebugMouseState guistate_debug_mouse;            // Debug Mouse Window
+    GuiDebugLogicState guistate_debug_logic;            // Debug Logic Window
 
     // decides whether this window should be visible or not
     bool draw_debug_main;
     bool draw_debug_mouse;
+    bool draw_debug_logic;
 
     guimaster_t();
 

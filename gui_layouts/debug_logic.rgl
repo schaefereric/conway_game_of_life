@@ -1,15 +1,30 @@
 #
 # rgl layout text file (v4.0) - raygui layout file generated using rGuiLayout
 #
-# Number of controls:     4
+# Number of controls:     19
 #
 # Ref. window:    r <x> <y> <width> <height>
 # Anchor info:    a <id> <name> <posx> <posy> <enabled>
 # Control info:   c <id> <type> <name> <rectangle> <anchor_id> <text>
 #
 r 0 40 -1 -1
-a 001 anchor01 696 232 1
-c 000 0 WindowBox000 0 0 280 200 1 Logic Debug
+a 001 anchor01 752 136 1
+c 000 0 WindowBox000 0 0 280 368 1 Logic Debug
 c 001 4 Label001 16 32 120 24 1 Enter Test Field
 c 002 15 Spinner002 32 56 96 24 1 X: 
 c 003 15 Spinner003 32 80 96 24 1 Y: 
+c 004 11 DropdownBox004 16 136 120 24 1 NW;N;NE;E;SE;S;SW;W
+c 005 5 Button005 16 160 120 24 1 Get Moore Neighbor
+c 006 4 Label006 152 136 24 24 1 X: 
+c 007 4 Label007 152 160 24 24 1 Y: 
+c 008 4 Label008 168 136 56 24 1 moore_x
+c 009 4 Label009 168 160 56 24 1 moore_y
+c 010 2 Line010 16 112 248 16 1 
+c 011 2 Line011 16 192 248 16 1 
+c 012 5 Button012 16 216 248 24 1 Get Number of Neighbors
+c 013 4 Label013 16 240 104 24 1 Counted Neighbors: 
+c 014 4 Label014 128 240 104 24 1 cneigbors
+c 015 2 Line015 16 264 248 16 1 
+c 016 5 Button016 16 288 248 24 1 Get New State of Square
+c 017 4 Label017 16 312 40 24 1 Result: 
+c 018 4 Label018 56 312 64 24 1 newsqstate

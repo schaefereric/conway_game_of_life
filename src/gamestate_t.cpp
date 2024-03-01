@@ -31,11 +31,11 @@ void gamestate_t::setRunAlgorithm(bool input) {
 }
 
 void gamestate_t::singleStep() {
-    applyGameRulesOnArray(&gridArray);
+    applyGameRulesOnArray_VectorMethod(&gridArray);
 }
 
 void gamestate_t::runAlgorithmIfActive() {
     if (runAlgorithm) {
-        applyGameRulesOnArray(&gridArray);
+        applyGameRulesOnArray_VectorMethod(&gridArray);
     }
 }

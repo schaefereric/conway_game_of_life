@@ -42,3 +42,23 @@ struct GuiDebugMouseState {
 
     Rectangle layoutRecs[20];
 };
+
+// Debug Logic
+struct GuiDebugLogicState {
+    Vector2 anchor01;
+
+    bool WindowBox000Active;
+    bool Spinner002EditMode;
+    int Spinner002Value;
+    bool Spinner003EditMode;
+    int Spinner003Value;
+    bool DropdownBox004EditMode;
+    int DropdownBox004Active;
+
+    Rectangle layoutRecs[19];
+
+    char moore_x_buffer[10];
+    char moore_y_buffer[10];
+    char counted_neighbors[5];
+    char state_of_square[10];
+};

@@ -36,19 +36,20 @@ struct flexible_array {
     // Initialize array with zeros
     void clearArray();
 
-    
+
+    // ------------------------------------------------------------
     // Scary Pointer Functions!
+
     int* returnPointerToNewArray();
 
     int* returnPointerToNewArray(unsigned int ix, unsigned int iy);
 
-    void exchangePointers(int* newArray);
+    void swapPointers(int* newArray);
 
-    // -----------------------------------------------------------
-    // 
+
+    // -----------------------------------------------------------   
     // DEPRECATED DEBUG FUNCTIONS !!! ONLY WORKS WITH INTEGERS !!!
-    //
-    // 
+  
     // Prints a countinuous list of all items in the array
     void traverse() const;
 

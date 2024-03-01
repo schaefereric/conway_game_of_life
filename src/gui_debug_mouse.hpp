@@ -70,7 +70,7 @@ GuiDebugMouseState InitGuiDebugMouse(void)
 
     int anchor_distance_x = 300;
 
-    state.anchor01 = { float(450 + anchor_distance_x), 408 };
+    state.anchor01 = { float(450 + anchor_distance_x), 448 };
 
     state.WindowBox000Active = true;
     state.Brush_select_ListViewScrollIndex = 0;
@@ -154,11 +154,10 @@ void GuiDebugMouse(gamestate_t & gamestate, GuiDebugMouseState* state)
             gamestate.paintbrush_mode = PAINT;
         }
         if (state->Brush_select_ListViewActive == 1) {
-            // "Paint" selection
+            // "Erase" selection
             gamestate.paintbrush_mode = ERASE;
         }
 
 
-        //std::cout << "scrollindex: " << state->Brush_select_ListViewScrollIndex << "    active: " << state->Brush_select_ListViewActive << std::endl;
     }
 }

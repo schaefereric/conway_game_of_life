@@ -92,7 +92,7 @@ int* flexible_array::returnPointerToNewArray(unsigned int ix, unsigned int iy) {
     return new int[ix * iy];
 }
 
-void flexible_array::exchangePointers(int* newArray) {
+void flexible_array::swapPointers(int* newArray) {
     delete[] pAry;
     pAry = newArray;
 }

@@ -77,14 +77,19 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, flexible_array* array
             break;
         }
 
-        Vector2 newPos = getMooreNeighborhoodCoordinate(ix, iy, tempDirection);
+        Vector2 tempPos = getMooreNeighborhoodCoordinate(ix, iy, tempDirection);
 
-        // if newPos is outside of the grid, do not count a neighbor and continue for loop
-        if (newPos.x < 0 || newPos.y < 0) {
+        // if tempPos is outside of the grid, do not count a neighbor and continue for loop
+        if (tempPos.x < 0 || tempPos.y < 0) {
             continue;
         } 
+        // prevent arithmetic overflow
+        if (tempPos.x >= arrayRef->getSizeX() || tempPos.y >= arrayRef->getSizeY()) {
+            continue;
+        }
 
-        if (arrayRef->getItem(newPos.x, newPos.y) == 1) {
+        // count neighbor
+        if (arrayRef->getItem(tempPos.x, tempPos.y) == 1) {
             numberOfNeighbors++;
         }
     }
@@ -120,18 +125,12 @@ bool decideNewStateOfSquare(unsigned int ix, unsigned int iy, flexible_array* ar
 }
 
 // Applies the game rules on the gridArray ONCE! 
-void applyGameRulesOnArray(flexible_array* arrayRef) {
+void applyGameRulesOnArray_SecondArrayMethod(flexible_array* arrayRef) {
     /*
-    *  VERY STUPID IDEA !!!!
+    * VERY STUPID IDEA !!!!
     * 1. initialize new flexible-array
     * 2. iterate over gridArray and save results directly to new array
     * 3. deallocate old array pointer and move new array pointer to old array
-    *
-    * 
-    * Better (?) idea:
-    * 1. std::vector<std::pair<int, int>> -> save positions of squares that live/die
-    * 2. apply saved positions to array
-    * 
     */
 
     flexible_array newArray(arrayRef->getSizeX(), arrayRef->getSizeY());
@@ -155,5 +154,39 @@ void applyGameRulesOnArray(flexible_array* arrayRef) {
     }
 
     // Change old array pointer with new array pointer
-    arrayRef->exchangePointers(newArray.pAry);
+    arrayRef->swapPointers(newArray.pAry);
+}
+
+void applyGameRulesOnArray_VectorMethod(flexible_array* arrayRef) {
+    /* 
+    * Better (?) idea:
+    * 1. std::vector<vector2> -> save positions of squares that live/die
+    * 2. apply saved positions to array
+    */
+
+    std::vector<Vector2> listOfAliveSquares;
+    Vector2 tempVec;
+
+    // Iterate over array and save position of squares that will live in the following generation
+    for (int index_y = 0; index_y < arrayRef->getSizeY(); index_y++) {
+        for (int index_x = 0; index_x < arrayRef->getSizeX(); index_x++) {
+
+            bool tempBool = decideNewStateOfSquare(index_x, index_y, arrayRef);
+
+            if (tempBool) {
+                tempVec.x = index_x;
+                tempVec.y = index_y;
+                listOfAliveSquares.push_back(tempVec);
+            }
+        }
+    }
+
+    // Wipe Array
+    arrayRef->clearArray();
+
+    // Apply new squares
+    for (auto i : listOfAliveSquares) {
+        arrayRef->setItem(i.x, i.y, 1);
+    }
+
 }

@@ -7,9 +7,9 @@
 
 struct gamestate_t {
     flexible_array gridArray;
-
-    int squareSize;
-    int gridOrigin_x;
+        
+    int squareSize;         // Edge length of one (1) square
+    int gridOrigin_x;       // Origin (left top corner) of rendered Grid
     int gridOrigin_y;
 
     int screenWidth;
@@ -18,7 +18,7 @@ struct gamestate_t {
     gamestate_t();
 
     // Mouse Input Handling
-    Vector2 mousePosition;
+    Vector2 mousePosition;  // Last recorded mouse position (update via updateMouse();)
     bool mouse_L;           // is left mouse button pressed ? (update via updateMouse();)
     bool mouse_R;           // is right mouse button pressed ? (update via updateMouse();)
     void updateMouse();
