@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include "color.hpp"
-//#include "raylib.h"
 
 // Takes two index numbers (x and y) and returns single array index number
 int flexible_array::getSingleIndex(unsigned int ix, unsigned int iy) const  
@@ -14,7 +13,7 @@ int flexible_array::getSingleIndex(unsigned int ix, unsigned int iy) const
 flexible_array::flexible_array(unsigned int ix, unsigned int iy) {
     size_x = ix;
     size_y = iy;
-    pAry = new int[ix * iy];
+    pAry = new bool[ix * iy];
     clearArray();
 }
 
@@ -22,7 +21,7 @@ flexible_array::flexible_array(unsigned int ix, unsigned int iy) {
 flexible_array::flexible_array() { 
     size_x = 2;
     size_y = 2;
-    pAry = new int[2 * 2];
+    pAry = new bool[2 * 2];
     clearArray();
 }
 
@@ -41,12 +40,12 @@ void flexible_array::reInitialize(unsigned int ix, unsigned int iy) {
     delete[] pAry;
     size_x = ix;
     size_y = iy;
-    pAry = new int[ix * iy];
+    pAry = new bool[ix * iy];
     clearArray();
 }
 
 // Returns item at given index
-int flexible_array::getItem(unsigned int ix, unsigned int iy) const {
+bool flexible_array::getItem(unsigned int ix, unsigned int iy) const {
     if (ix >= size_x || iy >= size_y) {
         std::cerr << "flexible_array::getItem: ERROR: Invalid index!" << "\n";
         return 0;
@@ -56,7 +55,7 @@ int flexible_array::getItem(unsigned int ix, unsigned int iy) const {
 }
 
 // Sets items at given index
-void flexible_array::setItem(unsigned int ix, unsigned int iy, int input) {
+void flexible_array::setItem(unsigned int ix, unsigned int iy, bool input) {
     if (ix > size_x - 1 || iy > size_y - 1) {
         std::cerr << "flexible_array::setItem: ERROR: Invalid index!" << "\n";
         return;
@@ -79,20 +78,20 @@ unsigned int flexible_array::getSizeY() const {
 void flexible_array::clearArray() {
     for (unsigned int i = 0; i < size_x; i++) {
         for (unsigned int j = 0; j < size_y; j++) {
-            setItem(i, j, 0);
+            setItem(i, j, false);
         }
     }
 }
 
-int* flexible_array::returnPointerToNewArray() {
-    return new int[size_x * size_y];
+bool* flexible_array::returnPointerToNewArray() {
+    return new bool[size_x * size_y];
 }
 
-int* flexible_array::returnPointerToNewArray(unsigned int ix, unsigned int iy) {
-    return new int[ix * iy];
+bool* flexible_array::returnPointerToNewArray(unsigned int ix, unsigned int iy) {
+    return new bool[ix * iy];
 }
 
-void flexible_array::swapPointers(int* newArray) {
+void flexible_array::swapPointers(bool* newArray) {
     delete[] pAry;
     pAry = newArray;
 }
@@ -119,10 +118,10 @@ void flexible_array::traverse() const {
 void flexible_array::printMatrix() const { 
     for (unsigned int i = 0; i < size_x; i++) {
         for (unsigned int j = 0; j < size_y; j++) {
-            if (getItem(i, j) == 0) {
+            if (getItem(i, j) == false) {
                 std::cout << "O ";
             }
-            else if (getItem(i, j) == 1) {
+            else if (getItem(i, j) == true) {
                 std::cout << dye::green("X ");
             }
         }

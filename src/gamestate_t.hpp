@@ -6,7 +6,7 @@
 #include "logic.hpp"
 
 struct gamestate_t {
-    flexible_array gridArray;
+    flexible_array gridArray; // Two-dimensional array which represents the main "grid" containing bool values
         
     int squareSize;         // Edge length of one (1) square
     int gridOrigin_x;       // Origin (left top corner) of rendered Grid

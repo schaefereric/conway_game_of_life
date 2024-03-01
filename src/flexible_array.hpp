@@ -4,7 +4,7 @@ struct flexible_array {
     unsigned int size_x; // Width of Array
     unsigned int size_y; // Height of Array
 
-    int* pAry; // Pointer to array on heap
+    bool* pAry; // Pointer to array on heap
 
     // Takes two index numbers (x and y) and returns single array index number
     int getSingleIndex(unsigned int ix, unsigned int iy) const; 
@@ -22,10 +22,10 @@ struct flexible_array {
     void reInitialize(unsigned int ix, unsigned int iy);
 
     // Returns item at given index
-    int getItem(unsigned int ix, unsigned int iy) const;
+    bool getItem(unsigned int ix, unsigned int iy) const;
 
     // Sets items at given index
-    void setItem(unsigned int ix, unsigned int iy, int input);
+    void setItem(unsigned int ix, unsigned int iy, bool input);
 
     // Returns array size_X
     unsigned int getSizeX() const;
@@ -40,11 +40,11 @@ struct flexible_array {
     // ------------------------------------------------------------
     // Scary Pointer Functions!
 
-    int* returnPointerToNewArray();
+    bool* returnPointerToNewArray();
 
-    int* returnPointerToNewArray(unsigned int ix, unsigned int iy);
+    bool* returnPointerToNewArray(unsigned int ix, unsigned int iy);
 
-    void swapPointers(int* newArray);
+    void swapPointers(bool* newArray);
 
 
     // -----------------------------------------------------------   

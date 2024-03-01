@@ -26,7 +26,7 @@ int main()
     SetTargetFPS(60);     
 
     gamestate.gridArray.reInitialize(15, 15);
-    gamestate.gridArray.setItem(5, 5, 1);
+    gamestate.gridArray.setItem(5, 5, true);
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key

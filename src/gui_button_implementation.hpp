@@ -13,14 +13,14 @@ void resize_array(int x, int y, flexible_array & arrayRef) {
 
 void read_field(int x, int y, std::string& str, flexible_array& arrayRef) {
 
-    int num = arrayRef.getItem(x, y);
+    bool num = arrayRef.getItem(x, y);
 
     str.clear();
 
-    if (num == 0) {
+    if (num == false) {
         str.insert(str.begin(), '0');
     }
-    else if (num == 1) {
+    else if (num == true) {
         str.insert(str.begin(), '1');
     }
     else {
@@ -31,12 +31,12 @@ void read_field(int x, int y, std::string& str, flexible_array& arrayRef) {
 
 void set_field_true(int x, int y, flexible_array& arrayRef) {
     // set true
-    arrayRef.setItem(x, y, 1);
+    arrayRef.setItem(x, y, true);
 }
 
 void set_field_false(int x, int y, flexible_array& arrayRef) {
     // set false
-    arrayRef.setItem(x, y, 0);
+    arrayRef.setItem(x, y, false);
 }
 
 void set_square_size(int x, int& squaresizeRef) {

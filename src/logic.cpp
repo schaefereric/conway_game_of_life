@@ -89,7 +89,7 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, flexible_array* array
         }
 
         // count neighbor
-        if (arrayRef->getItem(tempPos.x, tempPos.y) == 1) {
+        if (arrayRef->getItem(tempPos.x, tempPos.y) == true) {
             numberOfNeighbors++;
         }
     }
@@ -103,13 +103,13 @@ bool decideNewStateOfSquare(unsigned int ix, unsigned int iy, flexible_array* ar
     int numberOfNeighbors = getNumberOfNeighbors(ix, iy, arrayRef); 
 
     // The game rules:
-    if (arrayRef->getItem(ix, iy) == 0) {
+    if (arrayRef->getItem(ix, iy) == false) {
         if (numberOfNeighbors == 3) {
             return true;
         }
         else return false;
     }
-    if (arrayRef->getItem(ix, iy) == 1) {
+    if (arrayRef->getItem(ix, iy) == true) {
         if (numberOfNeighbors < 2) {
             return false;
         }
@@ -141,13 +141,13 @@ void applyGameRulesOnArray_SecondArrayMethod(flexible_array* arrayRef) {
             bool square = decideNewStateOfSquare(index_x, index_y, arrayRef);
 
             if (square) {
-                newArray.setItem(index_x, index_y, 1);
+                newArray.setItem(index_x, index_y, true);
             }
             else if (!square) {
-                newArray.setItem(index_x, index_y, 0);
+                newArray.setItem(index_x, index_y, false);
             }
             else {
-                newArray.setItem(index_x, index_y, 1);
+                newArray.setItem(index_x, index_y, true);
                 // todo: error handling
             }
         }
@@ -186,7 +186,7 @@ void applyGameRulesOnArray_VectorMethod(flexible_array* arrayRef) {
 
     // Apply new squares
     for (auto i : listOfAliveSquares) {
-        arrayRef->setItem(i.x, i.y, 1);
+        arrayRef->setItem(i.x, i.y, true);
     }
 
 }

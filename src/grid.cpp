@@ -10,7 +10,7 @@ void drawArrayGrid(gamestate_t& gamestate) {
 
             // determine color of square
             // true -> green, false -> white
-            if (gamestate.gridArray.getItem(x_index, y_index) == 1) {
+            if (gamestate.gridArray.getItem(x_index, y_index) == true) {
                 square_color = GREEN;
             }
 
@@ -66,11 +66,11 @@ void use_paintbrush(gamestate_t& gamestateRef) {
     }
 
     if (gamestateRef.paintbrush_mode == PAINT) {
-        gamestateRef.gridArray.setItem(x, y, 1);
+        gamestateRef.gridArray.setItem(x, y, true);
     }
 
     if (gamestateRef.paintbrush_mode == ERASE) {
-        gamestateRef.gridArray.setItem(x, y, 0);
+        gamestateRef.gridArray.setItem(x, y, false);
     }
 }
 
@@ -85,10 +85,10 @@ void use_paintbrush(gamestate_t& gamestateRef, enum paintbrush_mode_t mode_overw
     }
 
     if (mode_overwrite == PAINT) {
-        gamestateRef.gridArray.setItem(x, y, 1);
+        gamestateRef.gridArray.setItem(x, y, true);
     }
 
     if (mode_overwrite == ERASE) {
-        gamestateRef.gridArray.setItem(x, y, 0);
+        gamestateRef.gridArray.setItem(x, y, false);
     }
 }
