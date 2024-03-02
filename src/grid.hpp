@@ -9,9 +9,9 @@
 void drawArrayGrid(gamestate_t& gamestate);
 
 // Reverting the drawArrayGrid function to get coordinates of square at mouse cursor position
-int getArrayXFromMousePosition(gamestate_t& gamestateRef);
+unsigned int getArrayXFromMousePosition(gamestate_t& gamestateRef);
 
-int getArrayYFromMousePosition(gamestate_t& gamestateRef);
+unsigned int getArrayYFromMousePosition(gamestate_t& gamestateRef);
 
 // The actual "paintbrush"
 // gamestateRef.paintbrush_mode determines whether to paint or erase

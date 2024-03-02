@@ -7,36 +7,36 @@ Vector2 getMooreNeighborhoodCoordinate(int ix, int iy, moore_direction direction
 
     switch (direction) {
     case NW:
-        temp.x = ix - 1;
-        temp.y = iy - 1;
-        break;
-    case N:
-        temp.x = ix;
-        temp.y = iy - 1;
-        break;
-    case NE:
-        temp.x = ix + 1;
-        temp.y = iy - 1;
-        break;
-    case E:
-        temp.x = ix + 1;
-        temp.y = iy;
-        break;
-    case SE:
-        temp.x = ix + 1;
-        temp.y = iy + 1;
-        break;
-    case S:
-        temp.x = ix;
-        temp.y = iy + 1;
-        break;
-    case SW:
-        temp.x = ix - 1;
-        temp.y = iy + 1;
-        break;
-    case W:
-        temp.x = ix - 1;
-        temp.y = iy;
+        temp.x = static_cast<float> (ix - 1);
+        temp.y = static_cast<float> (iy - 1);
+        break;                      
+    case N:                         
+        temp.x = static_cast<float> (ix);
+        temp.y = static_cast<float> (iy - 1);
+        break;                      
+    case NE:                        
+        temp.x = static_cast<float> (ix + 1);
+        temp.y = static_cast<float> (iy - 1);
+        break;                      
+    case E:                         
+        temp.x = static_cast<float> (ix + 1);
+        temp.y = static_cast<float> (iy);
+        break;                      
+    case SE:                        
+        temp.x = static_cast<float> (ix + 1);
+        temp.y = static_cast<float> (iy + 1);
+        break;                      
+    case S:                         
+        temp.x = static_cast<float> (ix);
+        temp.y = static_cast<float> (iy + 1);
+        break;                      
+    case SW:                        
+        temp.x = static_cast<float> (ix - 1);
+        temp.y = static_cast<float> (iy + 1);
+        break;                      
+    case W:                         
+        temp.x = static_cast<float> (ix - 1);
+        temp.y = static_cast<float> (iy);
         break;
     }
 
@@ -89,7 +89,7 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, flexible_array* array
         }
 
         // count neighbor
-        if (arrayRef->getItem(tempPos.x, tempPos.y) == true) {
+        if (arrayRef->getItem(static_cast<int>(tempPos.x), static_cast<int>(tempPos.y)) == true) {
             numberOfNeighbors++;
         }
     }
@@ -119,6 +119,7 @@ bool decideNewStateOfSquare(unsigned int ix, unsigned int iy, flexible_array* ar
         if (numberOfNeighbors > 3) {
             return false;
         }
+        else return false;
     }
     else return false;
     
@@ -135,8 +136,8 @@ void applyGameRulesOnArray_SecondArrayMethod(flexible_array* arrayRef) {
 
     flexible_array newArray(arrayRef->getSizeX(), arrayRef->getSizeY());
 
-    for (int index_y = 0; index_y < arrayRef->getSizeY(); index_y++) {
-        for (int index_x = 0; index_x < arrayRef->getSizeX(); index_x++) {
+    for (unsigned int index_y = 0; index_y < arrayRef->getSizeY(); index_y++) {
+        for (unsigned int index_x = 0; index_x < arrayRef->getSizeX(); index_x++) {
 
             bool square = decideNewStateOfSquare(index_x, index_y, arrayRef);
 
@@ -168,14 +169,14 @@ void applyGameRulesOnArray_VectorMethod(flexible_array* arrayRef) {
     Vector2 tempVec;
 
     // Iterate over array and save position of squares that will live in the following generation
-    for (int index_y = 0; index_y < arrayRef->getSizeY(); index_y++) {
-        for (int index_x = 0; index_x < arrayRef->getSizeX(); index_x++) {
+    for (unsigned int index_y = 0; index_y < arrayRef->getSizeY(); index_y++) {
+        for (unsigned int index_x = 0; index_x < arrayRef->getSizeX(); index_x++) {
 
             bool tempBool = decideNewStateOfSquare(index_x, index_y, arrayRef);
 
             if (tempBool) {
-                tempVec.x = index_x;
-                tempVec.y = index_y;
+                tempVec.x = static_cast<float>(index_x);
+                tempVec.y = static_cast<float>(index_y);
                 listOfAliveSquares.push_back(tempVec);
             }
         }
@@ -186,7 +187,7 @@ void applyGameRulesOnArray_VectorMethod(flexible_array* arrayRef) {
 
     // Apply new squares
     for (auto i : listOfAliveSquares) {
-        arrayRef->setItem(i.x, i.y, true);
+        arrayRef->setItem(static_cast<unsigned int>(i.x), static_cast<unsigned int>(i.y), true);
     }
 
 }

@@ -18,7 +18,6 @@ void drawArrayGrid(gamestate_t& gamestate) {
                 square_color = WHITE;
             }
 
-
             // draw (colored) squares
             DrawRectangle((gamestate.squareSize * x_index) + gamestate.gridOrigin_x,
                 (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
@@ -34,31 +33,30 @@ void drawArrayGrid(gamestate_t& gamestate) {
                 BLACK);
         }
     }
-
 }
 
 // Reverting the drawArrayGrid function to get coordinates of square at mouse cursor position
-int getArrayXFromMousePosition(gamestate_t& gamestateRef) {
+unsigned int getArrayXFromMousePosition(gamestate_t& gamestateRef) {
     float temp;
 
     temp = (gamestateRef.mousePosition.x - gamestateRef.gridOrigin_x) / gamestateRef.squareSize;
 
-    return (int)std::floor(temp);
+    return static_cast<unsigned int> (std::floor(temp));
 }
 
-int getArrayYFromMousePosition(gamestate_t& gamestateRef) {
+unsigned int getArrayYFromMousePosition(gamestate_t& gamestateRef) {
     float temp;
 
     temp = (gamestateRef.mousePosition.y - gamestateRef.gridOrigin_y) / gamestateRef.squareSize;
 
-    return (int)std::floor(temp);
+    return static_cast<unsigned int> (std::floor(temp));
 }
 
 // The actual "paintbrush"
 // gamestateRef.paintbrush_mode determines whether to paint or erase
 void use_paintbrush(gamestate_t& gamestateRef) {
-    int x = getArrayXFromMousePosition(gamestateRef);
-    int y = getArrayYFromMousePosition(gamestateRef);
+    unsigned int x = getArrayXFromMousePosition(gamestateRef);
+    unsigned int y = getArrayYFromMousePosition(gamestateRef);
 
     // Return if mouse position is outside of grid
     if (x >= gamestateRef.gridArray.getSizeX() || y >= gamestateRef.gridArray.getSizeY()) {
@@ -76,8 +74,8 @@ void use_paintbrush(gamestate_t& gamestateRef) {
 
 // Paintbrush_mode is overwritten via parameter
 void use_paintbrush(gamestate_t& gamestateRef, enum paintbrush_mode_t mode_overwrite) {
-    int x = getArrayXFromMousePosition(gamestateRef);
-    int y = getArrayYFromMousePosition(gamestateRef);
+    unsigned int x = getArrayXFromMousePosition(gamestateRef);
+    unsigned int y = getArrayYFromMousePosition(gamestateRef);
 
 
     if (x >= gamestateRef.gridArray.getSizeX() || y >= gamestateRef.gridArray.getSizeY()) {
