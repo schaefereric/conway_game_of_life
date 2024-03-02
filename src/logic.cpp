@@ -89,7 +89,7 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, flexible_array* array
         }
 
         // count neighbor
-        if (arrayRef->getItem(static_cast<int>(tempPos.x), static_cast<int>(tempPos.y)) == true) {
+        if (arrayRef->getItem(static_cast<int>(tempPos.x), static_cast<int>(tempPos.y)) == 1) {
             numberOfNeighbors++;
         }
     }
@@ -97,19 +97,19 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, flexible_array* array
     return numberOfNeighbors;
 }
 
-// Returns TRUE if this square lives in the next generation, or returns FALSE if this square dies in the next generation
+// Returns  if this square lives in the next generation, or returns FALSE if this square dies in the next generation
 bool decideNewStateOfSquare(unsigned int ix, unsigned int iy, flexible_array* arrayRef) {
     
     int numberOfNeighbors = getNumberOfNeighbors(ix, iy, arrayRef); 
 
     // The game rules:
-    if (arrayRef->getItem(ix, iy) == false) {
+    if (arrayRef->getItem(ix, iy) == 0) {
         if (numberOfNeighbors == 3) {
             return true;
         }
         else return false;
     }
-    if (arrayRef->getItem(ix, iy) == true) {
+    if (arrayRef->getItem(ix, iy) == 1) {
         if (numberOfNeighbors < 2) {
             return false;
         }
@@ -142,13 +142,13 @@ void applyGameRulesOnArray_SecondArrayMethod(flexible_array* arrayRef) {
             bool square = decideNewStateOfSquare(index_x, index_y, arrayRef);
 
             if (square) {
-                newArray.setItem(index_x, index_y, true);
+                newArray.setItem(index_x, index_y, 0);
             }
             else if (!square) {
-                newArray.setItem(index_x, index_y, false);
+                newArray.setItem(index_x, index_y, 1);
             }
             else {
-                newArray.setItem(index_x, index_y, true);
+                newArray.setItem(index_x, index_y, 0);
                 // todo: error handling
             }
         }
@@ -187,7 +187,7 @@ void applyGameRulesOnArray_VectorMethod(flexible_array* arrayRef) {
 
     // Apply new squares
     for (auto i : listOfAliveSquares) {
-        arrayRef->setItem(static_cast<unsigned int>(i.x), static_cast<unsigned int>(i.y), true);
+        arrayRef->setItem(static_cast<unsigned int>(i.x), static_cast<unsigned int>(i.y), 1);
     }
 
 }
