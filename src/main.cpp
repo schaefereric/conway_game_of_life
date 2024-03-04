@@ -25,7 +25,7 @@ int main()
 
     SetTargetFPS(60);     
 
-    gamestate.gridArray.reInitialize(15, 15);
+    gamestate.gridArray.reInitialize(30, 30);
     gamestate.gridArray.setItem(5, 5, 1);
 
     // Main game loop
@@ -37,10 +37,22 @@ int main()
         gamestate.updateMouse();
 
         if (gamestate.mouse_L) {
-            use_paintbrush(gamestate);
+            //use_paintbrush(gamestate);
+
+            if (gamestate.paintbrush_mode == ERASE) {
+                gamestate.paintbrush_mode = PAINT;
+            }
+
+            usePaintbrushWithRadius(gamestate);
         }
         if (gamestate.mouse_R) {
-            use_paintbrush(gamestate, ERASE);
+            //use_paintbrush(gamestate, ERASE);
+            
+            if (gamestate.paintbrush_mode == PAINT) {
+                gamestate.paintbrush_mode = ERASE;
+            }
+
+            usePaintbrushWithRadius(gamestate);
         }
 
         // Draw

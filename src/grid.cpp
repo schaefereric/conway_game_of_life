@@ -90,3 +90,72 @@ void use_paintbrush(gamestate_t& gamestateRef, enum paintbrush_mode_t mode_overw
         gamestateRef.gridArray.setItem(x, y, 0);
     }
 }
+
+void usePaintbrushWithRadius(gamestate_t& gamestateRef) {
+    unsigned int x = getArrayXFromMousePosition(gamestateRef);
+    unsigned int y = getArrayYFromMousePosition(gamestateRef);
+
+    if (gamestateRef.paintbrush_mode == PAINT) {
+        fillCircle_JeskoMethod(x, y, gamestateRef.brushRadius, 1, gamestateRef);
+    }
+
+    if (gamestateRef.paintbrush_mode == ERASE) {
+        fillCircle_JeskoMethod(x, y, gamestateRef.brushRadius, 0, gamestateRef);
+    }
+    
+}
+
+void fillCircle_JeskoMethod(int mx, int my, int r, int input, gamestate_t & gamestateRef) {
+    int t1 = r / 16;
+    int t2 = 0;
+    int x = r;
+    int y = 0;
+    while (x >= y)
+    {
+        gamestateRef.gridArray.setItem(mx + x, my + y, input);
+        gamestateRef.gridArray.setItem(mx + x, my - y, input);
+              fillCircle_fillInBetween(mx + x, my + y, 
+                                               my - y, input, gamestateRef);
+
+        gamestateRef.gridArray.setItem(mx - x, my + y, input);
+        gamestateRef.gridArray.setItem(mx - x, my - y, input);
+              fillCircle_fillInBetween(mx - x, my + y,
+                                               my - y, input, gamestateRef);
+
+        gamestateRef.gridArray.setItem(mx + y, my + x, input);
+        gamestateRef.gridArray.setItem(mx + y, my - x, input);
+              fillCircle_fillInBetween(mx + y, my + x, 
+                                               my - x, input, gamestateRef);
+
+        gamestateRef.gridArray.setItem(mx - y, my + x, input);
+        gamestateRef.gridArray.setItem(mx - y, my - x, input);
+              fillCircle_fillInBetween(mx - y, my + x, 
+                                               my - x, input, gamestateRef);
+
+        y = y + 1;
+        t1 = t1 + y;
+        t2 = t1 - x;
+        if (t2 >= 0)
+        {
+            t1 = t2;
+            x = x - 1;
+        }
+    }
+}
+
+void fillCircle_fillInBetween(int x, int y1, int y2, int input, gamestate_t& gamestateRef) {
+    if (y1 == y2) {
+        return;
+    }
+
+    // we assume that y1 is the bigger number. if not, swap values
+    if (y2 > y1) {
+        int buffer = y2;
+        y2 = y1;
+        y1 = buffer;
+    }
+
+    for (int i = y2 + 1; i < y1; i++) {
+        gamestateRef.gridArray.setItem(x, i, input);
+    }
+}

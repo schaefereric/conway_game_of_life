@@ -1,10 +1,21 @@
 #pragma once
 
+// Flexible_array
+// Two dimensional array which is allocated on the heap
+// Initialize array size via constructor parameters and access items via getItem(x, y)
+// or set items via setItem(x, y, input)
+
+// Value Table
+//   0 = Square is false              (Color = White)
+//   1 = Square is true               (Color = Green)
+//   3 = Square is false but selected (Color = Blue)
+//   4 = Square is true  but selected (Color = Blue)
+
 struct flexible_array {
     unsigned int size_x; // Width of Array
     unsigned int size_y; // Height of Array
 
-    int* pAry; // Pointer to array on heap
+    int* pAry; // Pointer to array on heap, Do Not Touch!
 
     // Takes two index numbers (x and y) and returns single array index number
     int getSingleIndex(unsigned int ix, unsigned int iy) const; 

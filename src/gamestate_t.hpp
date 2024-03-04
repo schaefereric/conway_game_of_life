@@ -23,6 +23,7 @@ struct gamestate_t {
     bool mouse_R;           // is right mouse button pressed ? (update via updateMouse();)
     void updateMouse();
     paintbrush_mode_t paintbrush_mode;
+    int brushRadius;
 
     // Game Algorithm Handling
     bool runAlgorithm;

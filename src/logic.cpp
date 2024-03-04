@@ -38,7 +38,10 @@ Vector2 getMooreNeighborhoodCoordinate(int ix, int iy, moore_direction direction
         temp.x = static_cast<float> (ix - 1);
         temp.y = static_cast<float> (iy);
         break;
+    default:
+        break;
     }
+    
 
     return temp;
 }
@@ -75,7 +78,10 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, flexible_array* array
         case 7:
             tempDirection = W;
             break;
+        default:
+            return -1;
         }
+        
 
         Vector2 tempPos = getMooreNeighborhoodCoordinate(ix, iy, tempDirection);
 
@@ -88,7 +94,7 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, flexible_array* array
             continue;
         }
 
-        // count neighbor
+        // count neighbor if this square is true
         if (arrayRef->getItem(static_cast<int>(tempPos.x), static_cast<int>(tempPos.y)) == 1) {
             numberOfNeighbors++;
         }
@@ -97,7 +103,7 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, flexible_array* array
     return numberOfNeighbors;
 }
 
-// Returns  if this square lives in the next generation, or returns FALSE if this square dies in the next generation
+// Returns TRUE if this square lives in the next generation, or returns FALSE if this square dies in the next generation
 bool decideNewStateOfSquare(unsigned int ix, unsigned int iy, flexible_array* arrayRef) {
     
     int numberOfNeighbors = getNumberOfNeighbors(ix, iy, arrayRef); 

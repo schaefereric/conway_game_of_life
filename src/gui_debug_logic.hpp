@@ -144,6 +144,7 @@ static void Button016(GuiDebugLogicState* state, gamestate_t& gamestateRef)
     if (!temp) {
         strcpy(state->state_of_square, "false");
     }
+
 }
 
 

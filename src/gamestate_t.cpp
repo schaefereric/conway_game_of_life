@@ -2,7 +2,7 @@
 
 gamestate_t::gamestate_t() {
 
-    squareSize = 30;
+    squareSize = 15;
     gridOrigin_x = 30;
     gridOrigin_y = 30;
 
@@ -15,6 +15,7 @@ gamestate_t::gamestate_t() {
     mouse_R = false;
 
     paintbrush_mode = PAINT;
+    brushRadius = 2;
 
     runAlgorithm = false;
 }
