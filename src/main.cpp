@@ -43,7 +43,12 @@ int main()
                 gamestate.paintbrush_mode = PAINT;
             }
 
-            usePaintbrushWithRadius(gamestate);
+            if (gamestate.brushRadius == 0) {
+                use_paintbrush(gamestate);
+            }
+
+            //else usePaintbrushWithRadius(gamestate);
+            else useSpraybrush(gamestate);
         }
         if (gamestate.mouse_R) {
             //use_paintbrush(gamestate, ERASE);
@@ -52,7 +57,11 @@ int main()
                 gamestate.paintbrush_mode = ERASE;
             }
 
-            usePaintbrushWithRadius(gamestate);
+            if (gamestate.brushRadius == 0) {
+                use_paintbrush(gamestate);
+            }
+
+            else usePaintbrushWithRadius(gamestate);
         }
 
         // Draw

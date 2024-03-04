@@ -22,6 +22,8 @@ struct gamestate_t {
     bool mouse_L;           // is left mouse button pressed ? (update via updateMouse();)
     bool mouse_R;           // is right mouse button pressed ? (update via updateMouse();)
     void updateMouse();
+
+    // Brush Settings
     paintbrush_mode_t paintbrush_mode;
     int brushRadius;
 

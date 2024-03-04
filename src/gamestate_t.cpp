@@ -15,7 +15,7 @@ gamestate_t::gamestate_t() {
     mouse_R = false;
 
     paintbrush_mode = PAINT;
-    brushRadius = 2;
+    brushRadius = 3;
 
     runAlgorithm = false;
 }

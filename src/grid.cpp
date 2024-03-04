@@ -95,6 +95,10 @@ void usePaintbrushWithRadius(gamestate_t& gamestateRef) {
     unsigned int x = getArrayXFromMousePosition(gamestateRef);
     unsigned int y = getArrayYFromMousePosition(gamestateRef);
 
+    if (x >= gamestateRef.gridArray.getSizeX() || y >= gamestateRef.gridArray.getSizeY()) {
+        return;
+    }
+
     if (gamestateRef.paintbrush_mode == PAINT) {
         fillCircle_JeskoMethod(x, y, gamestateRef.brushRadius, 1, gamestateRef);
     }
@@ -103,6 +107,17 @@ void usePaintbrushWithRadius(gamestate_t& gamestateRef) {
         fillCircle_JeskoMethod(x, y, gamestateRef.brushRadius, 0, gamestateRef);
     }
     
+}
+
+void useSpraybrush(gamestate_t& gamestateRef) {
+    unsigned int x = getArrayXFromMousePosition(gamestateRef);
+    unsigned int y = getArrayYFromMousePosition(gamestateRef);
+
+    if (x >= gamestateRef.gridArray.getSizeX() || y >= gamestateRef.gridArray.getSizeY()) {
+        return;
+    }
+
+    fillSprayCircle(x, y, gamestateRef.brushRadius, gamestateRef);
 }
 
 void fillCircle_JeskoMethod(int mx, int my, int r, int input, gamestate_t & gamestateRef) {
@@ -141,7 +156,7 @@ void fillCircle_JeskoMethod(int mx, int my, int r, int input, gamestate_t & game
             x = x - 1;
         }
     }
-}
+} // todo: invalid index handling
 
 void fillCircle_fillInBetween(int x, int y1, int y2, int input, gamestate_t& gamestateRef) {
     if (y1 == y2) {
@@ -157,5 +172,75 @@ void fillCircle_fillInBetween(int x, int y1, int y2, int input, gamestate_t& gam
 
     for (int i = y2 + 1; i < y1; i++) {
         gamestateRef.gridArray.setItem(x, i, input);
+    }
+}
+
+
+
+void fillSprayCircle(int mx, int my, int r, gamestate_t& gamestateRef) {
+
+    static int previous_mx = 0; 
+    static int previous_my = 0;
+
+    if (previous_mx == mx || previous_my == my) {
+        return;
+    }
+
+    previous_mx = mx;
+    previous_my = my;
+
+    int t1 = r / 16;
+    int t2 = 0;
+    int x = r;
+    int y = 0;
+
+    std::random_device rd;
+
+    std::mt19937::result_type seed = rd() ^ (
+        (std::mt19937::result_type)
+        std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()
+        +
+        (std::mt19937::result_type)
+        std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
+
+    std::mt19937 gen(seed);
+
+    while (x >= y)
+    {
+        std::mt19937::result_type n;
+        
+        while ((n = gen()) > std::mt19937::max() -
+            (std::mt19937::max() - 5) % 6)
+        { 
+        }
+
+        gamestateRef.gridArray.setItem(mx + x, my + y, ((n & (1 << 1)) != 0));               
+        gamestateRef.gridArray.setItem(mx + x, my - y, ((n & (1 << 2)) != 0));
+              fillCircle_fillInBetween(mx + x, my + y,
+                                               my - y, ((n & (1 << 3)) != 0), gamestateRef);
+                
+        gamestateRef.gridArray.setItem(mx - x, my + y, ((n & (1 << 4)) != 0));
+        gamestateRef.gridArray.setItem(mx - x, my - y, ((n & (1 << 5)) != 0));
+              fillCircle_fillInBetween(mx - x, my + y,
+                                               my - y, ((n & (1 << 6)) != 0), gamestateRef);
+
+        gamestateRef.gridArray.setItem(mx + y, my + x, ((n & (1 << 7)) != 0));
+        gamestateRef.gridArray.setItem(mx + y, my - x, ((n & (1 << 8)) != 0));
+              fillCircle_fillInBetween(mx + y, my + x,
+                                               my - x, ((n & (1 << 9)) != 0), gamestateRef);
+
+        gamestateRef.gridArray.setItem(mx - y, my + x, ((n & (1 << 10)) != 0));
+        gamestateRef.gridArray.setItem(mx - y, my - x, ((n & (1 << 11)) != 0));
+              fillCircle_fillInBetween(mx - y, my + x,
+                                               my - x, ((n & (1 << 12)) != 0), gamestateRef);
+
+        y = y + 1;
+        t1 = t1 + y;
+        t2 = t1 - x;
+        if (t2 >= 0)
+        {
+            t1 = t2;
+            x = x - 1;
+        }
     }
 }

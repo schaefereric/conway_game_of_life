@@ -7,12 +7,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "conway_game_of_life", "conw
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_profiler|x64 = Debug_profiler|x64
+		Debug_profiler|x86 = Debug_profiler|x86
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A7B10BD-87FA-4F3B-8EE2-7823C1DDC7AC}.Debug_profiler|x64.ActiveCfg = Debug_profiler|x64
+		{8A7B10BD-87FA-4F3B-8EE2-7823C1DDC7AC}.Debug_profiler|x64.Build.0 = Debug_profiler|x64
+		{8A7B10BD-87FA-4F3B-8EE2-7823C1DDC7AC}.Debug_profiler|x86.ActiveCfg = Debug_profiler|Win32
+		{8A7B10BD-87FA-4F3B-8EE2-7823C1DDC7AC}.Debug_profiler|x86.Build.0 = Debug_profiler|Win32
 		{8A7B10BD-87FA-4F3B-8EE2-7823C1DDC7AC}.Debug|x64.ActiveCfg = Debug|x64
 		{8A7B10BD-87FA-4F3B-8EE2-7823C1DDC7AC}.Debug|x64.Build.0 = Debug|x64
 		{8A7B10BD-87FA-4F3B-8EE2-7823C1DDC7AC}.Debug|x86.ActiveCfg = Debug|Win32

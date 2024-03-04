@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include "color.hpp"
-//#include "raylib.h"
 
 // Takes two index numbers (x and y) and returns single array index number
 int flexible_array::getSingleIndex(unsigned int ix, unsigned int iy) const  
