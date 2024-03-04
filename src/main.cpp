@@ -37,31 +37,30 @@ int main()
         gamestate.updateMouse();
 
         if (gamestate.mouse_L) {
-            //use_paintbrush(gamestate);
 
             if (gamestate.paintbrush_mode == ERASE) {
                 gamestate.paintbrush_mode = PAINT;
             }
 
             if (gamestate.brushRadius == 0) {
-                use_paintbrush(gamestate);
+                paintbrush_singleSquare(gamestate);
             }
 
-            //else usePaintbrushWithRadius(gamestate);
-            else useSpraybrush(gamestate);
+            else spraybrush_circle(gamestate);
+            //else paintbrush_singleSquare(gamestate);
         }
         if (gamestate.mouse_R) {
-            //use_paintbrush(gamestate, ERASE);
             
             if (gamestate.paintbrush_mode == PAINT) {
                 gamestate.paintbrush_mode = ERASE;
             }
 
             if (gamestate.brushRadius == 0) {
-                use_paintbrush(gamestate);
+                paintbrush_singleSquare(gamestate);
             }
 
-            else usePaintbrushWithRadius(gamestate);
+            else paintbrush_circle(gamestate);
+
         }
 
         // Draw

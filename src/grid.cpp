@@ -54,7 +54,7 @@ unsigned int getArrayYFromMousePosition(gamestate_t& gamestateRef) {
 
 // The actual "paintbrush"
 // gamestateRef.paintbrush_mode determines whether to paint or erase
-void use_paintbrush(gamestate_t& gamestateRef) {
+void paintbrush_singleSquare(gamestate_t& gamestateRef) {
     unsigned int x = getArrayXFromMousePosition(gamestateRef);
     unsigned int y = getArrayYFromMousePosition(gamestateRef);
 
@@ -73,7 +73,7 @@ void use_paintbrush(gamestate_t& gamestateRef) {
 }
 
 // Paintbrush_mode is overwritten via parameter
-void use_paintbrush(gamestate_t& gamestateRef, enum paintbrush_mode_t mode_overwrite) {
+void paintbrush_singleSquare(gamestate_t& gamestateRef, enum paintbrush_mode_t mode_overwrite) {
     unsigned int x = getArrayXFromMousePosition(gamestateRef);
     unsigned int y = getArrayYFromMousePosition(gamestateRef);
 
@@ -91,7 +91,7 @@ void use_paintbrush(gamestate_t& gamestateRef, enum paintbrush_mode_t mode_overw
     }
 }
 
-void usePaintbrushWithRadius(gamestate_t& gamestateRef) {
+void paintbrush_circle(gamestate_t& gamestateRef) {
     unsigned int x = getArrayXFromMousePosition(gamestateRef);
     unsigned int y = getArrayYFromMousePosition(gamestateRef);
 
@@ -100,16 +100,16 @@ void usePaintbrushWithRadius(gamestate_t& gamestateRef) {
     }
 
     if (gamestateRef.paintbrush_mode == PAINT) {
-        fillCircle_JeskoMethod(x, y, gamestateRef.brushRadius, 1, gamestateRef);
+        rasterizeCircle_JeskoMethod(x, y, gamestateRef.brushRadius, 1, gamestateRef);
     }
 
     if (gamestateRef.paintbrush_mode == ERASE) {
-        fillCircle_JeskoMethod(x, y, gamestateRef.brushRadius, 0, gamestateRef);
+        rasterizeCircle_JeskoMethod(x, y, gamestateRef.brushRadius, 0, gamestateRef);
     }
     
 }
 
-void useSpraybrush(gamestate_t& gamestateRef) {
+void spraybrush_circle(gamestate_t& gamestateRef) {
     unsigned int x = getArrayXFromMousePosition(gamestateRef);
     unsigned int y = getArrayYFromMousePosition(gamestateRef);
 
@@ -117,10 +117,10 @@ void useSpraybrush(gamestate_t& gamestateRef) {
         return;
     }
 
-    fillSprayCircle(x, y, gamestateRef.brushRadius, gamestateRef);
+    rasterizeCircle_random(x, y, gamestateRef.brushRadius, gamestateRef);
 }
 
-void fillCircle_JeskoMethod(int mx, int my, int r, int input, gamestate_t & gamestateRef) {
+void rasterizeCircle_JeskoMethod(int mx, int my, int r, int input, gamestate_t & gamestateRef) {
     int t1 = r / 16;
     int t2 = 0;
     int x = r;
@@ -129,22 +129,22 @@ void fillCircle_JeskoMethod(int mx, int my, int r, int input, gamestate_t & game
     {
         gamestateRef.gridArray.setItem(mx + x, my + y, input);
         gamestateRef.gridArray.setItem(mx + x, my - y, input);
-              fillCircle_fillInBetween(mx + x, my + y, 
+           rasterizeCircle_fill_Y_Axis(mx + x, my + y,
                                                my - y, input, gamestateRef);
 
         gamestateRef.gridArray.setItem(mx - x, my + y, input);
         gamestateRef.gridArray.setItem(mx - x, my - y, input);
-              fillCircle_fillInBetween(mx - x, my + y,
+           rasterizeCircle_fill_Y_Axis(mx - x, my + y,
                                                my - y, input, gamestateRef);
 
         gamestateRef.gridArray.setItem(mx + y, my + x, input);
         gamestateRef.gridArray.setItem(mx + y, my - x, input);
-              fillCircle_fillInBetween(mx + y, my + x, 
+           rasterizeCircle_fill_Y_Axis(mx + y, my + x,
                                                my - x, input, gamestateRef);
 
         gamestateRef.gridArray.setItem(mx - y, my + x, input);
         gamestateRef.gridArray.setItem(mx - y, my - x, input);
-              fillCircle_fillInBetween(mx - y, my + x, 
+           rasterizeCircle_fill_Y_Axis(mx - y, my + x,
                                                my - x, input, gamestateRef);
 
         y = y + 1;
@@ -158,7 +158,7 @@ void fillCircle_JeskoMethod(int mx, int my, int r, int input, gamestate_t & game
     }
 } // todo: invalid index handling
 
-void fillCircle_fillInBetween(int x, int y1, int y2, int input, gamestate_t& gamestateRef) {
+void rasterizeCircle_fill_Y_Axis(int x, int y1, int y2, int input, gamestate_t& gamestateRef) {
     if (y1 == y2) {
         return;
     }
@@ -176,8 +176,39 @@ void fillCircle_fillInBetween(int x, int y1, int y2, int input, gamestate_t& gam
 }
 
 
+int getRandomBool() {
+    static unsigned int valuePool;
+    static unsigned int counter = 0;
 
-void fillSprayCircle(int mx, int my, int r, gamestate_t& gamestateRef) {
+    if (counter == 0 || counter == 31) {
+        counter = 0;
+
+        std::random_device rd;
+
+        std::mt19937::result_type seed = rd() ^ (
+            (std::mt19937::result_type)
+            std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()
+            +
+            (std::mt19937::result_type)
+            std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
+
+        std::mt19937 gen(seed);
+
+        std::mt19937::result_type n;
+
+        while ((n = gen()) > std::mt19937::max() -
+            (std::mt19937::max() - 5) % 6)
+        {
+        }
+
+        valuePool = n;
+    }
+
+    counter++;
+    return (valuePool & (1 << counter)) != 0;
+}
+
+void rasterizeCircle_random(int mx, int my, int r, gamestate_t& gamestateRef) {
 
     static int previous_mx = 0; 
     static int previous_my = 0;
@@ -194,45 +225,27 @@ void fillSprayCircle(int mx, int my, int r, gamestate_t& gamestateRef) {
     int x = r;
     int y = 0;
 
-    std::random_device rd;
-
-    std::mt19937::result_type seed = rd() ^ (
-        (std::mt19937::result_type)
-        std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()
-        +
-        (std::mt19937::result_type)
-        std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
-
-    std::mt19937 gen(seed);
-
     while (x >= y)
     {
-        std::mt19937::result_type n;
-        
-        while ((n = gen()) > std::mt19937::max() -
-            (std::mt19937::max() - 5) % 6)
-        { 
-        }
+        gamestateRef.gridArray.setItem(mx + x, my + y, getRandomBool());
+        gamestateRef.gridArray.setItem(mx + x, my - y, getRandomBool());
+           rasterizeCircle_fill_Y_Axis(mx + x, my + y,
+                                               my - y, getRandomBool(), gamestateRef);
 
-        gamestateRef.gridArray.setItem(mx + x, my + y, ((n & (1 << 1)) != 0));               
-        gamestateRef.gridArray.setItem(mx + x, my - y, ((n & (1 << 2)) != 0));
-              fillCircle_fillInBetween(mx + x, my + y,
-                                               my - y, ((n & (1 << 3)) != 0), gamestateRef);
-                
-        gamestateRef.gridArray.setItem(mx - x, my + y, ((n & (1 << 4)) != 0));
-        gamestateRef.gridArray.setItem(mx - x, my - y, ((n & (1 << 5)) != 0));
-              fillCircle_fillInBetween(mx - x, my + y,
-                                               my - y, ((n & (1 << 6)) != 0), gamestateRef);
+        gamestateRef.gridArray.setItem(mx - x, my + y, getRandomBool());
+        gamestateRef.gridArray.setItem(mx - x, my - y, getRandomBool());
+           rasterizeCircle_fill_Y_Axis(mx - x, my + y,
+                                               my - y, getRandomBool(), gamestateRef);
 
-        gamestateRef.gridArray.setItem(mx + y, my + x, ((n & (1 << 7)) != 0));
-        gamestateRef.gridArray.setItem(mx + y, my - x, ((n & (1 << 8)) != 0));
-              fillCircle_fillInBetween(mx + y, my + x,
-                                               my - x, ((n & (1 << 9)) != 0), gamestateRef);
+        gamestateRef.gridArray.setItem(mx + y, my + x, getRandomBool());
+        gamestateRef.gridArray.setItem(mx + y, my - x, getRandomBool());
+           rasterizeCircle_fill_Y_Axis(mx + y, my + x,
+                                               my - x, getRandomBool(), gamestateRef);
 
-        gamestateRef.gridArray.setItem(mx - y, my + x, ((n & (1 << 10)) != 0));
-        gamestateRef.gridArray.setItem(mx - y, my - x, ((n & (1 << 11)) != 0));
-              fillCircle_fillInBetween(mx - y, my + x,
-                                               my - x, ((n & (1 << 12)) != 0), gamestateRef);
+        gamestateRef.gridArray.setItem(mx - y, my + x, getRandomBool());
+        gamestateRef.gridArray.setItem(mx - y, my - x, getRandomBool());
+           rasterizeCircle_fill_Y_Axis(mx - y, my + x,
+                                               my - x, getRandomBool(), gamestateRef);
 
         y = y + 1;
         t1 = t1 + y;
