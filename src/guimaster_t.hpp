@@ -19,6 +19,8 @@ struct GuiDebugLogicState;
 
 struct guimaster_t
 {
+    gamestate_t* gamestate;
+
     GuiGameOfLifeState guistate_debug_main;             // Debug Main Window
     GuiDebugMouseState guistate_debug_mouse;            // Debug Mouse Window
     GuiDebugLogicState guistate_debug_logic;            // Debug Logic Window
@@ -28,7 +30,7 @@ struct guimaster_t
     bool draw_debug_mouse;
     bool draw_debug_logic;
 
-    guimaster_t();
+    guimaster_t(gamestate_t* gamestateRef);
 
     // initialize the gui structs with default values
     void init();

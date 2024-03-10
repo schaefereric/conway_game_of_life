@@ -200,6 +200,7 @@
     <ClCompile Include="src\guimaster_t.cpp" />
     <ClCompile Include="src\logic.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mouse_tools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\flexible_array.hpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="src\gui_game_of_life_gui.hpp" />
     <ClInclude Include="src\gui_structs.hpp" />
     <ClInclude Include="src\logic.hpp" />
+    <ClInclude Include="src\mouse_tools.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

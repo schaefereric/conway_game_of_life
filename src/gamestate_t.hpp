@@ -4,9 +4,13 @@
 #include "raylib.h"
 #include "GlobalDefinitions.hpp"
 #include "logic.hpp"
+#include "mouse_tools.hpp"
+
+struct mouse_tools;
 
 struct gamestate_t {
     flexible_array gridArray;
+    mouse_tools* mousetools;
         
     int squareSize;         // Edge length of one (1) square
     int gridOrigin_x;       // Origin (left top corner) of rendered Grid
@@ -16,16 +20,6 @@ struct gamestate_t {
     int screenHeight;
 
     gamestate_t();
-
-    // Mouse Input Handling
-    Vector2 mousePosition;  // Last recorded mouse position (update via updateMouse();)
-    bool mouse_L;           // is left mouse button pressed ? (update via updateMouse();)
-    bool mouse_R;           // is right mouse button pressed ? (update via updateMouse();)
-    void updateMouse();
-
-    // Brush Settings
-    paintbrush_mode_t paintbrush_mode;
-    int brushRadius;
 
     // Game Algorithm Handling
     bool runAlgorithm;

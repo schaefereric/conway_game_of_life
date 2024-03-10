@@ -11,7 +11,9 @@ void               GuiDebugMouse(gamestate_t& gamestate, GuiDebugMouseState* sta
 void               GuiDebugLogic(gamestate_t& gamestate, GuiDebugLogicState* state);
 
 
-guimaster_t::guimaster_t() {
+guimaster_t::guimaster_t(gamestate_t* gamestateRef) {
+    gamestate = gamestateRef;
+
     draw_debug_main = true;
     draw_debug_mouse = true;
     draw_debug_logic = true;

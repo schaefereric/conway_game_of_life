@@ -8,8 +8,8 @@
 // Value Table
 //   0 = Square is false              (Color = White)
 //   1 = Square is true               (Color = Green)
-//   3 = Square is false but selected (Color = Blue)
-//   4 = Square is true  but selected (Color = Blue)
+//   2 = Square is false but selected (Color = Blue)
+//   3 = Square is true  but selected (Color = Blue)
 
 struct flexible_array {
     unsigned int size_x; // Width of Array

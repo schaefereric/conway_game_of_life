@@ -108,23 +108,23 @@ void GuiDebugMouse(gamestate_t & gamestate, GuiDebugMouseState* state)
     if (state->WindowBox000Active)
     {
         static char mou_x_buffer[10];
-        _itoa_s((int)gamestate.mousePosition.x, mou_x_buffer, 10, 10); // Cast MousePosition.x integer to c_string
+        _itoa_s((int)gamestate.mousetools->mousePosition.x, mou_x_buffer, 10, 10); // Cast MousePosition.x integer to c_string
         static char mou_y_buffer[10];
-        _itoa_s((int)gamestate.mousePosition.y, mou_y_buffer, 10, 10); // Cast MousePosition.y integer to c_string
+        _itoa_s((int)gamestate.mousetools->mousePosition.y, mou_y_buffer, 10, 10); // Cast MousePosition.y integer to c_string
 
         static char mouse_lval_str[6];
-        if (gamestate.mouse_L) {
+        if (gamestate.mousetools->mouse_L) {
             strcpy(mouse_lval_str, "true");
         }
-        else if (!(gamestate.mouse_L)) {
+        else if (!(gamestate.mousetools->mouse_L)) {
             strcpy(mouse_lval_str, "false");
         }
 
         static char mouse_rval_str[6];
-        if (gamestate.mouse_R) {
+        if (gamestate.mousetools->mouse_R) {
             strcpy(mouse_rval_str, "true");
         }
-        else if (!(gamestate.mouse_R)) {
+        else if (!(gamestate.mousetools->mouse_R)) {
             strcpy(mouse_rval_str, "false");
         }
 
@@ -149,14 +149,14 @@ void GuiDebugMouse(gamestate_t & gamestate, GuiDebugMouseState* state)
         GuiLabel(state->layoutRecs[18], "Y: ");
         GuiLabel(state->layoutRecs[19], "lks_y");
 
-        if (state->Brush_select_ListViewActive == 0) {
-            // "Paint" selection
-            gamestate.paintbrush_mode = PAINT;
-        }
-        if (state->Brush_select_ListViewActive == 1) {
-            // "Erase" selection
-            gamestate.paintbrush_mode = ERASE;
-        }
+        //if (state->Brush_select_ListViewActive == 0) {
+        //    // "Paint" selection
+        //    gamestate.paintbrush_mode = PAINT;
+        //}
+        //if (state->Brush_select_ListViewActive == 1) {
+        //    // "Erase" selection
+        //    gamestate.paintbrush_mode = ERASE;
+        //}
 
 
     }

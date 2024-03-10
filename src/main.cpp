@@ -14,11 +14,13 @@
 #include "gui_debug_logic.hpp"
 #include "guimaster_t.hpp"
 #include "logic.hpp"
+#include "mouse_tools.hpp"
 
 int main()
 {
     gamestate_t gamestate;
-    guimaster_t guimaster;
+    guimaster_t guimaster(&gamestate);
+    mouse_tools mousetools(&gamestate);
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(gamestate.screenWidth, gamestate.screenHeight, "Eric's Game of Life v0.0000000000000001");
@@ -27,41 +29,16 @@ int main()
 
     gamestate.gridArray.reInitialize(30, 30);
     gamestate.gridArray.setItem(5, 5, 1);
+    gamestate.gridArray.setItem(5, 6, 2);
+    gamestate.gridArray.setItem(5, 7, 3);
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // Checks
         //----------------------------------------------------------------------------------
-
-        gamestate.updateMouse();
-
-        if (gamestate.mouse_L) {
-
-            if (gamestate.paintbrush_mode == ERASE) {
-                gamestate.paintbrush_mode = PAINT;
-            }
-
-            if (gamestate.brushRadius == 0) {
-                paintbrush_singleSquare(gamestate);
-            }
-
-            else spraybrush_circle(gamestate);
-            //else paintbrush_singleSquare(gamestate);
-        }
-        if (gamestate.mouse_R) {
-            
-            if (gamestate.paintbrush_mode == PAINT) {
-                gamestate.paintbrush_mode = ERASE;
-            }
-
-            if (gamestate.brushRadius == 0) {
-                paintbrush_singleSquare(gamestate);
-            }
-
-            else paintbrush_circle(gamestate);
-
-        }
+        mousetools.run();
+        
 
         // Draw
         //----------------------------------------------------------------------------------
