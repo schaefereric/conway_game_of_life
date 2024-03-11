@@ -20,14 +20,13 @@ int main()
 {
     gamestate_t gamestate;
     guimaster_t guimaster(&gamestate);
-    mouse_tools mousetools(&gamestate);
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(gamestate.screenWidth, gamestate.screenHeight, "Eric's Game of Life v0.0000000000000001");
 
     SetTargetFPS(60);     
 
-    gamestate.gridArray.reInitialize(30, 30);
+    gamestate.gridArray.reInitialize(50, 50);
     gamestate.gridArray.setItem(5, 5, 1);
     gamestate.gridArray.setItem(5, 6, 2);
     gamestate.gridArray.setItem(5, 7, 3);
@@ -37,7 +36,8 @@ int main()
     {
         // Checks
         //----------------------------------------------------------------------------------
-        mousetools.run();
+
+        gamestate.mousetools->run();
         
 
         // Draw
@@ -48,7 +48,7 @@ int main()
 
         drawArrayGrid(gamestate);
 
-        guimaster.draw(gamestate);
+        guimaster.draw();
 
         
 

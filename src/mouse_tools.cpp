@@ -3,12 +3,16 @@
 mouse_tools::mouse_tools(gamestate_t* gamestateRef) {
     gamestate = gamestateRef;
 
+    if (gamestate == NULL) {
+        throw;
+    }
+
     mousePosition.x = 0;
     mousePosition.y = 0;
     mouse_L = false;
     mouse_R = false;
 
-    currentTool = PAINT;
+    currentTool = MOVE_GRID;
     brushRadius = 2;
 
 }
@@ -28,11 +32,11 @@ void mouse_tools::setBrushRadius(int input) {
     brushRadius = input;
 }
 
-tool_mode_t mouse_tools::getCurrentTool() {
+tool_mode_t mouse_tools::getCurrentTool() const {
     return currentTool;
 }
 
-int mouse_tools::getBrushRadius() {
+int mouse_tools::getBrushRadius() const {
     return brushRadius;
 }
 
@@ -63,16 +67,16 @@ void mouse_tools::run() {
     }
 }
 
-void mouse_tools::runPaintbrush() {
-    unsigned int x = getArrayIndexXFromMousePosition();
-    unsigned int y = getArrayIndexYFromMousePosition();
-
-    // Return if mouse position is outside of grid
-    if (x >= gamestate->gridArray.getSizeX() || y >= gamestate->gridArray.getSizeY()) {
-        return;
-    }
+void mouse_tools::runPaintbrush() {   
 
     if (mouse_L) {
+        unsigned int x = getArrayIndexXFromMousePosition();
+        unsigned int y = getArrayIndexYFromMousePosition();
+
+        // Return if mouse position is outside of grid
+        if (x >= gamestate->gridArray.getSizeX() || y >= gamestate->gridArray.getSizeY()) {
+            return;
+        }
 
         if (brushRadius == 0) {
             gamestate->gridArray.setItem(x, y, 1);
@@ -82,6 +86,13 @@ void mouse_tools::runPaintbrush() {
     }
 
     if (mouse_R && !(mouse_L)) {
+        unsigned int x = getArrayIndexXFromMousePosition();
+        unsigned int y = getArrayIndexYFromMousePosition();
+
+        // Return if mouse position is outside of grid
+        if (x >= gamestate->gridArray.getSizeX() || y >= gamestate->gridArray.getSizeY()) {
+            return;
+        }
 
         if (brushRadius == 0) {
             gamestate->gridArray.setItem(x, y, 0);
@@ -92,15 +103,15 @@ void mouse_tools::runPaintbrush() {
 }
 
 void mouse_tools::runEraser() {
-    unsigned int x = getArrayIndexXFromMousePosition();
-    unsigned int y = getArrayIndexYFromMousePosition();
-
-    // Return if mouse position is outside of grid
-    if (x >= gamestate->gridArray.getSizeX() || y >= gamestate->gridArray.getSizeY()) {
-        return;
-    }
 
     if (mouse_L) {
+        unsigned int x = getArrayIndexXFromMousePosition();
+        unsigned int y = getArrayIndexYFromMousePosition();
+
+        // Return if mouse position is outside of grid
+        if (x >= gamestate->gridArray.getSizeX() || y >= gamestate->gridArray.getSizeY()) {
+            return;
+        }
 
         if (brushRadius == 0) {
             gamestate->gridArray.setItem(x, y, 0);
@@ -111,27 +122,57 @@ void mouse_tools::runEraser() {
 }
 
 void mouse_tools::runSpraybrush() {
-    unsigned int x = getArrayIndexXFromMousePosition();
-    unsigned int y = getArrayIndexYFromMousePosition();
-
-    // Return if mouse position is outside of grid
-    if (x >= gamestate->gridArray.getSizeX() || y >= gamestate->gridArray.getSizeY()) {
-        return;
-    }
 
     if (mouse_L) {
+        unsigned int x = getArrayIndexXFromMousePosition();
+        unsigned int y = getArrayIndexYFromMousePosition();
+                           
+        // Return if mouse position is outside of grid
+        if (x >= gamestate->gridArray.getSizeX() || y >= gamestate->gridArray.getSizeY()) {
+            return;        
+        }
+
         rasterizeCircle_random(x, y, brushRadius, gamestate);
     }
 }
 
 void mouse_tools::runMoveGrid() {
+    static int state = 0;
+    static int previous_x = 0;
+    static int previous_y = 0;
 
+    if (mouse_L) {
+        if (state == 0) {
+            previous_x = mousePosition.x;
+            previous_y = mousePosition.y;
+            state = 1;
+            return;
+        }
+        if (state == 1) {
+            gamestate->gridOrigin_x -= (previous_x - mousePosition.x);
+            gamestate->gridOrigin_y -= (previous_y - mousePosition.y);
+            previous_x = mousePosition.x;
+            previous_y = mousePosition.y;
+            state = 1;
+            return;
+
+        }
+    }
+
+    if (!(mouse_L) && state == 1) {
+        state = 0;
+        previous_x = 0;
+        previous_y = 0;
+        return;
+    }
+
+    
 }
 
 
 
 
-unsigned int mouse_tools::getArrayIndexXFromMousePosition() {
+unsigned int mouse_tools::getArrayIndexXFromMousePosition() const {
     float temp;
 
     temp = (mousePosition.x - gamestate->gridOrigin_x) / gamestate->squareSize;
@@ -139,7 +180,7 @@ unsigned int mouse_tools::getArrayIndexXFromMousePosition() {
     return static_cast<unsigned int> (std::floor(temp));
 }
 
-unsigned int mouse_tools::getArrayIndexYFromMousePosition() {
+unsigned int mouse_tools::getArrayIndexYFromMousePosition() const {
     float temp;
 
     temp = (mousePosition.y - gamestate->gridOrigin_y) / gamestate->squareSize;

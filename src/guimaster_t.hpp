@@ -36,7 +36,7 @@ struct guimaster_t
     void init();
 
     // executes the drawcalls for all visible windows
-    void draw(gamestate_t& gamestateRef);
+    void draw();
 
 };
 

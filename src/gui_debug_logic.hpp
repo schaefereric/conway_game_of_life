@@ -49,10 +49,10 @@
     // Module Functions Declaration
     //----------------------------------------------------------------------------------
     GuiDebugLogicState InitGuiDebugLogic(void);
-    void GuiDebugLogic(gamestate_t& gamestate, GuiDebugLogicState* state);
+    void GuiDebugLogic(gamestate_t* gamestate, GuiDebugLogicState* state);
     static void Button005(GuiDebugLogicState* state);
-    static void Button012(GuiDebugLogicState* state, gamestate_t& gamestateRef);
-    static void Button016(GuiDebugLogicState* state, gamestate_t& gamestateRef);
+    static void Button012(GuiDebugLogicState* state, gamestate_t* gamestateRef);
+    static void Button016(GuiDebugLogicState* state, gamestate_t* gamestateRef);
 
 
 
@@ -126,17 +126,17 @@ static void Button005(GuiDebugLogicState* state)
     _itoa_s((int)temp.y, state->moore_y_buffer, 10, 10);
 }
 
-static void Button012(GuiDebugLogicState* state, gamestate_t & gamestateRef)
+static void Button012(GuiDebugLogicState* state, gamestate_t * gamestateRef)
 {
     // get number of neighbors
-    int temp = getNumberOfNeighbors(state->Spinner002Value, state->Spinner003Value, &gamestateRef.gridArray);
+    int temp = getNumberOfNeighbors(state->Spinner002Value, state->Spinner003Value, &gamestateRef->gridArray);
     _itoa_s(temp, state->counted_neighbors, 5, 10);
 }
 
-static void Button016(GuiDebugLogicState* state, gamestate_t& gamestateRef)
+static void Button016(GuiDebugLogicState* state, gamestate_t* gamestateRef)
 {
     // get new state of square
-    bool temp = decideNewStateOfSquare(state->Spinner002Value, state->Spinner003Value, &gamestateRef.gridArray);
+    bool temp = decideNewStateOfSquare(state->Spinner002Value, state->Spinner003Value, &gamestateRef->gridArray);
     
     if (temp) {
         strcpy(state->state_of_square, "true");
@@ -148,7 +148,7 @@ static void Button016(GuiDebugLogicState* state, gamestate_t& gamestateRef)
 }
 
 
-void GuiDebugLogic(gamestate_t& gamestate, GuiDebugLogicState* state)
+void GuiDebugLogic(gamestate_t* gamestate, GuiDebugLogicState* state)
 {
     if (state->DropdownBox004EditMode) GuiLock();
 
