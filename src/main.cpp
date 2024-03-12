@@ -13,6 +13,7 @@
 #include "gui_debug_main.hpp"
 #include "gui_debug_mouse.hpp"
 #include "gui_debug_logic.hpp"
+#include "gui_hidden_ui_message.hpp"
 #include "guimaster_t.hpp"
 #include "logic.hpp"
 #include "mouse_tools.hpp"
@@ -25,7 +26,7 @@ int main()
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(gamestate.screenWidth, gamestate.screenHeight, "Eric's Game of Life v0.0000000000000001");
 
-    SetTargetFPS(60);     
+    //SetTargetFPS(60);     
 
     gamestate.gridArray.reInitialize(50, 50);
     gamestate.gridArray.setItem(5, 5, 1);

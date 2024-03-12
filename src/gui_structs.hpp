@@ -91,3 +91,8 @@ struct GuiMainWindowState {
     char squaresize_buffer[6];
 
 };
+
+// "Hidden UI" Message
+struct GuiHiddenState {
+    Rectangle layoutRecs[3];
+};

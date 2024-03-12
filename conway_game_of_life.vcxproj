@@ -212,6 +212,7 @@
     <ClInclude Include="src\gui_debug_logic.hpp" />
     <ClInclude Include="src\gui_debug_mouse.hpp" />
     <ClInclude Include="src\gui_debug_main.hpp" />
+    <ClInclude Include="src\gui_hidden_ui_message.hpp" />
     <ClInclude Include="src\gui_main_window.hpp" />
     <ClInclude Include="src\gui_structs.hpp" />
     <ClInclude Include="src\logic.hpp" />

@@ -1,0 +1,13 @@
+#
+# rgl layout text file (v4.0) - raygui layout file generated using rGuiLayout
+#
+# Number of controls:     3
+#
+# Ref. window:    r <x> <y> <width> <height>
+# Anchor info:    a <id> <name> <posx> <posy> <enabled>
+# Control info:   c <id> <type> <name> <rectangle> <anchor_id> <text>
+#
+r 0 40 -1 -1
+c 000 3 Panel000 0 0 200 72 0 
+c 001 4 Label001 8 8 184 16 0 User Interface is currently hidden
+c 002 5 Button002 32 32 128 24 0 Show User Interface

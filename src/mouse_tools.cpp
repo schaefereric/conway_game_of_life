@@ -142,7 +142,7 @@ void mouse_tools::runMoveGrid() {
     static int previous_y = 0;
 
     if (mouse_L) {
-        if (mousePosition.x < 415) {
+        if (mousePosition.x < 415 && !(gamestate->UIHidden)) {
             return;
         }
 

@@ -32,14 +32,15 @@
 #include "gui_button_implementation.hpp"
 #include "gamestate_t.hpp"
 #include "grid.hpp"
+#include "guimaster_t.hpp"
 
-
+struct guimaster_t;
 
 //----------------------------------------------------------------------------------
 // Module Functions Declaration
 //----------------------------------------------------------------------------------
-GuiMainWindowState InitGuiMainWindow(void);
-       void GuiMainWindow(gamestate_t* gamestate, GuiMainWindowState *state);
+GuiMainWindowState InitGuiMainWindow();
+       void GuiMainWindow(gamestate_t* gamestate, guimaster_t* guimaster, GuiMainWindowState* state);
 static void Button004(gamestate_t* gamestate);
 static void Button005(gamestate_t* gamestate);
 static void Button006(gamestate_t* gamestate);
@@ -61,7 +62,7 @@ static void Button032();
 //----------------------------------------------------------------------------------
 // Module Functions Definition
 //----------------------------------------------------------------------------------
-GuiMainWindowState InitGuiMainWindow(void)
+GuiMainWindowState InitGuiMainWindow()
 {
     GuiMainWindowState state = { 0 };
 
@@ -222,8 +223,8 @@ static void checkToolSelection(GuiMainWindowState* state, gamestate_t * gamestat
 }
 
 
-void GuiMainWindow(gamestate_t* gamestate, GuiMainWindowState *state) {
-    state->WindowBox000Active = true;
+void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindowState *state) {
+    //state->WindowBox000Active = true;
 
     if (state->WindowBox000Active) {
 
@@ -265,7 +266,7 @@ void GuiMainWindow(gamestate_t* gamestate, GuiMainWindowState *state) {
         GuiSlider(state->layoutRecs[12], "#139#Speed   ", NULL, &state->Slider012Value, 0, 100);
         GuiLabel(state->layoutRecs[13], "1234ms"); //todo
         GuiLabel(state->layoutRecs[14], state->brushradius_buffer); 
-        GuiSliderBar(state->layoutRecs[15], "#032#Brush Radius   ", NULL, &state->SliderBar015Value, 0, 15);
+        GuiSliderBar(state->layoutRecs[15], "#032#Brush Radius   ", NULL, &state->SliderBar015Value, 0, 10);
 
         GuiLine(state->layoutRecs[16], "Grid Options");
         GuiSlider(state->layoutRecs[17], "X-Axis: ", NULL, &state->Slider017Value, 3, 200);
@@ -277,7 +278,7 @@ void GuiMainWindow(gamestate_t* gamestate, GuiMainWindowState *state) {
         GuiLabel(state->layoutRecs[22], "#140#Tools");
         if (GuiButton(state->layoutRecs[23], "#094#Clear Grid")) Button023(gamestate); 
         if (GuiButton(state->layoutRecs[24], "#093#Shuffle Grid")) Button024(gamestate); 
-        GuiSlider(state->layoutRecs[25], "#096#Square Size    ", NULL, &state->Slider025Value, 3, 100);
+        GuiSlider(state->layoutRecs[25], "#096#Square Size    ", NULL, &state->Slider025Value, 3, 75);
         GuiLabel(state->layoutRecs[26], state->squaresize_buffer);
 
         GuiCheckBox(state->layoutRecs[33], "#108#Rectangle Outline", &state->CheckBoxEx033Checked);
@@ -318,5 +319,12 @@ void GuiMainWindow(gamestate_t* gamestate, GuiMainWindowState *state) {
         checkToolSelection(state, gamestate);
 
     }
+
+    if (!(state->WindowBox000Active)) {
+        gamestate->UIHidden = true;
+        guimaster->draw_hidden_ui_message = true;
+        guimaster->draw_main_window = false;
+    }
+
 }
 

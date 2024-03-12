@@ -14,8 +14,8 @@ struct gamestate_t {
         
     gamestate_t();
 
-    int squareSize;         // Edge length of one (1) square
-    int gridOrigin_x;       // Origin (left top corner) of rendered Grid
+    int squareSize;             // Edge length of one (1) square
+    int gridOrigin_x;           // Origin (left top corner) of rendered Grid
     int gridOrigin_y;
 
     int screenWidth;
@@ -30,5 +30,5 @@ struct gamestate_t {
     // Cosmetics
     bool drawRectangleOutline;
     bool drawBrushRadiusPreview;
-
+    bool UIHidden;              // needed for gui_hidden_ui_message
 };

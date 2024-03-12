@@ -13,6 +13,8 @@ gamestate_t::gamestate_t() {
     runAlgorithm = false;
 
     drawRectangleOutline = false;
+    drawBrushRadiusPreview = false;
+    UIHidden = false;
 }
 
 void gamestate_t::setRunAlgorithm(bool input) {
