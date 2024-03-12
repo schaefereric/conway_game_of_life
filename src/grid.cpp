@@ -33,17 +33,20 @@ void drawArrayGrid(gamestate_t& gamestate) {
 
             // draw (colored) squares
             DrawRectangle((gamestate.squareSize * x_index) + gamestate.gridOrigin_x,
-                (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
-                gamestate.squareSize,
-                gamestate.squareSize,
-                square_color);
+                          (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
+                          gamestate.squareSize,
+                          gamestate.squareSize,
+                          square_color);
 
             // draw grid lines
-            DrawRectangleLines((gamestate.squareSize * x_index) + gamestate.gridOrigin_x,
-                (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
-                gamestate.squareSize,
-                gamestate.squareSize,
-                BLACK);
+            if (gamestate.drawRectangleOutline) {
+                DrawRectangleLines((gamestate.squareSize * x_index) + gamestate.gridOrigin_x,
+                                   (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
+                                   gamestate.squareSize,
+                                   gamestate.squareSize,
+                                   BLACK);
+            }
+            
         }
     }
 }

@@ -13,7 +13,8 @@
 #include "gamestate_t.hpp"
 
 // Forward Declarations
-struct GuiGameOfLifeState;
+struct GuiMainWindowState;
+struct GuiDebugMainState;
 struct GuiDebugMouseState;
 struct GuiDebugLogicState;
 
@@ -21,11 +22,13 @@ struct guimaster_t
 {
     gamestate_t* gamestate;
 
-    GuiGameOfLifeState guistate_debug_main;             // Debug Main Window
+    GuiMainWindowState guistate_main_window;            // Main Window
+    GuiDebugMainState  guistate_debug_main;             // Debug Main Window
     GuiDebugMouseState guistate_debug_mouse;            // Debug Mouse Window
     GuiDebugLogicState guistate_debug_logic;            // Debug Logic Window
 
     // decides whether this window should be visible or not
+    bool draw_main_window;
     bool draw_debug_main;
     bool draw_debug_mouse;
     bool draw_debug_logic;

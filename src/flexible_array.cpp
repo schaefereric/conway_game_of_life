@@ -17,11 +17,11 @@ flexible_array::flexible_array(unsigned int ix, unsigned int iy) {
     clearArray();
 }
 
-// Default constructor, initializes array as 2*2 matrix
+// Default constructor, initializes array as 3*3 matrix
 flexible_array::flexible_array() { 
     size_x = 2;
     size_y = 2;
-    pAry = new int[2 * 2];
+    pAry = new int[3 * 3];
     clearArray();
 }
 

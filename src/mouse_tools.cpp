@@ -12,7 +12,7 @@ mouse_tools::mouse_tools(gamestate_t* gamestateRef) {
     mouse_L = false;
     mouse_R = false;
 
-    currentTool = MOVE_GRID;
+    currentTool = PAINT;
     brushRadius = 2;
 
 }
@@ -142,17 +142,21 @@ void mouse_tools::runMoveGrid() {
     static int previous_y = 0;
 
     if (mouse_L) {
+        if (mousePosition.x < 415) {
+            return;
+        }
+
         if (state == 0) {
-            previous_x = mousePosition.x;
-            previous_y = mousePosition.y;
+            previous_x = static_cast<int> (mousePosition.x);
+            previous_y = static_cast<int> (mousePosition.y);
             state = 1;
             return;
         }
         if (state == 1) {
-            gamestate->gridOrigin_x -= (previous_x - mousePosition.x);
-            gamestate->gridOrigin_y -= (previous_y - mousePosition.y);
-            previous_x = mousePosition.x;
-            previous_y = mousePosition.y;
+            gamestate->gridOrigin_x -= (previous_x - static_cast<int> (mousePosition.x));
+            gamestate->gridOrigin_y -= (previous_y - static_cast<int> (mousePosition.y));
+            previous_x = static_cast<int> (mousePosition.x);
+            previous_y = static_cast<int> (mousePosition.y);
             state = 1;
             return;
 

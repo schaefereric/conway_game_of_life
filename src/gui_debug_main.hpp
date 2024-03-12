@@ -1,6 +1,6 @@
 /*******************************************************************************************
 *
-*   GameOfLife v1.0.0 - user interface
+*   Gui Debug Main v1.0.0 - user interface
 *
 *   MODULE USAGE:
 *       #define GUI_GAME_OF_LIFE_IMPLEMENTATION
@@ -46,8 +46,8 @@
     //----------------------------------------------------------------------------------
     // Module Functions Declaration
     //----------------------------------------------------------------------------------
-    GuiGameOfLifeState InitGuiGameOfLife(void);
-    void GuiGameOfLife(gamestate_t * gamestate, GuiGameOfLifeState* state);
+    GuiDebugMainState InitGuiDebugMain(void);
+    void GuiDebugMain(gamestate_t * gamestate, GuiDebugMainState* state);
     static void Button010(int x, int y, flexible_array* arrayRef);
     static void Button015(gamestate_t* gamestate);
     static void Button016(gamestate_t* gamestate);
@@ -81,9 +81,9 @@
 //----------------------------------------------------------------------------------
 // Module Functions Definition
 //----------------------------------------------------------------------------------
-GuiGameOfLifeState InitGuiGameOfLife(void)
+GuiDebugMainState InitGuiDebugMain(void)
 {
-    GuiGameOfLifeState state = { 0 };
+    GuiDebugMainState state = { 0 };
 
     int anchor_distance_x = 300;
 
@@ -200,7 +200,7 @@ static void Button040(gamestate_t* gamestate)
 
 
 
-void GuiGameOfLife(gamestate_t * gamestate, GuiGameOfLifeState* state)
+void GuiDebugMain(gamestate_t * gamestate, GuiDebugMainState* state)
 {
 
     if (state->WindowBox000Active)

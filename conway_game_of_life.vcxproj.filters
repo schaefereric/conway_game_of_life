@@ -50,7 +50,7 @@
     <ClInclude Include="src\gui_button_implementation.hpp">
       <Filter>Quelldateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\gui_game_of_life_gui.hpp">
+    <ClInclude Include="src\gui_debug_main.hpp">
       <Filter>Quelldateien</Filter>
     </ClInclude>
     <ClInclude Include="src\gui_structs.hpp">
@@ -72,6 +72,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\mouse_tools.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui_main_window.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

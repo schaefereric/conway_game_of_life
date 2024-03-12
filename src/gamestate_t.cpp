@@ -4,13 +4,15 @@ gamestate_t::gamestate_t() {
     mousetools = new mouse_tools(this);
 
     squareSize = 15;
-    gridOrigin_x = 30;
-    gridOrigin_y = 30;
+    gridOrigin_x = 450;
+    gridOrigin_y = 50;
 
-    screenWidth = 1500;
-    screenHeight = 800;
+    screenWidth = 1600;
+    screenHeight = 900;
 
     runAlgorithm = false;
+
+    drawRectangleOutline = false;
 }
 
 void gamestate_t::setRunAlgorithm(bool input) {
