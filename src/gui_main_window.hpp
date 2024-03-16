@@ -224,7 +224,6 @@ static void checkToolSelection(GuiMainWindowState* state, gamestate_t * gamestat
 
 
 void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindowState *state) {
-    //state->WindowBox000Active = true;
 
     if (state->WindowBox000Active) {
 

@@ -12,8 +12,8 @@ struct mouse_tools {
     gamestate_t* gamestate;
 
     // Mouse Input 
-    Vector2 mousePosition;  // Last recorded mouse position (update via updateMouse();)
-    bool mouse_L;           // is left mouse button pressed ? (update via updateMouse();)
+    Vector2 mousePosition;  // Last recorded mouse position    (update via updateMouse();)
+    bool mouse_L;           // is left  mouse button pressed ? (update via updateMouse();)
     bool mouse_R;           // is right mouse button pressed ? (update via updateMouse();)
     void updateMouse();
     
