@@ -58,6 +58,12 @@ struct flexible_array {
     void swapPointers(int* newArray);
 
 
+    // ------------------------------------------------------------
+    // Debugging
+
+    bool logErrors;
+
+
     // -----------------------------------------------------------   
     // DEPRECATED DEBUG FUNCTIONS !!! ONLY WORKS WITH INTEGERS !!!
   

@@ -38,7 +38,7 @@ void drawArrayGrid(gamestate_t& gamestate) {
                           gamestate.squareSize,
                           square_color);
 
-            // draw grid lines
+            // draw grid outlines
             if (gamestate.drawRectangleOutline) {
                 DrawRectangleLines((gamestate.squareSize * x_index) + gamestate.gridOrigin_x,
                                    (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,

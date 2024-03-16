@@ -58,7 +58,7 @@ GuiHiddenState InitGuiHidden(void)
 {
     GuiHiddenState state = { 0 };
 
-    state.layoutRecs[0] = { 0, 0, 200, 72 };
+    state.layoutRecs[0] = { 1, 1, 200, 72 };
     state.layoutRecs[1] = { 8, 8, 184, 16 };
     state.layoutRecs[2] = { 32, 32, 128, 24 };
 

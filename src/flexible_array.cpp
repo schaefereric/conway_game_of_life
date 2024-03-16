@@ -15,6 +15,7 @@ flexible_array::flexible_array(unsigned int ix, unsigned int iy) {
     size_y = iy;
     pAry = new int[ix * iy];
     clearArray();
+    logErrors = false;
 }
 
 // Default constructor, initializes array as 3*3 matrix
@@ -23,6 +24,7 @@ flexible_array::flexible_array() {
     size_y = 2;
     pAry = new int[3 * 3];
     clearArray();
+    logErrors = false;
 }
 
 // Destructor, deallocates memory on heap
@@ -33,7 +35,10 @@ flexible_array::~flexible_array() {
 // Resize array
 void flexible_array::reInitialize(unsigned int ix, unsigned int iy) {
     if (ix == 0 || iy == 0) {
-        std::cerr << "flexible_array::reInitialize: ERROR: Size cannot be zero!" << "\n";
+        if (logErrors) {
+            std::cerr << "flexible_array::reInitialize: ERROR: Size cannot be zero!" << "\n";
+        }
+        
         return;
     }
 
@@ -47,7 +52,10 @@ void flexible_array::reInitialize(unsigned int ix, unsigned int iy) {
 // Returns item at given index
 int flexible_array::getItem(unsigned int ix, unsigned int iy) const {
     if (ix >= size_x || iy >= size_y) {
-        std::cerr << "flexible_array::getItem: ERROR: Invalid index!" << "\n";
+        if (logErrors) {
+            std::cerr << "flexible_array::getItem: ERROR: Invalid index!" << "\n";
+        }
+        
         return 0;
     }
 
@@ -57,7 +65,10 @@ int flexible_array::getItem(unsigned int ix, unsigned int iy) const {
 // Sets items at given index
 void flexible_array::setItem(unsigned int ix, unsigned int iy, int input) {
     if (ix > size_x - 1 || iy > size_y - 1) {
-        std::cerr << "flexible_array::setItem: ERROR: Invalid index!" << "\n";
+        if (logErrors) {
+            std::cerr << "flexible_array::setItem: ERROR: Invalid index!" << "\n";
+        }
+        
         return;
     }
 
