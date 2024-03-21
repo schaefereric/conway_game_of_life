@@ -37,7 +37,7 @@ private:
     void runSpraybrush();
     void runMoveGrid();
 
-    // Reverting the drawArrayGrid function (grid.hpp) to get coordinates of square at mouse cursor position
+    // Reverting the drawArrayGrid function (grid.hpp) to get array index of square at mouse cursor position
     unsigned int getArrayIndexXFromMousePosition() const;
     unsigned int getArrayIndexYFromMousePosition() const;
 };

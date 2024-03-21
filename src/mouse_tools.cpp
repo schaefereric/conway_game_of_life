@@ -142,16 +142,23 @@ void mouse_tools::runMoveGrid() {
     static int previous_y = 0;
 
     if (mouse_L) {
+
+        // Prevents the tool from triggering when using the GUI, 
+        // which begins on the left side of the screen and is 415px wide.
+        // Deactivated when GUI is hidden
         if (mousePosition.x < 415 && !(gamestate->UIHidden)) {
             return;
         }
 
+        // Setup
         if (state == 0) {
             previous_x = static_cast<int> (mousePosition.x);
             previous_y = static_cast<int> (mousePosition.y);
             state = 1;
             return;
         }
+
+        // Get distance of mouse position from previous frame to current frame and subtract that from gridOrigin to move the grid
         if (state == 1) {
             gamestate->gridOrigin_x -= (previous_x - static_cast<int> (mousePosition.x));
             gamestate->gridOrigin_y -= (previous_y - static_cast<int> (mousePosition.y));
@@ -163,6 +170,7 @@ void mouse_tools::runMoveGrid() {
         }
     }
 
+    // Reset state when left mouse button is released
     if (!(mouse_L) && state == 1) {
         state = 0;
         previous_x = 0;

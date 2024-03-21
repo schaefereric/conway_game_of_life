@@ -148,7 +148,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -201,6 +201,7 @@
     <ClCompile Include="src\logic.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mouse_tools.cpp" />
+    <ClCompile Include="src\timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\flexible_array.hpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="src\gui_structs.hpp" />
     <ClInclude Include="src\logic.hpp" />
     <ClInclude Include="src\mouse_tools.hpp" />
+    <ClInclude Include="src\timer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

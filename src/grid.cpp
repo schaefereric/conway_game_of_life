@@ -87,7 +87,7 @@ void rasterizeCircle_JeskoMethod(int mx, int my, int r, int input, gamestate_t* 
             x = x - 1;
         }
     }
-} // todo: invalid index handling
+} // todo: invalid index handling (update: sorta fixed the issue via flexible_array::logErrors, reconsider if this was a good idea)
 
 void rasterizeCircle_fill_Y_Axis(int x, int y1, int y2, int input, gamestate_t* gamestateRef) {
     if (y1 == y2) {

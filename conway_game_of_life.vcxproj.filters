@@ -36,6 +36,9 @@
     <ClCompile Include="src\mouse_tools.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\timer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\flexible_array.hpp">
@@ -78,6 +81,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\gui_hidden_ui_message.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\timer.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

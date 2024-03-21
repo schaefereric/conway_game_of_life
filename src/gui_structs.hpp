@@ -1,6 +1,40 @@
 #pragma once
 #include <raylib.h>
 
+// Main Window
+struct GuiMainWindowState {
+    Vector2 anchor01;
+    Vector2 anchor02;
+
+    bool WindowBox000Active;
+    bool Toggle012Active;      // paint
+    bool Toggle013Active;      // spray
+    bool Toggle014Active;      // move grid
+    bool Toggle015Active;      // erase
+    float Slider012Value;      // speed
+    float SliderBar015Value;   // brush radius
+    float Slider017Value;      // array size x
+    float Slider018Value;      // array size y
+    float Slider025Value;      // square size
+    bool CheckBoxEx033Checked; // rectangle outline
+    bool CheckBoxEx034Checked; // preview for brush radius
+
+
+    Rectangle layoutRecs[35];
+
+    char isGameRunning[10];
+    char array_size_x[6];
+    char array_size_y[6];
+    char brushradius_buffer[6];
+    char squaresize_buffer[6];
+    char speed_buffer[10];
+};
+
+// "Hidden UI" Message
+struct GuiHiddenState {
+    Rectangle layoutRecs[3];
+};
+
 // Debug Main
 struct GuiDebugMainState {
     Vector2 anchor01;
@@ -61,38 +95,4 @@ struct GuiDebugLogicState {
     char moore_y_buffer[10];
     char counted_neighbors[5];
     char state_of_square[10];
-};
-
-// Main Window
-struct GuiMainWindowState {
-    Vector2 anchor01;
-    Vector2 anchor02;
-
-    bool WindowBox000Active;
-    bool Toggle012Active;      // paint
-    bool Toggle013Active;      // spray
-    bool Toggle014Active;      // move grid
-    bool Toggle015Active;      // erase
-    float Slider012Value;      // speed
-    float SliderBar015Value;   // brush radius
-    float Slider017Value;      // array size x
-    float Slider018Value;      // array size y
-    float Slider025Value;      // square size
-    bool CheckBoxEx033Checked; // rectangle outline
-    bool CheckBoxEx034Checked; // preview for brush radius
-
-
-    Rectangle layoutRecs[35];
-
-    char isGameRunning[10];
-    char array_size_x[6];
-    char array_size_y[6];
-    char brushradius_buffer[6];
-    char squaresize_buffer[6];
-
-};
-
-// "Hidden UI" Message
-struct GuiHiddenState {
-    Rectangle layoutRecs[3];
 };

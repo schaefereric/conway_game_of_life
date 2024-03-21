@@ -1,6 +1,7 @@
 /*******************************************************************************************
 *
 *   MainWindow v1.0.0 - user interface
+*   Automatically generated via rguilayout
 *
 *   MODULE USAGE:
 *       #define GUI_MAIN_WINDOW_IMPLEMENTATION
@@ -48,6 +49,7 @@ static void Button023(gamestate_t* gamestate);
 static void Button024(gamestate_t* gamestate);
 static void Button028();
 static void Button032();
+static void stretchGUIToWindowHeight(gamestate_t* gamestate, GuiMainWindowState* state);
 
 
 /***********************************************************************************
@@ -67,18 +69,18 @@ GuiMainWindowState InitGuiMainWindow()
     GuiMainWindowState state = { 0 };
 
     state.anchor01 = { 0, 0 };
-    state.anchor02 = { 0, 896 };
+    state.anchor02 = { 0, 900 };
 
     state.WindowBox000Active = true;
     state.Toggle012Active = true;
     state.Toggle013Active = false;
     state.Toggle014Active = false;
     state.Toggle015Active = false;
-    state.Slider012Value = 0.0f;
+    state.Slider012Value = 200.0f;
     state.SliderBar015Value = 2.0f;
-    state.Slider017Value = 30.0f;
-    state.Slider018Value = 30.0f;
-    state.Slider025Value = 13.0f;
+    state.Slider017Value = 40.0f;
+    state.Slider018Value = 40.0f;
+    state.Slider025Value = 18.0f;
     state.CheckBoxEx033Checked = true;
     state.CheckBoxEx034Checked = false;
 
@@ -109,6 +111,7 @@ GuiMainWindowState InitGuiMainWindow()
     state.layoutRecs[24] = { state.anchor01.x + 208, state.anchor01.y + 552, 168, 24 };
     state.layoutRecs[25] = { state.anchor01.x + 136, state.anchor01.y + 592, 176, 16 };
     state.layoutRecs[26] = { state.anchor01.x + 328, state.anchor01.y + 592, 56, 16 };
+    // anchor02
     state.layoutRecs[27] = { state.anchor02.x + 24, state.anchor02.y + -192, 360, 16 };
     state.layoutRecs[28] = { state.anchor02.x + 32, state.anchor02.y + -160, 344, 24 };
     state.layoutRecs[29] = { state.anchor02.x + 24, state.anchor02.y + -88, 360, 16 };
@@ -126,12 +129,12 @@ GuiMainWindowState InitGuiMainWindow()
 static void Button004(gamestate_t* gamestate)
 {
     // start algorithm
-    gamestate->setRunAlgorithm(true);
+    gamestate->startAlgorithm();
 }
 static void Button005(gamestate_t* gamestate)
 {
     // stop algorithm
-    gamestate->setRunAlgorithm(false);
+    gamestate->stopAlgorithm();
 }
 static void Button006(gamestate_t* gamestate)
 {
@@ -156,6 +159,31 @@ static void Button032()
 {
     // open github repository
     OpenURL("https://github.com/schaefereric/conway_game_of_life");
+}
+
+
+#define spray_toggle Toggle012Active
+#define paint_toggle Toggle013Active
+#define erase_toggle Toggle015Active
+#define movegrid_toggle Toggle014Active
+
+static void checkToolSelection2(GuiMainWindowState* state, gamestate_t* gamestate) {
+    int numberOfActiveToggles = 0;
+
+    /*if (state->spray_toggle)    numberOfActiveToggles++;
+    if (state->paint_toggle)    numberOfActiveToggles++;
+    if (state->erase_toggle)    numberOfActiveToggles++;
+    if (state->movegrid_toggle) numberOfActiveToggles++;
+
+    if (numberOfActiveToggles > 1) {
+
+
+
+    }*/
+
+    bool* toggles[] = {&state->spray_toggle, &state->paint_toggle, &state->erase_toggle, &state->movegrid_toggle };
+
+    //todo: arsch
 }
 
 static void checkToolSelection(GuiMainWindowState* state, gamestate_t * gamestate) {
@@ -222,10 +250,34 @@ static void checkToolSelection(GuiMainWindowState* state, gamestate_t * gamestat
     }
 }
 
+// GUI Height is clipped to window height via this function
+static void stretchGUIToWindowHeight(gamestate_t* gamestate, GuiMainWindowState* state) {
+
+    // resizing is only performed if window size has been changed
+    if (state->anchor02.y != gamestate->windowHeight) {
+
+        state->anchor02.y           = static_cast<float> (gamestate->windowHeight);
+        state->layoutRecs[0].height = static_cast<float> (gamestate->windowHeight);
+
+        // re-calculate distances from anchor
+        state->layoutRecs[27] = { state->anchor02.x + 24, state->anchor02.y + -192, 360, 16 };
+        state->layoutRecs[28] = { state->anchor02.x + 32, state->anchor02.y + -160, 344, 24 };
+        state->layoutRecs[29] = { state->anchor02.x + 24, state->anchor02.y + -88,  360, 16 };
+        state->layoutRecs[30] = { state->anchor02.x + 32, state->anchor02.y + -56,  184, 24 };
+        state->layoutRecs[31] = { state->anchor02.x + 32, state->anchor02.y + -40,  272, 24 };
+        state->layoutRecs[32] = { state->anchor02.x + 32, state->anchor02.y + -128, 344, 24 };
+        state->layoutRecs[33] = { state->anchor01.x + 32, state->anchor01.y +  632,  18, 18 };
+        state->layoutRecs[34] = { state->anchor01.x + 32, state->anchor01.y +  336,  18, 18 };
+    }
+}
+
 
 void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindowState *state) {
 
     if (state->WindowBox000Active) {
+
+        // GUI Height is clipped to window height via this function
+        stretchGUIToWindowHeight(gamestate, state);
 
         // Game Status
         if (gamestate->runAlgorithm == true) {
@@ -234,6 +286,10 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
         if (gamestate->runAlgorithm == false) {
             strcpy(state->isGameRunning, "Stopped");
         }
+
+        // Set Speed/Delay
+        _itoa_s(gamestate->timer.getDelay(), state->speed_buffer, 10, 10);
+        strcat(state->speed_buffer, "ms");
 
         // Brush Radius
         _itoa_s(gamestate->mousetools->getBrushRadius(), state->brushradius_buffer, 6, 10);
@@ -262,8 +318,8 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
         GuiToggle(state->layoutRecs[9], "#092#Spray", &state->Toggle013Active);
         GuiToggle(state->layoutRecs[10], "#068#Move Grid", &state->Toggle014Active);
         GuiToggle(state->layoutRecs[11], "#028#Erase", &state->Toggle015Active);
-        GuiSlider(state->layoutRecs[12], "#139#Speed   ", NULL, &state->Slider012Value, 0, 100);
-        GuiLabel(state->layoutRecs[13], "1234ms"); //todo
+        GuiSlider(state->layoutRecs[12], "#139#Speed   ", NULL, &state->Slider012Value, 1, 1000);
+        GuiLabel(state->layoutRecs[13], state->speed_buffer); 
         GuiLabel(state->layoutRecs[14], state->brushradius_buffer); 
         GuiSliderBar(state->layoutRecs[15], "#032#Brush Radius   ", NULL, &state->SliderBar015Value, 0, 10);
 
@@ -293,6 +349,12 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
 
 
 
+        // Set Speed/Delay
+        int tempDelay = static_cast<int> (state->Slider012Value);
+        if (tempDelay != gamestate->timer.getDelay()) {
+            gamestate->timer.setDelay(tempDelay);
+        }
+
         // Set Square Size
         gamestate->squareSize = static_cast<int> (state->Slider025Value);
 
@@ -317,8 +379,11 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
         // Check Tool Selection
         checkToolSelection(state, gamestate);
 
+
+
     }
 
+    // Hide UI if [x] is clicked
     if (!(state->WindowBox000Active)) {
         gamestate->UIHidden = true;
         guimaster->draw_hidden_ui_message = true;

@@ -18,20 +18,20 @@
 #include "logic.hpp"
 #include "mouse_tools.hpp"
 
+// todo: brush preview auf cursor UND evntl bei bewegen des sliders preview in der mitte des grids
+// grid outline? (also richtige outline)
+
 int main()
 {
     gamestate_t gamestate;
     guimaster_t guimaster(&gamestate);
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(gamestate.screenWidth, gamestate.screenHeight, "Eric's Game of Life v0.0000000000000001");
+    InitWindow(1600, 900, "Eric's Game of Life v0.0000000000000001");
 
-    //SetTargetFPS(60);     
+    SetTargetFPS(60);    
+    SetWindowMinSize(1000, 850);
 
-    gamestate.gridArray.reInitialize(50, 50);
-    gamestate.gridArray.setItem(5, 5, 1);
-    gamestate.gridArray.setItem(5, 6, 2);
-    gamestate.gridArray.setItem(5, 7, 3);
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -39,7 +39,9 @@ int main()
         // Checks
         //----------------------------------------------------------------------------------
 
+        gamestate.updateWindowSize();
         gamestate.mousetools->run();
+        gamestate.runAlgorithmIfActive();
         
 
         // Draw
@@ -49,11 +51,7 @@ int main()
 
 
         drawArrayGrid(gamestate);
-
         guimaster.draw();
-
-        
-
         
 
         EndDrawing();
