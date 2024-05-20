@@ -24,7 +24,7 @@
 
 // WARNING: raygui implementation is expected to be defined before including this header
 #undef RAYGUI_IMPLEMENTATION
-#include "raygui.h"
+#include "../include/raygui.h"
 
 #include <string.h>     // Required for: strcpy()
 
@@ -61,8 +61,6 @@
 *   GUI_DEBUG_LOGIC IMPLEMENTATION
 *
 ************************************************************************************/
-
-#include "raygui.h"
 
 //----------------------------------------------------------------------------------
 // Global Variables Definition

@@ -24,7 +24,7 @@
 
 // WARNING: raygui implementation is expected to be defined before including this header
 #undef RAYGUI_IMPLEMENTATION
-#include "raygui.h"
+#include "../include/raygui.h"
 
 #include <string.h>     // Required for: strcpy()
 #include "gui_structs.hpp"
@@ -47,9 +47,6 @@
 *   GUI_HIDDEN_UI_MESSAGE IMPLEMENTATION
 *
 ************************************************************************************/
-
-#include "raygui.h"
-
 
 //----------------------------------------------------------------------------------
 // Module Functions Definition

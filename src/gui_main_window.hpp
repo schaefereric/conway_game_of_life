@@ -25,7 +25,7 @@
 
 // WARNING: raygui implementation is expected to be defined before including this header
 #undef RAYGUI_IMPLEMENTATION
-#include "raygui.h"
+#include "../include/raygui.h"
 
 #include <string.h>     // Required for: strcpy()
 #include <iostream>
@@ -58,7 +58,11 @@ static void stretchGUIToWindowHeight(gamestate_t* gamestate, GuiMainWindowState*
 *
 ************************************************************************************/
 
-#include "raygui.h"
+// redundant
+#define spray_toggle Toggle012Active
+#define paint_toggle Toggle013Active
+#define erase_toggle Toggle015Active
+#define movegrid_toggle Toggle014Active
 
 
 //----------------------------------------------------------------------------------
@@ -72,7 +76,7 @@ GuiMainWindowState InitGuiMainWindow()
     state.anchor02 = { 0, 900 };
 
     state.WindowBox000Active = true;
-    state.Toggle012Active = true;
+    state.Toggle012Active = false;
     state.Toggle013Active = false;
     state.Toggle014Active = false;
     state.Toggle015Active = false;
@@ -123,6 +127,7 @@ GuiMainWindowState InitGuiMainWindow()
 
 
     // Custom variables initialization
+    
 
     return state;
 }
@@ -161,93 +166,56 @@ static void Button032()
     OpenURL("https://github.com/schaefereric/conway_game_of_life");
 }
 
+// very very weird algorithm. reconsider
+static void checkToolSelection(GuiMainWindowState* state, gamestate_t* gamestate) {
 
-#define spray_toggle Toggle012Active
-#define paint_toggle Toggle013Active
-#define erase_toggle Toggle015Active
-#define movegrid_toggle Toggle014Active
-
-static void checkToolSelection2(GuiMainWindowState* state, gamestate_t* gamestate) {
-    int numberOfActiveToggles = 0;
-
-    /*if (state->spray_toggle)    numberOfActiveToggles++;
-    if (state->paint_toggle)    numberOfActiveToggles++;
-    if (state->erase_toggle)    numberOfActiveToggles++;
-    if (state->movegrid_toggle) numberOfActiveToggles++;
-
-    if (numberOfActiveToggles > 1) {
-
-
-
-    }*/
-
-    bool* toggles[] = {&state->spray_toggle, &state->paint_toggle, &state->erase_toggle, &state->movegrid_toggle };
-
-    //todo: arsch
-}
-
-static void checkToolSelection(GuiMainWindowState* state, gamestate_t * gamestate) {
-
-    static bool state_paint    = true;
-    static bool state_spray    = false;
-    static bool state_erase    = false;
-    static bool state_movegrid = false;
-
-    // Paint selected
-    if (!(state_paint) && state->Toggle012Active) {
-        state_paint = true;
-        state_spray = false;
-        state_erase = false;
-        state_movegrid = false;
-
-        state->Toggle013Active = false;
-        state->Toggle014Active = false;
-        state->Toggle015Active = false;
-
-        gamestate->mousetools->setCurrentTool(PAINT);
+    // Get amount of active GUI toggles
+    int numOfActiveToggles = 0;
+    for (auto iter : state->toggles) {
+        if (*iter.first) numOfActiveToggles++;
+    }
+    
+    // If no toggles are active
+    if (numOfActiveToggles == 0 || numOfActiveToggles == 1) {
+        for (auto& iter : state->toggles) {
+            // Get pair of current tool and activate toggle
+            if (iter.second == gamestate->mousetools->getCurrentTool()) {
+                *iter.first = true;
+                return;
+            }
+            // else, deactivate all other toggles
+            else *iter.first = false;
+        }
+        throw; // HANDLE EXCEPTION PROPERLY !!!!!
     }
 
-    // Erase selected
-    if (!(state_erase) && state->Toggle015Active) {
-        state_paint = false;
-        state_spray = false;
-        state_erase = true;
-        state_movegrid = false;
+    // CurrentTool will be replaced
+    if (numOfActiveToggles >= 2) {
+        for (auto& iter : state->toggles) {
 
-        state->Toggle012Active = false;
-        state->Toggle013Active = false;
-        state->Toggle014Active = false;
+            // bool = true, tool = false
+            // Toggle is active but tool is not selected -> select this tool
+            if (*iter.first && (iter.second != gamestate->mousetools->getCurrentTool())) {          
+                gamestate->mousetools->setCurrentTool(iter.second);
+                // new tool has been set, deactivate all other toggle bools
+                for (auto& iter2 : state->toggles) {
+                    if (iter.second != iter2.second) {
+                        *iter2.first = false;
+                    }
+                }
+                continue;
+            }
 
-        gamestate->mousetools->setCurrentTool(ERASE);
+            // bool = true, tool = true
+            if (*iter.first && (iter.second == gamestate->mousetools->getCurrentTool())) {
+                *iter.first = false;
+            }
+
+        }
+        return;
     }
 
-    // Spray selected
-    if (!(state_spray) && state->Toggle013Active) {
-        state_paint = false;
-        state_spray = true;
-        state_erase = false;
-        state_movegrid = false;
-
-        state->Toggle012Active = false;
-        state->Toggle014Active = false;
-        state->Toggle015Active = false;
-
-        gamestate->mousetools->setCurrentTool(SPRAY);
-    }
-
-    // move_grid selected
-    if (!(state_movegrid) && state->Toggle014Active) {
-        state_paint = false;
-        state_spray = false;
-        state_erase = false;
-        state_movegrid = true;
-
-        state->Toggle012Active = false;
-        state->Toggle013Active = false;
-        state->Toggle015Active = false;
-
-        gamestate->mousetools->setCurrentTool(MOVE_GRID);
-    }
+    return;
 }
 
 // GUI Height is clipped to window height via this function
@@ -306,6 +274,7 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
 
         // Drawcalls
         state->WindowBox000Active = !GuiWindowBox(state->layoutRecs[0], "Game of Life");
+
         GuiLine(state->layoutRecs[1], "Game Algorithm");
         GuiLabel(state->layoutRecs[2], "#191#Status: ");
         GuiLabel(state->layoutRecs[3], state->isGameRunning);
@@ -318,6 +287,7 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
         GuiToggle(state->layoutRecs[9], "#092#Spray", &state->Toggle013Active);
         GuiToggle(state->layoutRecs[10], "#068#Move Grid", &state->Toggle014Active);
         GuiToggle(state->layoutRecs[11], "#028#Erase", &state->Toggle015Active);
+        
         GuiSlider(state->layoutRecs[12], "#139#Speed   ", NULL, &state->Slider012Value, 1, 1000);
         GuiLabel(state->layoutRecs[13], state->speed_buffer); 
         GuiLabel(state->layoutRecs[14], state->brushradius_buffer); 
@@ -354,10 +324,24 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
         if (tempDelay != gamestate->timer.getDelay()) {
             gamestate->timer.setDelay(tempDelay);
         }
+        
+        
+        // Ugly Hack
+        // Both GUI and mousetools overwrite squaresize -> changes are immediatly overwritten by the other function
+        // Cheap flag in gamestate determines whether mouse wheel has been used or not and therefore decides if GUI can overwrite value
+        // If mouse wheel has been used, GUISlider needs to be changed to current squaresize value so it doesnt overwrite in next frame
+        // But: All other sliders are NOT aware of gamestate changes! Reconsider
 
-        // Set Square Size
-        gamestate->squareSize = static_cast<int> (state->Slider025Value);
+        if (gamestate->mousetools->mouseWheelZoomTriggered) {
+            // Do not change squaresize and change slider value to new squaresize value
+            state->Slider025Value = static_cast<float>(gamestate->getSquareSize());
+        }
+        // Set Square Size via GUI if mouse wheel zoom isn't used
+        else gamestate->squareSize = static_cast<int> (state->Slider025Value);
+        
 
+
+        
         // Set Brush Radius
         gamestate->mousetools->setBrushRadius(static_cast<int> (state->SliderBar015Value));
 

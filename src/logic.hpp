@@ -13,9 +13,6 @@ int getNumberOfNeighbors(unsigned int ix, unsigned int iy, flexible_array* array
 // Returns TRUE if this square lives in the next generation, or returns FALSE if this square dies in the next generation
 bool decideNewStateOfSquare(unsigned int ix, unsigned int iy, flexible_array* arrayRef);
 
-// These functions apply the game rules on the gridArray ONCE!
-// 
-// Really stupid algoritm
-void applyGameRulesOnArray_SecondArrayMethod(flexible_array* arrayRef);
-// Also really stupid but better algorithm
-void applyGameRulesOnArray_VectorMethod(flexible_array* arrayRef);
+// This function applys the game rules on the gridArray ONCE!
+// This function needs to be optimized in the future
+void applyGameRulesOnArray(flexible_array* arrayRef);

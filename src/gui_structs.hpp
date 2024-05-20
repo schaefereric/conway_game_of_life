@@ -1,5 +1,7 @@
 #pragma once
-#include <raylib.h>
+#include "raylib.h"
+#include <vector>
+#include "GlobalDefinitions.hpp"
 
 // Main Window
 struct GuiMainWindowState {
@@ -22,12 +24,17 @@ struct GuiMainWindowState {
 
     Rectangle layoutRecs[35];
 
+    // c-string buffers for GUI
     char isGameRunning[10];
     char array_size_x[6];
     char array_size_y[6];
     char brushradius_buffer[6];
     char squaresize_buffer[6];
     char speed_buffer[10];
+
+    // Tool Selection Toggles
+    // Vector with all toggle bools and corrensponding tool_modes
+    std::vector< std::pair<bool*, tool_mode_t> > toggles;
 };
 
 // "Hidden UI" Message

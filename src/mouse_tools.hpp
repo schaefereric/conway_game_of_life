@@ -25,6 +25,8 @@ struct mouse_tools {
     tool_mode_t getCurrentTool() const;
     int getBrushRadius() const;
 
+    bool mouseWheelZoomTriggered;
+
 private:
 
     // Brush Settings
@@ -36,6 +38,8 @@ private:
     void runEraser();
     void runSpraybrush();
     void runMoveGrid();
+
+    void runMouseWheelZoom(); // Mouse wheel zoom is called in every frame, regardless of current tool
 
     // Reverting the drawArrayGrid function (grid.hpp) to get array index of square at mouse cursor position
     unsigned int getArrayIndexXFromMousePosition() const;

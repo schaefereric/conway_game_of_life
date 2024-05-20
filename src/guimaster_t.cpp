@@ -27,6 +27,31 @@ guimaster_t::guimaster_t(gamestate_t* gamestateRef) {
 
 void guimaster_t::init() {
     guistate_main_window = InitGuiMainWindow();
+
+    // Initialize Toggle Vector for main window
+    std::pair<bool*, tool_mode_t> temp;
+
+    // paint
+    temp.first  = &guistate_main_window.Toggle012Active;
+    temp.second = PAINT;
+    guistate_main_window.toggles.push_back(temp);
+
+    // spray
+    temp.first = &guistate_main_window.Toggle013Active;
+    temp.second = SPRAY;
+    guistate_main_window.toggles.push_back(temp);
+
+    // erase
+    temp.first = &guistate_main_window.Toggle015Active;
+    temp.second = ERASE;
+    guistate_main_window.toggles.push_back(temp);
+
+    // move grid
+    temp.first = &guistate_main_window.Toggle014Active;
+    temp.second = MOVE_GRID;
+    guistate_main_window.toggles.push_back(temp);
+
+
     guistate_debug_main  = InitGuiDebugMain();
     guistate_debug_mouse = InitGuiDebugMouse();
     guistate_debug_logic = InitGuiDebugLogic();

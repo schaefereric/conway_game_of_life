@@ -1,7 +1,5 @@
 #include "flexible_array.hpp"
-
 #include <iostream>
-#include "color.hpp"
 
 // Takes two index numbers (x and y) and returns single array index number
 int flexible_array::getSingleIndex(unsigned int ix, unsigned int iy) const  
@@ -133,7 +131,7 @@ void flexible_array::printMatrix() const {
                 std::cout << "O ";
             }
             else if (getItem(i, j) == 1) {
-                std::cout << dye::green("X ");
+                std::cout << "X ";
             }
         }
         std::cout << "\n";

@@ -13,8 +13,20 @@ gamestate_t::gamestate_t() {
     runAlgorithm = false;
 
     drawRectangleOutline = false;
+    drawGridOutline = true;
     drawBrushRadiusPreview = false;
     UIHidden = false;
+}
+
+void gamestate_t::setSquareSize(int input) {
+    this->squareSize = input;
+    if (squareSize < 1) {
+        this->squareSize = 1;
+    }
+}
+
+int gamestate_t::getSquareSize() {
+    return this->squareSize;
 }
 
 void gamestate_t::setRunAlgorithm(bool input) {
@@ -22,15 +34,19 @@ void gamestate_t::setRunAlgorithm(bool input) {
 }
 
 void gamestate_t::singleStep() {
-    applyGameRulesOnArray_VectorMethod(&gridArray);
+    applyGameRulesOnArray(&gridArray);
 }
 
 void gamestate_t::runAlgorithmIfActive() {
     if (runAlgorithm) {
         if (timer.hasTimeElapsed()) {
-            applyGameRulesOnArray_VectorMethod(&gridArray);
+            applyGameRulesOnArray(&gridArray);
         }
     }
+}
+
+void gamestate_t::endOfFrame() {
+    mousetools->mouseWheelZoomTriggered = false;
 }
 
 void gamestate_t::startAlgorithm() {
@@ -45,6 +61,13 @@ void gamestate_t::stopAlgorithm() {
 
 void gamestate_t::setDelay(int inputMilliseconds) {
     timer.setDelay(inputMilliseconds);
+}
+
+void gamestate_t::runKeyboardActions() {
+    if (IsKeyDown(KEY_ONE))   mousetools->setCurrentTool(PAINT);
+    if (IsKeyDown(KEY_TWO))   mousetools->setCurrentTool(SPRAY);
+    if (IsKeyDown(KEY_THREE)) mousetools->setCurrentTool(ERASE);
+    if (IsKeyDown(KEY_FOUR))  mousetools->setCurrentTool(MOVE_GRID);
 }
 
 void gamestate_t::updateWindowSize() {

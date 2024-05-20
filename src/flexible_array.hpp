@@ -23,7 +23,7 @@ struct flexible_array {
     // Recommended constructor, enter field size in parameters
     flexible_array(unsigned int ix, unsigned int iy);
 
-    // Default constructor, initializes array as 2*2 matrix
+    // Default constructor, initializes array as 3*3 matrix
     flexible_array();
 
     // Destructor, deallocates memory on heap

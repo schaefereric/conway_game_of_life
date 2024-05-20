@@ -8,15 +8,18 @@ private:
     std::chrono::time_point<std::chrono::steady_clock>* startTime;
     std::chrono::time_point<std::chrono::steady_clock> endTime;
 
-    int iDelay;
-    std::chrono::duration<int, std::milli> dDelay;
+    int iDelay;                                     // type int
+    std::chrono::duration<int, std::milli> dDelay;  // type duration
 
 public:
     void start();
     void stop();
+
+    bool hasTimeElapsed() const;
+
     void setDelay(int input);
     int getDelay() const;
-    bool hasTimeElapsed() const;
+
     bool isRunning() const;
     void setRunning(bool input);
 

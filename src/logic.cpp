@@ -131,45 +131,7 @@ bool decideNewStateOfSquare(unsigned int ix, unsigned int iy, flexible_array* ar
     
 }
 
-// Applies the game rules on the gridArray ONCE! 
-void applyGameRulesOnArray_SecondArrayMethod(flexible_array* arrayRef) {
-    /*
-    * VERY STUPID IDEA !!!!
-    * 1. initialize new flexible-array
-    * 2. iterate over gridArray and save results directly to new array
-    * 3. deallocate old array pointer and move new array pointer to old array
-    */
-
-    flexible_array newArray(arrayRef->getSizeX(), arrayRef->getSizeY());
-
-    for (unsigned int index_y = 0; index_y < arrayRef->getSizeY(); index_y++) {
-        for (unsigned int index_x = 0; index_x < arrayRef->getSizeX(); index_x++) {
-
-            bool square = decideNewStateOfSquare(index_x, index_y, arrayRef);
-
-            if (square) {
-                newArray.setItem(index_x, index_y, 0);
-            }
-            else if (!square) {
-                newArray.setItem(index_x, index_y, 1);
-            }
-            else {
-                newArray.setItem(index_x, index_y, 0);
-                // todo: error handling
-            }
-        }
-    }
-
-    // Change old array pointer with new array pointer
-    arrayRef->swapPointers(newArray.pAry);
-}
-
-void applyGameRulesOnArray_VectorMethod(flexible_array* arrayRef) {
-    /* 
-    * Better (?) idea:
-    * 1. std::vector<vector2> -> save positions of squares that live/die
-    * 2. apply saved positions to array
-    */
+void applyGameRulesOnArray(flexible_array* arrayRef) {
 
     std::vector<Vector2> listOfAliveSquares;
     Vector2 tempVec;
@@ -187,8 +149,11 @@ void applyGameRulesOnArray_VectorMethod(flexible_array* arrayRef) {
             }
         }
     }
-
-    // Wipe Array
+    
+    // TODO: OPTIMIZE FOLLOWING LINES
+    // It is unnecessary to wipe the entire array and only apply the new squares
+    // 
+    // Wipe Array 
     arrayRef->clearArray();
 
     // Apply new squares

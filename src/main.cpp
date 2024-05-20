@@ -4,7 +4,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "raylib.h"
-#include "raygui.h"
+#include "../include/raygui.h"
 #include "GlobalDefinitions.hpp"
 #include "flexible_array.hpp"
 #include "gamestate_t.hpp"
@@ -19,7 +19,9 @@
 #include "mouse_tools.hpp"
 
 // todo: brush preview auf cursor UND evntl bei bewegen des sliders preview in der mitte des grids
-// grid outline? (also richtige outline)
+// fix keyboard tools
+// "stamps" f-pentomino,...
+// 3d?
 
 int main()
 {
@@ -40,6 +42,7 @@ int main()
         //----------------------------------------------------------------------------------
 
         gamestate.updateWindowSize();
+        gamestate.runKeyboardActions();
         gamestate.mousetools->run();
         gamestate.runAlgorithmIfActive();
         
@@ -54,6 +57,7 @@ int main()
         guimaster.draw();
         
 
+        gamestate.endOfFrame();
         EndDrawing();
         //----------------------------------------------------------------------------------
     }

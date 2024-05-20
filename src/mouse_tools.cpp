@@ -15,13 +15,14 @@ mouse_tools::mouse_tools(gamestate_t* gamestateRef) {
     currentTool = PAINT;
     brushRadius = 2;
 
+    mouseWheelZoomTriggered = false;
 }
 
 void mouse_tools::updateMouse() {
     mousePosition = GetMousePosition();
 
-    mouse_L = IsMouseButtonDown(0);
-    mouse_R = IsMouseButtonDown(1);
+    mouse_L = IsMouseButtonDown(MOUSE_BUTTON_LEFT);
+    mouse_R = IsMouseButtonDown(MOUSE_BUTTON_RIGHT);
 }
 
 void mouse_tools::setCurrentTool(tool_mode_t input) {
@@ -65,6 +66,8 @@ void mouse_tools::run() {
     default:
         break;
     }
+
+    runMouseWheelZoom();
 }
 
 void mouse_tools::runPaintbrush() {   
@@ -85,6 +88,7 @@ void mouse_tools::runPaintbrush() {
         else rasterizeCircle_JeskoMethod(x, y, brushRadius, 1, gamestate);
     }
 
+    // Right click -> eraser
     if (mouse_R && !(mouse_L)) {
         unsigned int x = getArrayIndexXFromMousePosition();
         unsigned int y = getArrayIndexYFromMousePosition();
@@ -171,7 +175,7 @@ void mouse_tools::runMoveGrid() {
     }
 
     // Reset state when left mouse button is released
-    if (!(mouse_L) && state == 1) {
+    if (!(mouse_L) && state >= 1) {
         state = 0;
         previous_x = 0;
         previous_y = 0;
@@ -179,6 +183,19 @@ void mouse_tools::runMoveGrid() {
     }
 
     
+}
+
+void mouse_tools::runMouseWheelZoom() {
+
+    float movement = GetMouseWheelMove();
+
+    if (movement == 0) return; // No Mouse Wheel Movement
+
+    else {
+        gamestate->setSquareSize(gamestate->squareSize - static_cast<int>(movement));
+        mouseWheelZoomTriggered = true;
+    }
+
 }
 
 

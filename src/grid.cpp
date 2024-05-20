@@ -38,8 +38,8 @@ void drawArrayGrid(gamestate_t& gamestate) {
                           gamestate.squareSize,
                           square_color);
 
-            // draw grid outlines
-            if (gamestate.drawRectangleOutline) {
+            // draw rectangle outlines
+            if (gamestate.drawRectangleOutline && (gamestate.getSquareSize() > 4)) {
                 DrawRectangleLines((gamestate.squareSize * x_index) + gamestate.gridOrigin_x,
                                    (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
                                    gamestate.squareSize,
@@ -48,6 +48,15 @@ void drawArrayGrid(gamestate_t& gamestate) {
             }
             
         }
+    }
+
+    // draw grid outlines
+    if (gamestate.drawGridOutline) {
+        DrawRectangleLines(gamestate.gridOrigin_x, 
+                           gamestate.gridOrigin_y,
+                          (gamestate.squareSize * gamestate.gridArray.getSizeX()),
+                          (gamestate.squareSize * gamestate.gridArray.getSizeY()),
+                           BLACK);
     }
 }
 
