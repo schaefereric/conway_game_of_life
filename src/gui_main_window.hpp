@@ -256,19 +256,24 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
         }
 
         // Set Speed/Delay
-        _itoa_s(gamestate->timer.getDelay(), state->speed_buffer, 10, 10);
+        //_itoa_s(gamestate->timer.getDelay(), state->speed_buffer, 10, 10);
+        snprintf(state->speed_buffer, sizeof(state->speed_buffer), "%d", gamestate->timer.getDelay());
         strcat(state->speed_buffer, "ms");
 
         // Brush Radius
-        _itoa_s(gamestate->mousetools->getBrushRadius(), state->brushradius_buffer, 6, 10);
+        //_itoa_s(gamestate->mousetools->getBrushRadius(), state->brushradius_buffer, 6, 10);
+        snprintf(state->brushradius_buffer, sizeof(state->brushradius_buffer), "%d", gamestate->mousetools->getBrushRadius());
         strcat(state->brushradius_buffer, "px");
 
         // Array Size
-        _itoa_s(gamestate->gridArray.getSizeX(), state->array_size_x, 6, 10);
-        _itoa_s(gamestate->gridArray.getSizeY(), state->array_size_y, 6, 10);
+        //_itoa_s(gamestate->gridArray.getSizeX(), state->array_size_x, 6, 10);
+        //_itoa_s(gamestate->gridArray.getSizeY(), state->array_size_y, 6, 10);
+        snprintf(state->array_size_x, sizeof(state->array_size_x), "%d", gamestate->gridArray.getSizeX());
+        snprintf(state->array_size_y, sizeof(state->array_size_y), "%d", gamestate->gridArray.getSizeY());
 
         // Square Size
-        _itoa_s(gamestate->squareSize, state->squaresize_buffer, 6, 10);
+        //_itoa_s(gamestate->squareSize, state->squaresize_buffer, 6, 10);
+        snprintf(state->squaresize_buffer, sizeof(state->squaresize_buffer), "%d", gamestate->getSquareSize());
         strcat(state->squaresize_buffer, "px");
 
 

@@ -120,15 +120,18 @@ static void Button005(GuiDebugLogicState* state)
     moore_direction tempDir = (moore_direction)state->DropdownBox004Active;
     Vector2 temp            = getMooreNeighborhoodCoordinate(state->Spinner002Value, state->Spinner003Value, tempDir);
 
-    _itoa_s((int)temp.x, state->moore_x_buffer, 10, 10);
-    _itoa_s((int)temp.y, state->moore_y_buffer, 10, 10);
+    //_itoa_s((int)temp.x, state->moore_x_buffer, 10, 10);
+    //_itoa_s((int)temp.y, state->moore_y_buffer, 10, 10);
+    snprintf(state->moore_x_buffer, sizeof(state->moore_x_buffer), "%d", static_cast<int>(temp.x));
+    snprintf(state->moore_y_buffer, sizeof(state->moore_y_buffer), "%d", static_cast<int>(temp.y));
 }
 
 static void Button012(GuiDebugLogicState* state, gamestate_t * gamestateRef)
 {
     // get number of neighbors
     int temp = getNumberOfNeighbors(state->Spinner002Value, state->Spinner003Value, &gamestateRef->gridArray);
-    _itoa_s(temp, state->counted_neighbors, 5, 10);
+    //_itoa_s(temp, state->counted_neighbors, 5, 10);
+    snprintf(state->counted_neighbors, sizeof(state->counted_neighbors), "%d", temp);
 }
 
 static void Button016(GuiDebugLogicState* state, gamestate_t* gamestateRef)

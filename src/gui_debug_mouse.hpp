@@ -105,9 +105,12 @@ void GuiDebugMouse(gamestate_t * gamestate, GuiDebugMouseState* state)
     if (state->WindowBox000Active)
     {
         static char mou_x_buffer[10];
-        _itoa_s((int)gamestate->mousetools->mousePosition.x, mou_x_buffer, 10, 10); // Cast MousePosition.x integer to c_string
+        //_itoa_s((int)gamestate->mousetools->mousePosition.x, mou_x_buffer, 10, 10); // Cast MousePosition.x integer to c_string
+        snprintf(mou_x_buffer, sizeof(mou_x_buffer), "%d", static_cast<int>(gamestate->mousetools->mousePosition.x));
+
         static char mou_y_buffer[10];
-        _itoa_s((int)gamestate->mousetools->mousePosition.y, mou_y_buffer, 10, 10); // Cast MousePosition.y integer to c_string
+        //_itoa_s((int)gamestate->mousetools->mousePosition.y, mou_y_buffer, 10, 10); // Cast MousePosition.y integer to c_string
+        snprintf(mou_y_buffer, sizeof(mou_y_buffer), "%d", static_cast<int>(gamestate->mousetools->mousePosition.y));
 
         static char mouse_lval_str[6];
         if (gamestate->mousetools->mouse_L) {
