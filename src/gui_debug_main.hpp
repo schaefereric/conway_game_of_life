@@ -19,6 +19,7 @@
 *
 **********************************************************************************************/
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <string>
 #include "gamestate_t.hpp"
@@ -29,7 +30,7 @@
 #undef RAYGUI_IMPLEMENTATION
 #include "../include/raygui.h"
 
-#include <string.h>     // Required for: strcpy()
+#include <cstring>     // Required for: strcpy()
 #include "gui_structs.hpp"
 
 
@@ -212,10 +213,10 @@ void GuiDebugMain(gamestate_t * gamestate, GuiDebugMainState* state)
     
     static char isAlgoRunning[10];
     if (gamestate->runAlgorithm == true) {
-        strcpy(isAlgoRunning, "Running");
+        strcpy_s(isAlgoRunning, sizeof(isAlgoRunning), "Running");
     }
     if (gamestate->runAlgorithm == false) {
-        strcpy(isAlgoRunning, "Paused");
+        strcpy_s(isAlgoRunning, sizeof(isAlgoRunning), "Paused");
     }
 
     GuiGroupBox(state->layoutRecs[1], "Array");

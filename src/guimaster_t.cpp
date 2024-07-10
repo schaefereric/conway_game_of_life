@@ -1,4 +1,14 @@
+
+#include "GlobalDefinitions.hpp"
+#include "gui_structs.hpp"
 #include "guimaster_t.hpp"
+#include <utility>
+
+#include "gui_debug_logic.hpp"
+#include "gui_debug_main.hpp"
+#include "gui_debug_mouse.hpp"
+#include "gui_main_window.hpp"
+#include "gui_hidden_ui_message.hpp"
 
 // Forward Declarations
 // Init Functions

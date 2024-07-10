@@ -1,10 +1,10 @@
 #pragma once
 
 #include "flexible_array.hpp"
-#include "raylib.h"
 #include "GlobalDefinitions.hpp"
 #include "logic.hpp"
-#include "mouse_tools.hpp"
+//#include "mouse_tools.hpp"
+#include "raylib.h"
 #include "timer.hpp"
 
 struct mouse_tools;

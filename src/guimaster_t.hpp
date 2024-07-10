@@ -9,15 +9,9 @@
 // This class stores the "guistates" for all GUIs, initializes, manages and draws them.
 // All guistates are initialized in constuctor and GUIs can be drawn via draw();.
 
-#include "gui_structs.hpp"
 #include "gamestate_t.hpp"
+#include "gui_structs.hpp"
 
-// Forward Declarations
-struct GuiMainWindowState;
-struct GuiDebugMainState;
-struct GuiDebugMouseState;
-struct GuiDebugLogicState;
-struct GuiHiddenState;
 
 struct guimaster_t
 {

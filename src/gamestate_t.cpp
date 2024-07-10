@@ -1,4 +1,5 @@
 #include "gamestate_t.hpp"
+#include "mouse_tools.hpp"
 
 gamestate_t::gamestate_t() {
     mousetools = new mouse_tools(this);

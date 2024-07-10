@@ -20,6 +20,7 @@
 *
 **********************************************************************************************/
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 
 #include "raylib.h"
 
@@ -27,15 +28,18 @@
 #undef RAYGUI_IMPLEMENTATION
 #include "../include/raygui.h"
 
-#include <string.h>     // Required for: strcpy()
+#include <cstring>     // Required for: strcpy()
 #include <iostream>
 #include "gui_structs.hpp"
-#include "gui_button_implementation.hpp"
 #include "gamestate_t.hpp"
 #include "grid.hpp"
 #include "guimaster_t.hpp"
+#include "mouse_tools.hpp"
+#include <cstdio>
 
 struct guimaster_t;
+struct gamestate_t;
+struct mouse_tools;
 
 //----------------------------------------------------------------------------------
 // Module Functions Declaration
@@ -58,7 +62,7 @@ static void stretchGUIToWindowHeight(gamestate_t* gamestate, GuiMainWindowState*
 *
 ************************************************************************************/
 
-// redundant
+// deprecated (?)
 #define spray_toggle Toggle012Active
 #define paint_toggle Toggle013Active
 #define erase_toggle Toggle015Active
@@ -249,21 +253,21 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
 
         // Game Status
         if (gamestate->runAlgorithm == true) {
-            strcpy(state->isGameRunning, "Running");
+            strcpy_s(state->isGameRunning, sizeof(state->isGameRunning), "Running");
         }
         if (gamestate->runAlgorithm == false) {
-            strcpy(state->isGameRunning, "Stopped");
+            strcpy_s(state->isGameRunning, sizeof(state->isGameRunning), "Stopped");
         }
 
         // Set Speed/Delay
         //_itoa_s(gamestate->timer.getDelay(), state->speed_buffer, 10, 10);
         snprintf(state->speed_buffer, sizeof(state->speed_buffer), "%d", gamestate->timer.getDelay());
-        strcat(state->speed_buffer, "ms");
+        strcat_s(state->speed_buffer, sizeof(state->speed_buffer), "ms");
 
         // Brush Radius
         //_itoa_s(gamestate->mousetools->getBrushRadius(), state->brushradius_buffer, 6, 10);
         snprintf(state->brushradius_buffer, sizeof(state->brushradius_buffer), "%d", gamestate->mousetools->getBrushRadius());
-        strcat(state->brushradius_buffer, "px");
+        strcat_s(state->brushradius_buffer, sizeof(state->brushradius_buffer), "px");
 
         // Array Size
         //_itoa_s(gamestate->gridArray.getSizeX(), state->array_size_x, 6, 10);
@@ -274,7 +278,7 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
         // Square Size
         //_itoa_s(gamestate->squareSize, state->squaresize_buffer, 6, 10);
         snprintf(state->squaresize_buffer, sizeof(state->squaresize_buffer), "%d", gamestate->getSquareSize());
-        strcat(state->squaresize_buffer, "px");
+        strcat_s(state->squaresize_buffer, sizeof(state->squaresize_buffer), "px");
 
 
         // Drawcalls

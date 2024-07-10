@@ -3,20 +3,12 @@
 #define RAYGUI_IMPLEMENTATION
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "raylib.h"
 #include "../include/raygui.h"
-#include "GlobalDefinitions.hpp"
-#include "flexible_array.hpp"
 #include "gamestate_t.hpp"
 #include "grid.hpp"
-#include "gui_main_window.hpp"
-#include "gui_debug_main.hpp"
-#include "gui_debug_mouse.hpp"
-#include "gui_debug_logic.hpp"
-#include "gui_hidden_ui_message.hpp"
 #include "guimaster_t.hpp"
-#include "logic.hpp"
 #include "mouse_tools.hpp"
+#include "raylib.h"
 
 // todo: brush preview auf cursor UND evntl bei bewegen des sliders preview in der mitte des grids
 // fix keyboard tools
@@ -53,7 +45,7 @@ int main()
         ClearBackground(RAYWHITE);
 
 
-        drawArrayGrid(gamestate);
+        drawArrayGrid(&gamestate);
         guimaster.draw();
         
 

@@ -1,3 +1,4 @@
+#include "GlobalDefinitions.hpp"
 #include "mouse_tools.hpp"
 
 mouse_tools::mouse_tools(gamestate_t* gamestateRef) {

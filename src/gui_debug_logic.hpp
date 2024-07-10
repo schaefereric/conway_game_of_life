@@ -19,6 +19,7 @@
 *
 **********************************************************************************************/
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 
 #include "raylib.h"
 
@@ -26,7 +27,7 @@
 #undef RAYGUI_IMPLEMENTATION
 #include "../include/raygui.h"
 
-#include <string.h>     // Required for: strcpy()
+#include <cstring>     // Required for: strcpy()
 
 #include "gui_structs.hpp"
 #include "gui_button_implementation.hpp"
@@ -140,10 +141,10 @@ static void Button016(GuiDebugLogicState* state, gamestate_t* gamestateRef)
     bool temp = decideNewStateOfSquare(state->Spinner002Value, state->Spinner003Value, &gamestateRef->gridArray);
     
     if (temp) {
-        strcpy(state->state_of_square, "true");
+        strcpy_s(state->state_of_square, sizeof(state->state_of_square), "true");
     }
     if (!temp) {
-        strcpy(state->state_of_square, "false");
+        strcpy_s(state->state_of_square, sizeof(state->state_of_square), "false");
     }
 
 }

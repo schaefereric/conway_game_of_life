@@ -19,6 +19,7 @@
 *
 **********************************************************************************************/
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 
 #include "raylib.h"
 
@@ -26,13 +27,15 @@
 #undef RAYGUI_IMPLEMENTATION
 #include "../include/raygui.h"
 
-#include <string.h>     // Required for: strcpy()
+#include <cstring>     // Required for: strcpy()
 #include <string>
 #include "gui_structs.hpp"
 #include "gui_button_implementation.hpp"
 #include "gamestate_t.hpp"
+#include "mouse_tools.hpp"
 #include <iostream>
 
+struct mouse_tools;
 
 //----------------------------------------------------------------------------------
 // Module Functions Declaration
@@ -114,18 +117,18 @@ void GuiDebugMouse(gamestate_t * gamestate, GuiDebugMouseState* state)
 
         static char mouse_lval_str[6];
         if (gamestate->mousetools->mouse_L) {
-            strcpy(mouse_lval_str, "true");
+            strcpy_s(mouse_lval_str, sizeof(mouse_lval_str), "true");
         }
         else if (!(gamestate->mousetools->mouse_L)) {
-            strcpy(mouse_lval_str, "false");
+            strcpy_s(mouse_lval_str, sizeof(mouse_lval_str), "false");
         }
 
         static char mouse_rval_str[6];
         if (gamestate->mousetools->mouse_R) {
-            strcpy(mouse_rval_str, "true");
+            strcpy_s(mouse_rval_str, sizeof(mouse_rval_str), "true");
         }
         else if (!(gamestate->mousetools->mouse_R)) {
-            strcpy(mouse_rval_str, "false");
+            strcpy_s(mouse_rval_str, sizeof(mouse_rval_str), "false");
         }
 
         state->WindowBox000Active = !GuiWindowBox(state->layoutRecs[0], "Mouse Debug");

@@ -1,7 +1,8 @@
 #pragma once
-#include "raylib.h"
-#include <vector>
 #include "GlobalDefinitions.hpp"
+#include "raylib.h"
+#include <utility>
+#include <vector>
 
 // Main Window
 struct GuiMainWindowState {

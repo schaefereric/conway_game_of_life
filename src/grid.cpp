@@ -1,17 +1,17 @@
 #include "grid.hpp"
 
 // Reads array and draws the entire array on screen
-void drawArrayGrid(gamestate_t& gamestate) {
+void drawArrayGrid(gamestate_t* gamestate) {
 
     Color square_color;
 
-    for (unsigned int y_index = 0; y_index < gamestate.gridArray.getSizeY(); y_index++) { // Column
-        for (unsigned int x_index = 0; x_index < gamestate.gridArray.getSizeX(); x_index++) { // Item per Column
+    for (unsigned int y_index = 0; y_index < gamestate->gridArray.getSizeY(); y_index++) { // Column
+        for (unsigned int x_index = 0; x_index < gamestate->gridArray.getSizeX(); x_index++) { // Item per Column
 
             // determine color of square
             // Value Table -> flexible_array.hpp
 
-            int item = gamestate.gridArray.getItem(x_index, y_index);
+            int item = gamestate->gridArray.getItem(x_index, y_index);
 
             switch (item) {
             case 0:
@@ -32,18 +32,18 @@ void drawArrayGrid(gamestate_t& gamestate) {
             }
 
             // draw (colored) squares
-            DrawRectangle((gamestate.squareSize * x_index) + gamestate.gridOrigin_x,
-                          (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
-                          gamestate.squareSize,
-                          gamestate.squareSize,
+            DrawRectangle((gamestate->squareSize * x_index) + gamestate->gridOrigin_x,
+                          (gamestate->squareSize * y_index) + gamestate->gridOrigin_y,
+                          gamestate->squareSize,
+                          gamestate->squareSize,
                           square_color);
 
             // draw rectangle outlines
-            if (gamestate.drawRectangleOutline && (gamestate.getSquareSize() > 4)) {
-                DrawRectangleLines((gamestate.squareSize * x_index) + gamestate.gridOrigin_x,
-                                   (gamestate.squareSize * y_index) + gamestate.gridOrigin_y,
-                                   gamestate.squareSize,
-                                   gamestate.squareSize,
+            if (gamestate->drawRectangleOutline && (gamestate->getSquareSize() > 4)) {
+                DrawRectangleLines((gamestate->squareSize * x_index) + gamestate->gridOrigin_x,
+                                   (gamestate->squareSize * y_index) + gamestate->gridOrigin_y,
+                                   gamestate->squareSize,
+                                   gamestate->squareSize,
                                    BLACK);
             }
             
@@ -51,11 +51,11 @@ void drawArrayGrid(gamestate_t& gamestate) {
     }
 
     // draw grid outlines
-    if (gamestate.drawGridOutline) {
-        DrawRectangleLines(gamestate.gridOrigin_x, 
-                           gamestate.gridOrigin_y,
-                          (gamestate.squareSize * gamestate.gridArray.getSizeX()),
-                          (gamestate.squareSize * gamestate.gridArray.getSizeY()),
+    if (gamestate->drawGridOutline) {
+        DrawRectangleLines(gamestate->gridOrigin_x, 
+                           gamestate->gridOrigin_y,
+                          (gamestate->squareSize * gamestate->gridArray.getSizeX()),
+                          (gamestate->squareSize * gamestate->gridArray.getSizeY()),
                            BLACK);
     }
 }

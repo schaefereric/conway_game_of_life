@@ -11,7 +11,7 @@
 struct gamestate_t;
 
 // Reads array and draws the entire array on screen
-void drawArrayGrid(gamestate_t& gamestate);
+void drawArrayGrid(gamestate_t* gamestate);
 
 
 // Helper functions for rasterizing a circle
