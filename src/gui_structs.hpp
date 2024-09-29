@@ -1,6 +1,6 @@
 #pragma once
 #include "GlobalDefinitions.hpp"
-#include "raylib.h"
+#include "../include/raylib.h"
 #include <utility>
 #include <vector>
 

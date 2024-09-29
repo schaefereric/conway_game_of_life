@@ -4,7 +4,7 @@
 #include "GlobalDefinitions.hpp"
 #include "logic.hpp"
 //#include "mouse_tools.hpp"
-#include "raylib.h"
+#include "../include/raylib.h"
 #include "timer.hpp"
 
 struct mouse_tools;

@@ -8,7 +8,7 @@
 #include "grid.hpp"
 #include "guimaster_t.hpp"
 #include "mouse_tools.hpp"
-#include "raylib.h"
+#include "../include/raylib.h"
 
 // todo: brush preview auf cursor UND evntl bei bewegen des sliders preview in der mitte des grids
 // fix keyboard tools

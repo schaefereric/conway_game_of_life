@@ -1,7 +1,7 @@
 #pragma once
 
 #include "flexible_array.hpp"
-#include "raylib.h"
+#include "../include/raylib.h"
 #include "gamestate_t.hpp"
 #include <cmath> 
 #include <chrono>

@@ -22,8 +22,6 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "raylib.h"
-
 // WARNING: raygui implementation is expected to be defined before including this header
 #undef RAYGUI_IMPLEMENTATION
 #include "../include/raygui.h"
@@ -253,21 +251,37 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
 
         // Game Status
         if (gamestate->runAlgorithm == true) {
+            #ifdef _WIN32
             strcpy_s(state->isGameRunning, sizeof(state->isGameRunning), "Running");
+            #else
+            strcpy(state->isGameRunning, "Running");
+            #endif
         }
         if (gamestate->runAlgorithm == false) {
+            #ifdef _WIN32
             strcpy_s(state->isGameRunning, sizeof(state->isGameRunning), "Stopped");
+            #else
+            strcpy(state->isGameRunning, "Stopped");
+            #endif
         }
 
         // Set Speed/Delay
         //_itoa_s(gamestate->timer.getDelay(), state->speed_buffer, 10, 10);
         snprintf(state->speed_buffer, sizeof(state->speed_buffer), "%d", gamestate->timer.getDelay());
+        #ifdef _WIN32
         strcat_s(state->speed_buffer, sizeof(state->speed_buffer), "ms");
+        #else
+        strcat(state->speed_buffer, "ms");
+        #endif
 
         // Brush Radius
         //_itoa_s(gamestate->mousetools->getBrushRadius(), state->brushradius_buffer, 6, 10);
         snprintf(state->brushradius_buffer, sizeof(state->brushradius_buffer), "%d", gamestate->mousetools->getBrushRadius());
+        #ifdef _WIN32
         strcat_s(state->brushradius_buffer, sizeof(state->brushradius_buffer), "px");
+        #else
+        strcat(state->brushradius_buffer, "px");
+        #endif
 
         // Array Size
         //_itoa_s(gamestate->gridArray.getSizeX(), state->array_size_x, 6, 10);
@@ -278,8 +292,11 @@ void GuiMainWindow(gamestate_t* gamestate, guimaster_t * guimaster, GuiMainWindo
         // Square Size
         //_itoa_s(gamestate->squareSize, state->squaresize_buffer, 6, 10);
         snprintf(state->squaresize_buffer, sizeof(state->squaresize_buffer), "%d", gamestate->getSquareSize());
+        #ifdef _WIN32
         strcat_s(state->squaresize_buffer, sizeof(state->squaresize_buffer), "px");
-
+        #else
+        strcat(state->squaresize_buffer, "px");
+        #endif
 
         // Drawcalls
         state->WindowBox000Active = !GuiWindowBox(state->layoutRecs[0], "Game of Life");

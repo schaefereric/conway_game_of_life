@@ -21,7 +21,6 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "raylib.h"
 
 // WARNING: raygui implementation is expected to be defined before including this header
 #undef RAYGUI_IMPLEMENTATION
@@ -117,18 +116,34 @@ void GuiDebugMouse(gamestate_t * gamestate, GuiDebugMouseState* state)
 
         static char mouse_lval_str[6];
         if (gamestate->mousetools->mouse_L) {
+            #ifdef _WIN32
             strcpy_s(mouse_lval_str, sizeof(mouse_lval_str), "true");
+            #else
+            strcpy(mouse_lval_str, "true");
+            #endif
         }
         else if (!(gamestate->mousetools->mouse_L)) {
+            #ifdef _WIN32
             strcpy_s(mouse_lval_str, sizeof(mouse_lval_str), "false");
+            #else
+            strcpy(mouse_lval_str, "false");
+            #endif
         }
 
         static char mouse_rval_str[6];
         if (gamestate->mousetools->mouse_R) {
+            #ifdef _WIN32
             strcpy_s(mouse_rval_str, sizeof(mouse_rval_str), "true");
+            #else
+            strcpy(mouse_rval_str, "true");
+            #endif
         }
         else if (!(gamestate->mousetools->mouse_R)) {
+            #ifdef _WIN32
             strcpy_s(mouse_rval_str, sizeof(mouse_rval_str), "false");
+            #else
+            strcpy(mouse_rval_str, "false");
+            #endif
         }
 
         state->WindowBox000Active = !GuiWindowBox(state->layoutRecs[0], "Mouse Debug");

@@ -20,7 +20,6 @@
 **********************************************************************************************/
 #pragma once
 
-#include "raylib.h"
 
 // WARNING: raygui implementation is expected to be defined before including this header
 #undef RAYGUI_IMPLEMENTATION

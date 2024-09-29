@@ -21,8 +21,6 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "raylib.h"
-
 // WARNING: raygui implementation is expected to be defined before including this header
 #undef RAYGUI_IMPLEMENTATION
 #include "../include/raygui.h"
@@ -141,10 +139,18 @@ static void Button016(GuiDebugLogicState* state, gamestate_t* gamestateRef)
     bool temp = decideNewStateOfSquare(state->Spinner002Value, state->Spinner003Value, &gamestateRef->gridArray);
     
     if (temp) {
+        #ifdef _WIN32
         strcpy_s(state->state_of_square, sizeof(state->state_of_square), "true");
+        #else
+        strcpy(state->state_of_square, "true");
+        #endif
     }
     if (!temp) {
+        #ifdef _WIN32
         strcpy_s(state->state_of_square, sizeof(state->state_of_square), "false");
+        #else
+        strcpy(state->state_of_square, "false");
+        #endif
     }
 
 }

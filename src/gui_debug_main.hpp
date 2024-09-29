@@ -24,7 +24,6 @@
 #include <string>
 #include "gamestate_t.hpp"
 #include "gui_button_implementation.hpp"
-#include "raylib.h"
 
 // WARNING: raygui implementation is expected to be defined before including this header
 #undef RAYGUI_IMPLEMENTATION
@@ -213,10 +212,18 @@ void GuiDebugMain(gamestate_t * gamestate, GuiDebugMainState* state)
     
     static char isAlgoRunning[10];
     if (gamestate->runAlgorithm == true) {
+        #ifdef _WIN32
         strcpy_s(isAlgoRunning, sizeof(isAlgoRunning), "Running");
+        #else
+        strcpy(isAlgoRunning, "Running");
+        #endif
     }
     if (gamestate->runAlgorithm == false) {
-        strcpy_s(isAlgoRunning, sizeof(isAlgoRunning), "Paused");
+        #ifdef _WIN32
+        strcpy_s(isAlgoRunning, sizeof(isAlgoRunning), "Stopped");
+        #else
+        strcpy(isAlgoRunning, "Stopped");
+        #endif
     }
 
     GuiGroupBox(state->layoutRecs[1], "Array");
